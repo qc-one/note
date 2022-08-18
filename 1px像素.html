@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1px像素问题</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: bisque;
+            position: relative;
+        }
+        .box:before{
+            content: '';
+            position: absolute;
+            top: 0;
+            height: 1px;
+            width: 100%;
+            background-color: red;
+            transform-origin: 50% 0%;
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio:2){
+            .box:before{
+                transform: scaleY(0.5);
+            }
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio:3){
+            .box:before{
+                transform: scaleY(0.33);
+            }
+        }
+
+        /* 线条 */
+        .list{
+            margin: 0 20px;
+            list-style: none;
+            line-height: 42px;
+            padding: 0;
+        }
+        .list>li{
+            padding: 0;
+            position: relative;
+        }
+        .list>li:not(:first-child):after{   /* CSS匹配非第一个直接子元素 */
+            content: "";
+            display: block;
+            height: 0;
+            border-top: #999 solid 1px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: scaleY(0.5); /* 将 1px 的线条缩小为原来的 50% */
+        }
+ 
+        /* 边框 */
+        /* 
+            其他作者可能会通过设置4个边的线条凑出边框线的效果，
+            这样做不仅代码不够精简，而且调整圆角问题也会非常麻烦
+        */
+        .button{
+            line-height: 42px;
+            text-align: center;
+            margin: 20px;
+            background-color: #f8f8f8;
+            position: relative;
+            border-radius: 4px;
+        }
+        .button:after{
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            bottom: -50%;
+            left: -50%;
+            border: 1px solid red;
+            transform: scale(0.5);
+            transform-origin: 50% 50% 0;
+            box-sizing: border-box;
+            border-radius: 8px; /* 尺寸缩小 50%，即圆角半径设置为按钮的2倍 */
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <ul class="list">
+        <li>线条 1px</li>
+        <li>web前端 河浪</li>
+        <li>helang.love@qq.com</li>
+    </ul>
+    <div class="button">边框 1px</div>
+</body>
+</html>
