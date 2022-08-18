@@ -1,0 +1,105 @@
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <title>WECHAT_EMPTY_TITLE</title>
+    <!-- <link rel="icon" href="./static/img/favicon.png"> -->
+    <style>
+    img {
+        display: block;
+        margin: 40px auto 10px;
+        text-align: center;
+        height: 180px;
+    }
+
+    .footer {
+        width: 100%;
+        position: absolute;
+        bottom: 40px;
+        text-align: center;
+        font-size: 12px;
+    }
+
+    p {
+        text-align: center;
+        margin-top: 20px;
+    }
+    </style>
+    <script src="https://hm.baidu.com/hm.js?c6e750343ce0cd9050d714f2a75af856"></script><script>
+    window.onload = function () {
+        const ShortPathLenMin = 1;
+        const ShortPathLenMax = 20;
+        function getQueryVariable(variable) {
+            let query = window.location.search.substring(1);
+            let vars = query.split('&');
+            for (let i = 0; i < vars.length; i++) {
+                let pair = vars[i].split('=');
+                if (pair[0] === variable) {
+                    return pair[1];
+                }
+            }
+            return null;
+        }
+        function redirectToLongUrl(shortPath) {
+            var ajax = new XMLHttpRequest();
+            ajax.open('GET', '/api/v1/short-urls/' + shortPath, 'true');
+            ajax.send();
+            ajax.onreadystatechange = function () {
+                // 对于readyState非4的情况，即未完成http响应的接收时，不做处理
+                // 完成响应，且返回200，表示成功获取长网址
+                if (ajax.readyState === 4) {
+                    if (ajax.status === 200) {
+                        var jsonResponse = JSON.parse(ajax.responseText);
+                        window.location.href = jsonResponse['LongUrl'];
+                    } else {
+                        window._hmt.push(['_trackEvent', '延迟跳转', 'redirect_to_notfound', '查询长网址失败']);
+                        window.location.href = '/notfound.html';
+                    }
+                }
+            };
+        }
+
+        function redirectToNotFound() {
+            window._hmt.push(['_trackEvent', '延迟跳转', 'redirect_to_notfound', '获取短网址失败']);
+            window.location.href = '/notfound.html';
+            return;
+        }
+
+        function checkShortPath(shortPath) {
+            var regexOfPath = new RegExp('^[0-9a-zA-Z-_]{' + ShortPathLenMin + ',' + ShortPathLenMax + '}$');
+            return regexOfPath.test(shortPath);
+        }
+
+        var shortPath = getQueryVariable('target');
+        if (shortPath === undefined || shortPath === null || !checkShortPath(shortPath)) {
+            redirectToNotFound();
+        }
+        window.setTimeout(redirectToLongUrl, 10000, shortPath);
+    };
+    </script>
+    <script>
+    // 百度统计延迟跳转代码
+    /* eslint-disable */    
+    var _hmt = _hmt || [];
+    ( function() {
+        var hm = document.createElement("script");
+        hm.src = 'https://hm.baidu.com/hm.js?c6e750343ce0cd9050d714f2a75af856';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    /* eslint-disable */
+    </script>        
+<style id="__WXWORK_INNER_SCROLLBAR_CSS">::-webkit-scrollbar { width: 12px !important; height: 12px !important; }::-webkit-scrollbar-track:vertical {  }::-webkit-scrollbar-thumb:vertical { background-color: rgba(136, 141, 152, 0.5) !important; border-radius: 10px !important; background-clip: content-box !important; border:2px solid transparent !important; } ::-webkit-scrollbar-track:horizontal {  }::-webkit-scrollbar-thumb:horizontal { background-color: rgba(136, 141, 152, 0.5) !important; border-radius: 10px !important; background-clip: content-box !important; border:2px solid transparent !important; } ::-webkit-resizer { display: none !important; }</style></head>
+
+<body>
+    <!-- <img src="./static/img/loading.gif" alt=""> -->
+    <p>跳转中...</p>
+    <div class="footer">
+        <!-- <script src="./static/common/footer.js"></script><p style="color:#000;">©2020 Baidu 短网址转换服务由<a href="https://dwz.cn">dwz.cn</a>提供</p> -->
+    </div>
+
+<script>
+document.getElementById('a-toFAQ').addEventListener('click', function () {
+    window._hmt.push(['_trackEvent', '延迟跳转', 'redirect_to_faq', '访问FAQ']);
+    window.open('/console/faq', '_blank');
+}, false);
+</script>
+</body></html>

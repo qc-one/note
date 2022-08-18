@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			var person = {
+				name:"tom",
+				cell:123
+			}
+			//Object.getOwnPropertyDescriptor()可以获取指定属性的描述，因为这里没有对name属性的特性进行特殊的修改，所以打印出来的是其默认值。
+			// console.log(Object.getOwnPropertyDescriptor(person,"name"))	
+//			{
+//				value: "qin",
+//				writable: true,
+//				enumerable: true,
+//				configurable: true
+//			}
+
+			Object.defineProperty(person,'name',{
+				writable:false,
+				value:"aaa",
+				configurable:false,
+				enumerable:false
+			})
+
+
+			var book = {
+				_year:2020,//下划线表示内部属性，只能通过对象的方法来读写
+				editor:2
+			}
+			console.log(book)
+			Object.defineProperty(book,'year',{
+				get(){
+					return this._year
+				},
+				//若只指定get不指定set，那就默认该属性是只读的。
+				set(newYear){
+					if(newYear !== this._year){
+						this._year = newYear;
+						this.editor++;
+					}
+				}
+			})
+			console.log(Object.getOwnPropertyDescriptor(book,'year'));
+			console.log("未修改"+book.year);
+			book.year = 2018;
+			console.log('修改后year的值'+book.year);
+			console.log('修改year的值后，editor属性的值：'+book.editor);
+
+		</script>
+	</body>
+</html>

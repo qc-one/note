@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="mylist1">
+        <li>牛奶</li>
+        <li>橡胶</li>
+        <li>花生</li>
+    </ul>
+
+    <ul id="mylist2">
+        <li>苹果</li>
+        <li>梨子</li>
+        <li>草莓</li>
+    </ul>
+    <input type="button" value="点击移动" onclick="mylist();"/>
+    
+    <script type="text/javascript">
+        var obj = {
+            b:123
+        };
+        obj.a =  obj.a ? 234 : '00';
+        console.log(obj.a)
+
+        function mylist(){
+            //定义节点 并把mylist2中的第一子节点赋值给node
+            var node=document.getElementById("mylist2").firstChild; 
+            // console.log(node);
+            //将node里面获取的子节点 添加到mylisf1里面
+            document.getElementById("mylist1").appendChild(node);     
+        }
+        //定义节点 并把mylist2中的第一子节点赋值给node
+        var node=document.getElementById("mylist2").firstChild; 
+            //将node里面获取的子节点 添加到mylisf1里面
+            document.getElementById("mylist1").appendChild(node); 
+            console.log(node);
+    </script>
+    <script>
+
+        //双向数据绑定就是在单向绑定的基础上给可输入元素（input、textare）添加了change（input）事件，来动态修改model和view，并没有多高深。
+
+    </script>
+</body>
+</html>

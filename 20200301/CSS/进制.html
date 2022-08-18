@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // A---Z    65---90
+        // a---z    97---122
+        function toAscii(str){
+            return str.charCodeAt() + 1
+        }
+        function fromAscii(asc){
+            return String.fromCharCode(asc)
+        }
+        function getNext(str){
+            if(str.length === 1){
+                if(str.charCodeAt() === 90){
+                    return 'A' + fromAscii(65)
+                }else if(str.charCodeAt() === 122){
+                    return 'a' + fromAscii(97)
+                } else {
+                    return fromAscii(toAscii(str))
+                }
+            }else{
+                var arr = str.split('').reverse();
+                var brr = [];
+                var flag = -1;
+                for(var i = 0;i<arr.length;i++){
+                    if(arr[i].charCodeAt() === 90 || arr[i].charCodeAt() === 122){
+                        brr.push(getNext(arr[i]).slice(1))
+                        flag = i;
+                        continue;
+                    } else {
+                        brr.push(getNext(arr[i]))
+                        break;
+                    }
+                }
+                var ccc = brr.concat(arr.slice(flag+2)).reverse();
+                return ccc.join('');
+            }
+            
+        }
+        console.log(getNext('A'));//B
+        console.log(getNext('C'));//D
+        console.log(getNext('AA'));//AB
+        console.log(getNext('Z'));//AA
+        console.log(getNext('AZ'));//BA
+        console.log(getNext('EZZ'));// FAA
+        console.log(getNext('ABCDZZ'));//ABCEAA
+    </script>
+</body>
+</html>

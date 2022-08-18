@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			var mockNew = function (constructor) {
+			　　var o = new Object(); // 创建一个新对象
+				o.__proto__ = constructor.prototype // 绑定构造函数原型，但是生产代码中千万别用.__proto__
+			   constructor.apply(o, Array.prototype.slice.call(arguments, 1)) // 赋作用域 执行代码
+			   return o // 返回新对象
+			}
+			//然后我们用这个模拟new操作符的函数来创造一个对象试试
+			　var Person = function (name, age) {
+			　　　this.name = name
+			  　　this.age = age
+			  }
+			  Person.prototype.sayName = function () {
+			  　　console.log(this.name)
+			　}
+			  var person1 = mockNew(Person, 'MeloGuo', 22)
+			  console.log(person1.name) // 'MeloGuo'
+			  console.log(person1.age) // 22
+			  person1.sayName() // Uncaught TypeError: person1.sayName is not a function
+		</script>
+	</body>
+</html>

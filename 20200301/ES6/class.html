@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		
+		<script type="text/javascript">
+			//ES5中的近类结构
+//			function Person(name) {
+//				this.name = name;
+//			}
+//			Person.prototype.sayname = function(){
+//				console.log(this.name);
+//			}
+//			var person = new Person("Tom");
+//			person.sayname();
+//			console.log(person instanceof Person);//true
+//			console.log(person instanceof Object);//true
+
+			//匿名类
+//			let Person = class {
+//			　　constructor(height,width){
+//			　　　　this.height = height;
+//			　　　　this.width = width;
+//			　　}
+//			};
+//			console.log(Person.name);//Person
+			//具名类
+//			let Person = class Person {
+//			　　constructor(height,width){
+//			　　　　this.height = height;
+//			　　　　this.width = width;
+//			　　}
+//			}
+//			console.log(Person.name);//Person
+			
+//			let Person = (function(){
+//			    "use strict"
+//			    const Person = function(name){
+//			    	//确保通过关键字new调用该函数
+//			    	if(typeof new.target === "undefined"){
+//			    		throw new Error("必须通过关键字new调用构造函数");
+//			    	}
+//			    	this.name = name;
+//			    }
+//			    Object.defineProperty(Peron.prototype,"sayName",{
+//			    	value:function(){
+//			    		//确保不会通过关键字new调用该方法
+//			    		if(typeof new.target !== "undefined"){
+//			    			throw new Error("不可使用关键字new调用该方法")
+//			    		}
+//			    		console.log(this.name);
+//			    	},
+//			    	enumerable:false,
+//			    	writable:true,
+//			    	configurable:true
+//			    })
+//			    return Person
+//			})();
+
+
+			//静态成员
+			// function Person(name){
+			// 	this.name = name;
+			// }
+			// //静态方法
+			// Person.create = function(name){
+			// 	return new Person(name);
+			// }
+			// //实例方法
+			// Person.prototype.sayName = function(){
+			// 	console.log(this.name);
+			// }
+			// var person = Person.create("top")
+			// console.log(person);
+
+			// class Person{
+			// 	//等价于Person构造函数
+			// 	constructor(name){
+			// 		this.name = name;
+			// 	}
+			// 	//等价于Person.prototype.sayName
+			// 	sayName(){
+			// 		console.log(this.name)
+			// 	}
+			// 	//等价于Person.create
+			// 	static create(name){
+			// 		return new Person(name)
+			// 	}
+			// }
+			// var person = new Person('tom');
+			// console.log(person)
+
+			// class Box {
+			// 	static a() {//父类Box的静态方法
+			// 		return '我是父类的静态方法a';
+			// 	}
+			// }
+			// class Desk extends Box {}
+			// //子类Desk可以直接调用父类的静态方法a
+			// console.log(Desk.a()); 
+
+			//在ECMAScript6之前，需要多个步骤实现继承。
+			// function Father(length,width){
+			// 	this.length = length;
+			// 	this.width = width;
+			// }
+			// Father.prototype.getArea = function(){
+			// 	return this.length * this.width
+			// }
+			// function Son(length,width){
+			// 	Father.call(this,length,width)
+			// }
+			// Son.prototype = Object.create(Father.prototype,{
+			// 	constructor:{
+			// 		value:Son,
+			// 		enumerable:true,
+			// 		writable:true,
+			// 		configurable:true
+			// 	}
+			// })
+			// var son = new Son(3,4);
+			// console.log(son.getArea());//12
+			// console.log(son instanceof Son);//true
+			// console.log(son instanceof Father);//true 
+
+
+			//ES6实现继承
+			// class Father{
+			// 	constructor(length,width){
+			// 		this.length = length;
+			// 		this.width = width;
+			// 	}
+			// 	getArea(){
+			// 		return this.length * this.width
+			// 	}
+			// }
+			// class Son extends Father {
+			// 	constructor(length,width){
+			// 		super(length,width)
+			// 	}
+			// }
+			// var son = new Son(3,4);
+			// console.log(son.getArea());//12
+			// console.log(son instanceof Son)//true
+			// console.log(son instanceof Father);//true
+
+			
+		</script>
+	</body>
+</html>

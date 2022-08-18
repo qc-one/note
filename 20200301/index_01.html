@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // A---Z    65---90
+        // a---z    97---122
+        function toAscii(str){
+            return str.charCodeAt() + 1
+        }
+        function fromAscii(asc){
+            return String.fromCharCode(asc)
+        }
+        function getNext(str){
+            if(str.length === 1){
+                if(str.charCodeAt() === 90){
+                    return 'A' + fromAscii(65)
+                }else if(str.charCodeAt() === 122){
+                    return 'a' + fromAscii(97)
+                } else {
+                    return fromAscii(toAscii(str))
+                }
+            }else{
+                var arr = str.split('');
+                var brr = [];
+                arr.reduce((a,b) => {
+                    console.log(a,b)
+                    // brr.push(fromAscii(toAscii(v)));
+                })
+                var a = brr.join('')
+                // console.log(brr);
+                // console.log(a)
+
+                
+
+                // var s = str.slice(str.length-1);
+                // if(s.charCodeAt() === 90){
+                //     // var arr = str.split('');
+                //     // arr.pop();
+                //     // var brr = [];
+                //     // arr.forEach((v,i) => {
+                //     //     brr.push(fromAscii(toAscii(v)));
+                //     // })
+                //     return brr.join('') + 'A'
+                // } else if (s.charCodeAt() === 122){
+                //     var arr = str.split('');
+                //     arr.pop();
+                //     var brr = [];
+                //     arr.forEach((v,i) => {
+                //         brr.push(fromAscii(toAscii(v)));
+                //     })
+                //     return brr.join('') + 'a'
+                // } else {
+                //     return str.slice(0,str.length-1) + getNext(s);
+                // }
+            }
+            
+        }
+        getNext('ABCD');
+        // console.log(getNext('AZASDD'));
+        // console.log(getNext('abczdsdz'));
+    </script>
+</body>
+</html>

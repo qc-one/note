@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="colorSelect">colorSelect</div>
+    <div id="memorySelect">memorySelect</div>
+    <div id="numSelect">numSelect</div>
+    <script>
+        //单利模式：保证一个类只有一个实例, 一般先判断实例是否存在,如果存在直接返回, 不存在则先创建再返回,这样就可以保证一个类只有一个实例对象.
+        //作用：模块间通信、保证某个类的对象的唯一性、防止变量污染
+        //注意事项：正确使用this、闭包容易造成内存泄漏,所以要及时清除不需要的变量、创建一个新对象的成本较高
+        //适用场景：一个单一对象。比如：弹窗，无论点击多少次，弹窗只应该被创建一次。
+        console.log('单利模式');
+        class CreateUser {
+            constructor(name) {
+                this.name = name;
+                this.getName();
+            }
+            getName() {
+                return this.name;
+            }
+        }
+        // 代理实现单例模式
+        var ProxyMode = (function() {
+            var instance = null;
+            return function(name) {
+                if(!instance) {
+                    instance = new CreateUser(name);
+                }
+                return instance;
+            }
+        })();
+        // 测试单体模式的实例
+        var a = new ProxyMode("aaa");
+        var b = new ProxyMode("bbb");
+        // 因为单体模式是只实例化一次，所以下面的实例是相等的
+        console.log(a === b);    //true
+
+        //策略模式: 策略模式将不同算法进行合理的分类和单独封装，让不同算法之间可以互相替换而不会影响到算法的使用者
+        //作用：实现不同, 作用一致、调用方式相同,降低了使用成本以及不同算法之间的耦合、单独定义算法模型, 方便单元测试、避免大量冗余的代码判断,比如if else等
+        //实际案例：实现更优雅的表单验证、游戏里的角色计分器、棋牌类游戏的输赢算法
+        //一个基于策略模式的程序至少由两部分组成。第一个部分是一组策略类（可变），策略类封装了具体的算法，并负责具体的计算过程。第二个部分是环境类Context（不变），Context接受客户的请求，随后将请求委托给某一个策略类。要做到这一点，说明Context中要维持对某个策略对象的引用。
+        console.log('策略类');
+        /*策略类*/
+        var levelOBJ = {
+            "A": function(money) {
+                return money * 4;
+            },
+            "B" : function(money) {
+                return money * 3;
+            },
+            "C" : function(money) {
+                return money * 2;
+            } 
+        };
+        /*环境类*/
+        var calculateBouns =function(level,money) {
+            return levelOBJ[level](money);
+        };
+        console.log(calculateBouns('A',10000)); // 40000
+
+        //代理模式：一个对象通过某种代理方式来控制对另一个对象的访问
+        //作用：远程代理(一个对象对另一个对象的局部代理)、虚拟代理(对于需要创建开销很大的对象如渲染网页大图时可以先用缩略图代替真图)、安全代理(保护真实对象的访问权限)、缓存代理(一些开销比较大的运算提供暂时的存储，下次运算时，如果传递进来的参数跟之前相同，则可以直接返回前面存储的运算结果)
+        //注意事项：使用代理会增加代码的复杂度,所以应该有选择的使用代理.
+        //我们可以使用代理模式实现如下功能:通过缓存代理来优化计算性能、图片占位符/骨架屏/预加载等、合并请求/资源
+        console.log('代理模式');
+        // 缓存代理
+        function sum(a, b){
+            return a + b
+        }
+        let proxySum = (function(){
+            let cache = {}
+            return function(){
+                let args = Array.prototype.join.call(arguments, ',');
+                if(args in cache){
+                    return cache[args];
+                }
+                cache[args] = sum.apply(this, arguments)
+                return cache[args]
+            }
+        })()
+        console.log(proxySum(2,3));
+
+        // 中介者模式：通过一个中介者对象，其他所有的相关对象都通过该中介者对象来通信，而不是相互引用，当其中的一个对象发生改变时，只需要通知中介者对象即可。通过中介者模式可以解除对象与对象之间的紧耦合关系
+        //例如：现实生活中，航线上的飞机只需要和机场的塔台通信就能确定航线和飞行状态，而不需要和所有飞机通信。同时塔台作为中介者，知道每架飞机的飞行状态，所以可以安排所有飞机的起降和航线安排。
+        //中介者模式适用的场景：例如购物车需求，存在商品选择表单、颜色选择表单、购买数量表单等等，都会触发change事件，那么可以通过中介者来转发处理这些事件，实现各个事件间的解耦，仅仅维护中介者对象即可。
+        console.log('中介者模式');
+        var goods = {   //手机库存
+            'red|32G': 3,
+            'red|64G': 1,
+            'blue|32G': 7,
+            'blue|32G': 6,
+        };
+        //中介者
+        var mediator = (function() {
+            var colorSelect = document.getElementById('colorSelect');
+            var memorySelect = document.getElementById('memorySelect');
+            var numSelect = document.getElementById('numSelect');
+            return {
+                changed: function(obj) {
+                    switch(obj){
+                        case colorSelect:
+                            console.log('colorSelect');
+                            //TODO
+                            break;
+                        case memorySelect:
+                            console.log('memorySelect');
+                            //TODO
+                            break;
+                        case numSelect:
+                            console.log('numSelect');
+                            //TODO
+                            break;
+                        default:
+                            console.log('default');
+                            break;
+                    }
+                }
+            }
+        })();
+        colorSelect.onclick = function() {
+            mediator.changed(this);
+        };
+        memorySelect.onclick = function() {
+            mediator.changed(this);
+        };
+        numSelect.onclick = function() {
+            mediator.changed(this);
+        };
+
+        // 装饰者模式：在不改变对象自身的基础上，在程序运行期间给对象动态地添加方法。
+        //例如：现有4种型号的自行车分别被定义成一个单独的类，如果给每辆自行车都加上前灯、尾灯、铃铛这3个配件，如果用类继承的方式，需要创建4*3=12个子类。但如果通过装饰者模式，只需要创建3个类。
+        //装饰者模式适用的场景：原有方法维持不变，在原有方法上再挂载其他方法来满足现有需求；函数的解耦，将函数拆分成多个可复用的函数，再将拆分出来的函数挂载到某个函数上，实现相同的效果但增强了复用性。
+        console.log('装饰者模式');
+        Function.prototype.before = function(beforefn) {
+            var self = this;    //保存原函数引用
+            return function(){  //返回包含了原函数和新函数的 '代理函数'
+                beforefn.apply(this, arguments);    //执行新函数，修正this
+                return self.apply(this,arguments);  //执行原函数
+            }
+        }
+        Function.prototype.after = function(afterfn) {
+            var self = this;
+            return function(){
+                var ret = self.apply(this,arguments);
+                afterfn.apply(this, arguments);
+                return ret;
+            }
+        }
+        var func = function() {
+            console.log('2');
+        }
+        //func1和func3为挂载函数
+        var func1 = function() {
+            console.log('1');
+        }
+        var func3 = function() {
+            console.log('3');
+        }
+        func = func.before(func1).after(func3);
+        func();
+
+        //观察者模式：定义了一种一对多的关系, 所有观察对象同时监听某一主题对象,当主题对象状态发生变化时就会通知所有观察者对象,使得他们能够自动更新自己
+        //作用：目标对象与观察者存在一种动态关联,增加了灵活性、支持简单的广播通信, 自动通知所有已经订阅过的对象、目标对象和观察者之间的抽象耦合关系能够单独扩展和重用
+        //注意事项：观察者模式一般都要注意要先监听, 再触发(特殊情况也可以先发布,后订阅,比如QQ的离线模式)
+        //观察者模式是非常经典的设计模式,主要应用如下:系统消息通知、网站日志记录、内容订阅功能、javascript事件机制、react/vue等的观察者
+        console.log('观察者模式');
+        class Subject {
+            constructor() {
+                this.subs = {}
+            }
+
+            addSub(key, fn) {
+                const subArr = this.subs[key]
+                if (!subArr) {
+                    this.subs[key] = []
+                }
+                this.subs[key].push(fn)
+            }
+            trigger(key, message) {
+                const subArr = this.subs[key]
+                if (!subArr || subArr.length === 0) {
+                    return false
+                }
+                for(let i = 0, len = subArr.length; i < len; i++) {
+                    const fn = subArr[i]
+                    fn(message)
+                }
+            }
+            unSub(key, fn) {
+                const subArr = this.subs[key]
+                if (!subArr) {
+                    return false
+                }
+                if (!fn) {
+                    this.subs[key] = []
+                } else {
+                    for (let i = 0, len = subArr.length; i < len; i++) {
+                        const _fn = subArr[i]
+                        if (_fn === fn) {
+                            subArr.splice(i, 1)
+                        }
+                    }
+                }
+            }
+        }
+        // 测试
+        // 订阅
+        let subA = new Subject()
+        let A = (message) => {
+            console.log('订阅者收到信息: ' + message)
+        }
+        subA.addSub('A', A)
+        // 发布
+        subA.trigger('A', '我是徐小夕')   // A收到信息: --> 我是徐小夕
+    </script>
+</body>
+</html>
