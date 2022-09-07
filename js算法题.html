@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
         // var a = [1, 2, 3];
@@ -14,26 +16,25 @@
 
         var _a = 0;
         var proxy = new Proxy(window, {
-            set: function(target, key, value, receiver){ 
+            set: function (target, key, value, receiver) {
                 return Reflect.set(target, key, value, receiver);
             },
-            get: function(target, key, receiver){
-                console.log(target
-                , key, receiver);
-                if(key === "a") return ++_a;
+            get: function (target, key, receiver) {
+                console.log(target, key, receiver);
+                if (key === "a") return ++_a;
                 else return window[key];
             }
         });
-        console.log(proxy.a===1 && proxy.a===2 && proxy.a===3); //true
+        console.log(proxy.a === 1 && proxy.a === 2 && proxy.a === 3); //true
 
         const obj = {
             cat: {
                 name: '哈哈'
             }
         }
-        const dog = obj?.dog?.name;
+        const dog = obj ? .dog ? .name;
         console.log(dog);
-
     </script>
 </body>
+
 </html>
