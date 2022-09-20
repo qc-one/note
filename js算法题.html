@@ -10,30 +10,36 @@
 
 <body>
     <script>
+        // 查找字符串中是否包含特定单词
+        function wordInString(s, word) {
+            return new RegExp('\\b' + word + '\\b', 'i').test(s);
+        }
+        console.log(wordInString('Didyou, or didyou not, get why?', 'you')); // true
+
         // var a = [1, 2, 3];
         // a.join = a.shift;
         // console.log(a == 1 && a == 2 && a == 3); // true
 
-        var _a = 0;
-        var proxy = new Proxy(window, {
-            set: function (target, key, value, receiver) {
-                return Reflect.set(target, key, value, receiver);
-            },
-            get: function (target, key, receiver) {
-                console.log(target, key, receiver);
-                if (key === "a") return ++_a;
-                else return window[key];
-            }
-        });
-        console.log(proxy.a === 1 && proxy.a === 2 && proxy.a === 3); //true
+        // var _a = 0;
+        // var proxy = new Proxy(window, {
+        //     set: function (target, key, value, receiver) {
+        //         return Reflect.set(target, key, value, receiver);
+        //     },
+        //     get: function (target, key, receiver) {
+        //         console.log(target, key, receiver);
+        //         if (key === "a") return ++_a;
+        //         else return window[key];
+        //     }
+        // });
+        // console.log(proxy.a === 1 && proxy.a === 2 && proxy.a === 3); //true
 
-        const obj = {
-            cat: {
-                name: '哈哈'
-            }
-        }
-        const dog = obj ? .dog ? .name;
-        console.log(dog);
+        // const obj = {
+        //     cat: {
+        //         name: '哈哈'
+        //     }
+        // }
+        // const dog = obj ? .dog ? .name;
+        // console.log(dog);
     </script>
 </body>
 
