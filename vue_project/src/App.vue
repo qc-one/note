@@ -1,5 +1,9 @@
 <template>
     <div id="app">
+        <h1>组件传参</h1>
+        <Father></Father>
+        <Son></Son>
+        <a-divider />
         <a-button type="primary" @click="keepAlice('testOne')">testOne切换组件</a-button>
         <a-button type="primary" @click="keepAlice('testTwo')">testTwo切换组件</a-button>
         <keep-alive exclude="KeepTest">
@@ -11,12 +15,16 @@
 <script>
     import KeepAlive from './components/KeepAlive.vue'
     import KeepTest from './components/Test.vue'
+    import Father from './components/Father.vue'
+    import Son from './components/Son.vue'
 
     export default {
         name: 'App',
         components: {
             testOne: KeepAlive,
-            testTwo: KeepTest
+            testTwo: KeepTest,
+            Father,
+            Son
         },
         data() {
             return {
