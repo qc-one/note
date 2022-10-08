@@ -26,6 +26,11 @@
             Father,
             Son
         },
+        provide() {
+            return {
+                aaa: 'aaa'
+            }
+        },
         data() {
             return {
                 keepName: 'testOne',

@@ -10,7 +10,9 @@
         name: 'SonSon',
         created() {
             console.log('son', this.$EventBus);
+            console.log(this.aaa, 'aaa');
         },
+        inject: ['aaa'],
         data() {
             return {
 
