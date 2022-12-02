@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+        <script>
+            let skill = {
+                num: 123,
+                sing() {
+                    console.log('唱歌');
+                },
+                game() {
+                    console.log('游戏');
+                }
+            }
+            let person = Object.create(skill, {
+                name: {
+                    value: 'qc'
+                },
+                age: {
+                    value: 18
+                }
+            })
+            person.game(); // 唱歌
+            console.log(person); // {name: 'qc', age: 18}
+            console.log(person.__proto__ === skill); // true
+            console.log(person.num); // 123
+        </script>
+
+        <script>
+            // if (!Object.keys) {
+            // Object.keys = (function () {
+            //     var hasOwnProperty = Object.prototype.hasOwnProperty,
+            //         hasDontEnumBug = !({toString: null}).propertyIsEnumerable('toString'),
+            //         dontEnums = [
+            //         'toString',
+            //         'toLocaleString',
+            //         'valueOf',
+            //         'hasOwnProperty',
+            //         'isPrototypeOf',
+            //         'propertyIsEnumerable',
+            //         'constructor'
+            //         ],
+            //         dontEnumsLength = dontEnums.length;
+
+            //     return function (obj) {
+            //     if (typeof obj !== 'object' && typeof obj !== 'function' || obj === null) throw new TypeError('Object.keys called on non-object');
+
+            //     var result = [];
+
+            //     for (var prop in obj) {
+            //         if (hasOwnProperty.call(obj, prop)) result.push(prop);
+            //     }
+
+            //     if (hasDontEnumBug) {
+            //         for (var i=0; i < dontEnumsLength; i++) {
+            //         if (hasOwnProperty.call(obj, dontEnums[i])) result.push(dontEnums[i]);
+            //         }
+            //     }
+            //     return result;
+            //     }
+            // })()
+            // };
+
+            // const sorted = {}
+            // sorted[300] = {}
+            // sorted[200] = {}
+            // sorted[100] = {}
+            // sorted[50.5] = {}
+            // console.log(Object.keys(sorted)) // 输出什么呢？
+
+            // let person = {}
+            // let personName = 'lihua'
+            // //在person对象上添加属性namep,值为personName
+            // Object.defineProperty(person, 'namep', {
+            //     //但是默认是不可枚举的(for in打印打印不出来)，可：enumerable: true
+            //     //默认不可以修改，可：wirtable：true
+            //     //默认不可以删除，可：configurable：true
+            //     get: function () {
+            //         console.log('触发了get方法')
+            //         return personName
+            //     },
+            //     set: function (val) {
+            //         console.log('触发了set方法')
+            //         personName = val
+            //     }
+            // })
+            // //当读取person对象的namp属性时，触发get方法
+            // console.log(person.namep)
+            // //当修改personName时，重新访问person.namep发现修改成功
+            // personName = 'liming'
+            // console.log(person.namep)
+            // // 对person.namep进行修改，触发set方法
+            // person.namep = 'huahua'
+            // console.log(person.namep)
+
+            var obj = { 0: 'a', 1: 'b', 2: 'c' };
+            console.log(Object.keys(obj)); // console: ['0', '1', '2']
+
+        </script>
+		
+		<script type="text/javascript">
+			//克隆对象
+//			const _obj = { a: 0, b: 1, c: 2 }; // 以下方法任选一种
+//			const obj = { ..._obj };
+//			const obj = JSON.parse(JSON.stringify(_obj));
+//			console.log(obj)	// obj => { a: 0, b: 1, c: 2 }
+
+			//合并对象
+//			const obj1 = { a: 0, b: 1, c: 2 };
+//			const obj2 = { c: 3, d: 4, e: 5 };
+//			const obj = { ...obj1, ...obj2 };
+//			console.log(obj)	// obj => { a: 0, b: 1, c: 3, d: 4, e: 5 }
+
+			//对象字面量：获取环境变量时必用此方法，用它一直爽，一直用它一直爽
+//			const env = "prod";
+//			const link = {
+//			    dev: "Development Address",
+//			    test: "Testing Address",
+//			    prod: "Production Address"
+//			}[env];
+				// link => "Production Address"
+
+			//对象变量属性
+//			const flag = false;
+//			const obj = {
+//			    a: 0,
+//			    b: 1,
+//			    [flag ? "c" : "d"]: 2
+//			};
+//			console.log(obj)// obj => { a: 0, b: 1, d: 2 }
+
+			//创建纯空对象
+//			const obj = Object.create(null);
+//			Object.prototype.a = 0;
+			// obj => {}
+			
+			//删除对象无用属性
+//			const obj = { a: 0, b: 1, c: 2 }; // 只想拿b和c
+//			const { a, ...rest } = obj;
+//			console.log(rest)	// rest => { b: 1, c: 2 }
+
+			//解构对象属性嵌套
+//			const obj = { a: 0, b: 1, c: { d: 2, e: 3 } };
+//			const { c: { d, e } } = obj;
+			// d e => 2 3
+				
+			//解构对象属性别名
+//			const obj = { a: 0, b: 1, c: 2 };
+//			const { a, b: d, c: e } = obj;
+			// a d e => 0 1 2
+			
+			//解构对象属性默认值
+//			const obj = { a: 0, b: 1, c: 2 };
+//			const { a, b = 2, d = 3 } = obj;
+//			console.log(a,b,d)	// a b d => 0 1 3
+			
+			//Object.assign：对象属性复制，浅拷贝
+			
+//			Object.assign = Object.assign || function(){
+//			    if(arguments.length == 0) throw new TypeError('Cannot convert undefined or null to object');
+//			    
+//			    let target = arguments[0],
+//			        args = Array.prototype.slice.call(arguments, 1),
+//			        key
+//			    args.forEach(function(item){
+//			        for(key in item){
+//			            item.hasOwnProperty(key) && ( target[key] = item[key] )
+//			        }
+//			    })
+//			    return target
+//			}
+//			let target = {a:1,b:2,c:{d:3}}
+////			let clone = Object.assign({}, target)
+//			target.c.d = 4
+			
+			//简单的深克隆可以使用JSON.parse()和JSON.stringify()，这两个api是解析json数据的，所以只能解析除symbol外的原始类型及数组和对象
+//			let clone = JSON.parse( JSON.stringify(target) )
+//			console.log(clone)
+
+			//检测数据是不是除了symbol外的原始数据
+//			function isStatic(value) {
+//			    return(
+//			        typeof value === 'string' ||
+//					typeof value === 'number' ||
+//					typeof value === 'boolean' ||
+//					typeof value === 'undefined' ||
+//			        value === null
+//			    )
+//			}
+
+			//检测数据是不是原始数据
+//			function isPrimitive(value) {
+//			    return isStatic(value) || typeof value === 'symbol'
+//			}
+			
+			//检查 value 是否是类数组
+//			function isArrayLike(value) {
+//			    return value != null && isLength(value.length) && !isFunction(value);
+//			}
+			
+			//检查 value 是否为有效的类数组长度
+//			function isLength(value) {
+//			      return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= Number.MAX_SAFE_INTEGER;
+//			}
+//			console.log(Number.MAX_SAFE_INTEGER)
+			//判断数据是不是Object类型的数据
+//			function isPlainObject(obj) {
+//			    return Object.prototype.toString.call(obj) === '[object Object]'
+//			}
+			
+			//获取数据类型，返回结果为 Number、String、Object、Array等
+//			function getRawType(value) {
+//			    return Object.prototype.toString.call(value).slice(8, -1)
+//			}
+
+			//克隆数据，可深度克隆		
+//			function clone(value, deep){
+//			    if(isPrimitive(value)){//检测数据是不是原始数据
+//			        return value
+//			    }
+//			    if (isArrayLike(value)) { //是类数组
+//			        value = Array.prototype.slice.call(value)
+//			        return value.map(item => deep ? clone(item, deep) : item)
+//			       }else if(isPlainObject(value)){ //是对象
+//			           let target = {}, key;
+//			          for (key in value) {
+//			            value.hasOwnProperty(key) && ( target[key] = deep ? clone(value[key], deep) : value[key] )
+//			        }
+//			    }
+//			    
+//			    let type = getRawType(value)
+//			    
+//			    switch(type){
+//			        case 'Date':
+//			        case 'RegExp': 
+//			        case 'Error': value = new window[type](value); break;
+//			    }
+//			    return value
+//			}
+//			console.log(clone({a:123}))
+			
+			//Object.setPrototypeOf() 方法设置一个指定的对象的原型 ( 即, 内部[[Prototype]]属性）到另一个对象或  null。
+			//Object.setPrototypeOf(obj, prototype)
+			
+		</script>
+		
+	</body>
+</html>
