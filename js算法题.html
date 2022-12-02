@@ -10,11 +10,74 @@
 
 <body>
     <script>
-        // 查找字符串中是否包含特定单词
-        function wordInString(s, word) {
-            return new RegExp('\\b' + word + '\\b', 'i').test(s);
+        let arr = [
+            {
+                path: '/home',
+                name: 'home',
+                label: '首页',
+                icon: 's-home',
+                url: 'Home/index'
+            },
+            {
+                path: "/other",
+                name: 'Other',
+                label: "其他",
+                icon: "s-tools",
+                url: "Other/index",
+                children: [{
+                        path: "pageone",
+                        name: "page1",
+                        label: "页面1",
+                        icon: "setting",
+                        url: "PageOne/index",
+                        children: [{
+                            path: "pageone",
+                            name: "page3",
+                            label: "页面3",
+                            icon: "setting",
+                            url: "PageOne/index",
+                        }, ],
+                    },
+                    {
+                        path: "pagetwo",
+                        name: "page2",
+                        label: "页面2",
+                        icon: "setting",
+                        url: "PageTwo/index",
+                    },
+                ],
+            },
+        ]
+        function fn(o) {
+            let a = [];
+            o.forEach(item => {
+                let obj = {};
+                if (item.children) {
+                    // item.children.map(i => {
+                    //     i.component = () => import(`../views/${i.url}`);
+                    //     return i;
+                    // })
+                    // menuArr.push(...item.children);
+                    // obj = {...item, abc: item.url}
+                    // obj.children.push(obj);
+                    fn(item.children)
+                }
+                // else {
+                //     // obj = {...item, abc: item.url}
+                //     // a.push(obj);
+                //     item.abc = item.url
+                // }
+                item.abc = item.url
+            });
+            return o
         }
-        console.log(wordInString('Didyou, or didyou not, get why?', 'you')); // true
+        console.log(fn(arr));
+
+        // 查找字符串中是否包含特定单词
+        // function wordInString(s, word) {
+        //     return new RegExp('\\b' + word + '\\b', 'i').test(s);
+        // }
+        // console.log(wordInString('Didyou, or didyou not, get why?', 'you')); // true
 
         // var a = [1, 2, 3];
         // a.join = a.shift;
