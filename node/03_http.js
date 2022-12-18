@@ -22,6 +22,7 @@ const serve = http.createServer();
 //     res.end(content);
 // })
 
+// req是请求对象，包含了与客户端相关的数据和属性
 serve.on("request", (req, res) => {
     const url = req.url;
     res.setHeader('Content-Type', 'text/html;charset=utf-8');
