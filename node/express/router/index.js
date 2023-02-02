@@ -2,15 +2,32 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get("/user", (req, res, next) => {
-    console.log("局部中间件");
+router.get("/get", (req, res, next) => {
+    // 局部中间件
     next();
 }, (req, res) => {
-    console.log(req.startTime, 'req');
-    res.send('user get');
+    let query = req.query;
+    res.send({
+        status: 0,
+        msg: "GET请求成功",
+        data: query
+    });
 })
-router.post("/user", (req, res) => {
-    res.send('user post');
+router.post("/post", (req, res) => {
+    let body = req.body;
+    res.send({
+        status: 0,
+        msg: "POST请求成功",
+        data: body
+    });
+})
+router.delete("/delete", (req, res) => {
+    let body = req.body;
+    res.send({
+        status: 0,
+        msg: "DELETE请求成功",
+        data: body
+    });
 })
 
 module.exports = router;

@@ -11,10 +11,8 @@ app.use((req, res, next) => {
         str += chunk;
     })
     req.on("end", () => {
-        console.log(str);
         body = qs.parse(str);
         req.body = body;
-        console.log(body);
         next();
     })
 })
