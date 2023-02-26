@@ -164,11 +164,10 @@ app.post('/api/login', (req, res) => {
                 username: req.body.username
             },
             secretKey, {
-                expiresIn: '30h'
+                expiresIn: '30s'
             })
     })
 });
-
 // 这是一个有权限的 API 接口
 app.get('/admin/getinfo', function (req, res) {
     // TODO_05：使用 req.auth 获取用户信息，并使用 data 属性将用户信息发送给客户端
@@ -179,7 +178,21 @@ app.get('/admin/getinfo', function (req, res) {
         data: req.auth // 要发送给客户端的用户信息
     })
 })
-
+// 全局错误处理中间件，捕获解析JWT失败后产生的错误
+app.use((err, req, res, next) => {
+    // token解析失败导致的错误
+    if (err.name === 'UnauthorizedError') {
+        return res.send({
+            status: 401,
+            message: '无效的token'
+        });
+    }
+    // 其它原因导致的错误
+    res.send({
+        status: 500,
+        message: '未知错误'
+    })
+})
 
 app.use('/api', router);
 
