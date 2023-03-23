@@ -12,11 +12,32 @@ const joi = require("joi");
 const username = joi.string().alphanum().min(3).max(10).required();
 // 密码的验证规则
 const password = joi.string().pattern(/^[\S]{6,12}$/).required();
+// 定义 id, nickname, emial 的验证规则
+// https://blog.csdn.net/qq_42543244/article/details/126605768
+// const id = joi.number().integer().min(1).required().error(new Error("id不合法1"));
+const id = joi.number().integer().min(1).required().messages({
+    "number.integer": "id必须为整数",
+    "number.min": "id最小为1",
+    "any.required": "id必须"
+});
+const nickname = joi.string().required();
+const email = joi.string().email().required().messages({
+    "string.email": "email格式不对",
+    "any.required": "email必须"
+});
 // 注册和登录表单的验证规则对象
 exports.reg_login_schema = {
     // 表示需要对 req.body 中的数据进行验证
     body: {
         username,
         password,
+    },
+}
+// 验证规则对象 - 更新用户基本信息
+exports.update_userinfo_schema = {
+    body: {
+        id,
+        nickname,
+        email,
     },
 }
