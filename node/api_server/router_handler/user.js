@@ -66,14 +66,14 @@ exports.login = (req, res) => {
         if (err) return res.cc(err)
         // 执行 SQL 语句成功，但是查询到数据条数不等于 1
         if (results.length !== 1) return res.cc('登录失败！')
-        // TODO：判断用户输入的登录密码是否和数据库中的密码一致
+        // 判断用户输入的登录密码是否和数据库中的密码一致
         // 拿着用户输入的密码,和数据库中存储的密码进行对比
         const compareResult = bcrypt.compareSync(userinfo.password, results[0].password)
         // 如果对比的结果等于 false, 则证明用户输入的密码错误
         if (!compareResult) {
             return res.cc('密码失败，登录失败！')
         }
-        // TODO：登录成功，生成 Token 字符串
+        // 登录成功，生成 Token 字符串
         const user = {
             ...results[0],
             password: '',

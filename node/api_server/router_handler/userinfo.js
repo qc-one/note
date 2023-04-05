@@ -45,7 +45,6 @@ exports.updatePassword = (req, res) => {
         if (err) return res.cc(err)
         // 检查指定 id 的用户是否存在
         if (results.length !== 1) return res.cc('用户不存在！')
-        // TODO：判断提交的旧密码是否正确
         // 判断提交的旧密码是否正确
         const compareResult = bcrypt.compareSync(req.body.oldPwd, results[0].password)
         if (!compareResult) return res.cc('原密码错误！')
@@ -63,4 +62,18 @@ exports.updatePassword = (req, res) => {
             res.cc('更新密码成功！', 0)
         })
     })
+}
+
+// 更新用户头像的处理函数
+exports.updateAvatar = (req, res) => {
+    const sql = 'update ev_users set user_pic=? where id=?';
+    db.query(sql, [req.body.avatar, req.user.id], (err, results) => {
+        // 执行 SQL 语句失败
+        if (err) return res.cc(err)
+        // 执行 SQL 语句成功，但是影响行数不等于 1 
+        if (results.affectedRows !== 1) return res.cc('更新头像失败！')
+        // 更新用户头像成功
+        return res.cc('更新头像成功！', 0)
+    })
+    res.send('ok')
 }
