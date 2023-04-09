@@ -44,6 +44,10 @@ const userinfoRouter = require('./router/userinfo')
 // 注意：以 /my 开头的接口，都是有权限的接口，需要进行 Token 身份认证
 app.use('/my', userinfoRouter)
 
+// 导入并使用文章分类管理路由模块
+const articateRouter = require('./router/articate')
+app.use('/my/article', articateRouter)
+
 // 错误中间件
 app.use((err, req, res, next) => {
     // 数据验证失败
