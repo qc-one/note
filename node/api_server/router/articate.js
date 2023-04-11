@@ -6,7 +6,8 @@ const artcate_handler = require('../router_handler/articate')
 const expressJoi = require('@escook/express-joi')
 // 导入文章分类的验证模块
 const {
-    add_cate_schema
+    add_cate_schema,
+    delete_cate_schema
 } = require('../schema/artcate')
 
 // 创建路由对象
@@ -15,6 +16,8 @@ const router = express.Router();
 router.get('/cates', artcate_handler.getArticate)
 // 新增文章分类的路由
 router.post('/addcates', expressJoi(add_cate_schema), artcate_handler.addArticleCates)
+// 删除文章分类的路由
+router.get('/deletecate/:id', expressJoi(delete_cate_schema), artcate_handler.deleteCateById)
 
 // 将路由对象共享出去
 module.exports = router

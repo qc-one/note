@@ -10,3 +10,12 @@ exports.add_cate_schema = {
         alias,
     },
 }
+
+// 定义 分类Id 的校验规则
+const id = joi.number().integer().min(1).required()
+// 校验规则对象 - 删除分类
+exports.delete_cate_schema = {
+    params: {
+        id,
+    },
+}
