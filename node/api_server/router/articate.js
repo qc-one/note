@@ -8,7 +8,8 @@ const expressJoi = require('@escook/express-joi')
 const {
     add_cate_schema,
     delete_cate_schema,
-    get_cate_schema
+    get_cate_schema,
+    update_cate_schema
 } = require('../schema/artcate')
 
 // 创建路由对象
@@ -21,6 +22,8 @@ router.post('/addcates', expressJoi(add_cate_schema), artcate_handler.addArticle
 router.get('/deletecate/:id', expressJoi(delete_cate_schema), artcate_handler.deleteCateById)
 // 根据ID获取文章分类的路由
 router.get('/cates/:id', expressJoi(get_cate_schema), artcate_handler.getArtCateById)
+// 更新文章分类的路由
+router.post('/updatecate', expressJoi(update_cate_schema), artcate_handler.updateCateById)
 
 // 将路由对象共享出去
 module.exports = router
