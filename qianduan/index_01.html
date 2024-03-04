@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>I am awesome!</h1>
+    <button>change</button>
+
+    <script>
+      // console.log('script start')
+      // async function async1() { // 第一个promise  
+      //   await async2()  
+      //   console.log('async1 end')
+      // }
+      // function async2() {  
+      //   console.log('async2 end')
+      // }
+      // setTimeout(function() {  // 第一个定时器  
+      //   console.log('setTimeout')
+      // })
+      // async1()
+      // new Promise(resolve => { // 第二个promise  
+      //   console.log('promise1')  
+      //   resolve()
+      // }).then(function() {  
+      //   console.log('promise2')
+      // }).then(function() {  
+      //   console.log('promise3')
+      // })
+      // new Promise(resolve => { // 第三个promise  
+      //   console.log('promise4')  
+      //   setTimeout(()=>{  // 第二个定时器    
+      //       resolve()  
+      //   })
+      // }).then(function() {  
+      //   console.log('promise5')
+      // }).then(function() {  
+      //   console.log('promise6')
+      // })
+      // console.log('script end')
+      // new Promise((resolve) => {
+      //     resolve();
+      // }).then(() => {
+      //     new Promise((resolve) => {
+      //         console.log(1);
+      //         resolve();
+      //     }).then(() => {
+      //         console.log(2);
+      //     }).then(() => {
+      //         console.log(3);
+      //     })
+      //     return 123
+      // }).then((a) => {
+      //     console.log(a, 'aaa');
+      //     console.log(4);
+      // })
+      // new Promise((resolve) => {
+      //     resolve();
+      // }).then(() => {
+      //     new Promise((resolve) => {
+      //         console.log(5);
+      //         resolve();
+      //     }).then(() => {
+      //         console.log(6);
+      //     }).then(() => {
+      //         console.log(7);
+      //     })
+      // }).then(() => {
+      //     console.log(8);
+      // })
+      // new Promise((resolve) => {
+      //     // new的时候是宏任务，先执行这里
+      //     console.log(111);
+      //     resolve();
+      //     console.log(222);
+      // }).then(() => {
+      //     console.log(333);
+      //     // 这里的new promise是第一个微任务带来的宏任务，所以这里的第一个then是相对这个任务队列里面的微任务
+      //     new Promise((resolve) => {
+      //         console.log(444);
+      //         resolve();
+      //         console.log(555);
+      //     }).then(() => {
+      //         console.log(666);
+      //     }).then(() => {
+      //         console.log(777);
+      //     })
+      // }).then(() => {
+      //     console.log(888);
+      // })
+
+      // let arr = [10,[0, 1], [2, 3], [4,[5,6,7]]];
+      // const newArr = function(arr){
+      //     return arr.reduce((pre,cur) => {
+      //         // console.log(pre, 'pre');
+      //         return pre.concat(Array.isArray(cur) ? newArr(cur) : cur);
+      //     },[])
+      // }
+      // console.log(newArr(arr)); //[0, 1, 2, 3, 4, 5, 6, 7]
+      // var result = [
+      //   {
+      //     subject: 'math',
+      //     score: 10
+      //   },
+      //   {
+      //     subject: 'chinese',
+      //     score: 20
+      //   },
+      //   {
+      //     subject: 'english',
+      //     score: 30
+      //   }
+      // ];
+      // var sum = result.reduce(function(prev, cur) {
+      //   return cur.score + prev;
+      // }, 0);
+      // console.log(sum) //60
+      // // [3,2,1].reduce(Math.pow)
+      //内容为3，不遍历该项
+      // var arr = [1, 2, 3, 4];
+      // arr.forEach(function(item) {
+      //     if (item === 3) {
+      //         return;
+      //     }
+      //     console.log(item);
+      // });
+      //找到id为002，然后终止整个循环,返回当前这一项的值。
+      //使用 try-catch完成的
+      // 代码如下
+
+      // let arr = [{
+      //   id: '001',
+      //   name: '张三1'
+      // }, {
+      //   id: '002',
+      //   name: '张三2'
+      // }, {
+      //   id: '003',
+      //   name: '张三2'
+      // }];
+
+      // // 使用forEach跳出整个循环，使用rty-catch
+      // function useForeach(Arr) {
+      //   let obj = {}
+      //   try {
+      //     Arr.forEach(function(item) {
+      //       if (item.id == '002') {
+      //         // 找到目标项，赋值。然后抛出异常
+      //         obj = item
+      //         throw new Error('return false')
+      //       }
+      //     });
+      //   } catch (e) {
+      //     // 返回id===002的这一项的数据
+      //     return obj
+      //   }
+      // }
+      // console.log(useForeach(arr))
+
+
+      // var h1 = document.querySelector('h1');
+      // var btn = document.querySelector('button');
+      // // 死循环指定的时间
+      // function delay(duration) {
+      //   var start = Date.now();
+      //   while (Date.now() - start < duration) {}
+      // }
+      // btn.onclick = function () {
+      //   h1.textContent = '我很帅！';
+      //   delay(3000);
+      // };
+
+      // let arr1 = [1,2,3,4,5,6,7,8,9,10];
+      // arr1.copyWithin(3);
+      // console.log(arr1);
+      // 输出[1, 2, 3, 1, 2, 3, 4, 5, 6, 7]
+      // let arr1 = [1,2,3,4,5,6,7,8,9,10];
+      // arr1.copyWithin(-3);
+      // console.log(arr1);
+      // 输出[1, 2, 3, 4, 5, 6, 7, 1, 2, 3]
+      // let arr1 = [1,2,3,4,5,6,7,8,9,10];
+      // arr1.copyWithin(3);
+      // console.log(arr1); // 输出[1, 2, 3, 8, 5, 6, 7, 8, 9, 10]
+
+
+
+      // const arr = [5,2,4,8,9]
+      // console.log(arr.find((item, index, arr) => {
+      //   console.log(item, index, arr);
+      //   return item > 5
+      // }))     // 8
+      // console.log(arr.find(item => item > 10))    // undefined
+
+      //slice(start, end)
+      // var text="excellent"
+      // console.log(text.slice(1)); //returns "exce"
+      // console.log(text.slice(2,4)); //returns "ce"
+      // console.log(text);
+      //substr(from, to)
+      // var text="excellent"
+      // console.log(text.substr(0,4)); //returns "exce"
+      // console.log(text.substr(2,4)); //returns "cell"
+      // console.log(text);
+      //substring(from, [to])
+      // var myString = 'javascript rox';
+      // console.log(myString.substring(0,10));;
+      // console.log(myString)
+      //output: javascript
+      // var myString = '999 JavaScript Coders';
+      // // console.log(myString.replace(/JavaScript/i, "jQuery"));
+      // // console.log(myString);
+      // console.log(myString.split(" ", 2));
+      // console.log(myString);
+      //repeat()
+      // var string = "Welcome to Edureka";
+      // console.log(string.repeat(2));; //output: Welcome to Edureka Welcome to Edureka
+      // console.log(string);
+      //valueOf()
+      // var mystr = "Hello World!";
+      // var res = mystr.valueOf();
+      // console.log(mystr, res); //output: Hello World!
+      //charAt(x)
+      // var myString = 'jQuery FTW!!!';
+      // console.log(myString.charAt()); //F
+      // console.log(myString);
+
+      // window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+      // console.log(window.indexedDB, 111);
+      // if (!window.indexedDB) {
+      //   alert('不支持indexDB')
+      // }
+      // const DATA_BASE = 'TEST_DB_03'
+      // let db = {}
+      // /**
+      //   1. 不存在当前数据库时，即为创建
+      //   2. open参数：数据库名称，版本号（整数）
+      // */
+      // const request = window.indexedDB.open(DATA_BASE, 2)
+      // console.log(request, 222);
+      // // 请求出错 执行函数
+      // request.onerror = function(event) {
+      //   // Do something with request.errorCode!
+      //   console.log(event, 333);
+      // };
+      // // 请求成功 执行函数
+      // request.onsuccess = function(event) {
+      //   // Do something with request.result!
+      //   console.log(event, 444);
+      // };
+      // /**
+      //   1. 当数据库不存在时，创建数据库会触发 onupgradeneeded 事件
+      //   2. 当指定的版本号高于当前时会直接触发 onupgradeneeded 事件
+      //   3. 唯一可以修改数据库结构的事件
+      // */
+      // request.onupgradeneeded = function (event) {
+      //   console.log(event, 555);
+      //   /**
+      //     1. 保存 IDBDataBase 接口（数据库）
+      //   */
+      //   db = event.target.result
+      //   console.log('execute onupgradeneeded');
+      //   /**
+      //     1. 为当前数据库创建对象仓库（表）
+      //     2. 这里的keyPath 相当于主键
+      //     3. createIndex(indexName, keyPath, {unique | multiEntry | locale})
+      //   */
+      //   const objectStore = db.createObjectStore('users', { keyPath: 'id' })
+      //   objectStore.createIndex('name', 'name', { unique: false })
+      //   objectStore.createIndex('age', 'age', { unique: false })
+      // }
+      
+
+      //   function loadJS(files, done) {
+      //   // 获取head标签
+      //   const head = document.getElementsByTagName('head')[0];
+      //   Promise.all(files.map(file => {
+      //     return new Promise(resolve => {
+      //       // 创建script标签并添加到head
+      //       const s = document.createElement('script');
+      //       s.type = "text/javascript";
+      //       s.async = true;
+      //       s.src = file;
+      //       // 监听load事件，如果加载完成则resolve
+      //       s.addEventListener('load', (e) => resolve(), false);
+      //       head.appendChild(s);
+      //     });
+      //   })).then(done);  // 所有均完成，执行用户的回调事件
+      // }
+      // loadJS(["test1.js", "test02.js"], () => {
+      //   // 用户的回调逻辑
+      //   console.log("加载完成");
+      // });
+    </script>
+    
+</body>
+</html>

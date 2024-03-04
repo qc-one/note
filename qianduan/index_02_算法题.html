@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 手写instanceof
+        let myInstanceof = (target, origin) => {
+            while(target) {
+                console.log(target, 111);
+                if (target.__proto__ === origin.prototype) {
+                return true
+                }
+                console.log(target.__proto__, 222);
+                target = target.__proto__
+            }
+            return false
+        }
+        let a = [1, 2, 3];
+        console.log(myInstanceof(123, Array)); // true
+        // console.log(myInstanceof(a, Object)); // true
+
+        // 无重复字符串的最长子串
+        // var lengthOfLongestSubstring = function(s) {
+        //     let arr = [];
+        //     let max = 0;
+        //     let str = ""
+        //     for (let i = 0; i < s.length; i ++) {
+        //         // console.log(i, arr);
+        //         //如果之前存在，就删除，止到没有为止
+        //         if(arr.indexOf(s[i]) !== -1) {
+        //             // console.log(arr.indexOf(s[i]) + 1);
+        //             // console.log(arr.indexOf(s[i]), 333);
+        //             str = arr.join("");
+        //             arr.splice(0, arr.indexOf(s[i]) + 1);
+        //         }
+        //         //加入当前元素
+        //         arr.push(s[i]);
+        //         //取最大
+        //         // console.log(arr, max, 222);
+        //         max = Math.max(max, arr.length);
+        //     }
+        //     console.log(str);
+        //     return max;
+        // };
+        // console.log(lengthOfLongestSubstring('qinchuang')); // 7 ['q', 'i', 'n', 'c', 'h', 'u', 'a']
+        // console.log(lengthOfLongestSubstring('abcacbb')); // 3
+        // console.log(lengthOfLongestSubstring('pwwlakwkew')); // 3
+
+        // 比较版本号
+        // var compareVersion = function(version1, version2) {
+        //     const arr1 = version1.split('.'); // ['1', '1', '2']
+        //     const arr2 = version2.split('.'); // ['1', '2', '3', '4']
+        //     while(arr1.length && arr2.length){
+        //         console.log(arr1, arr2);
+        //         const n1 = Number(arr1.shift()); // 1 1
+        //         const n2 = Number(arr2.shift()); // 1 2
+        //         if(n1 > n2) return 1
+        //         if(n1 < n2) return -1
+        //     }
+        //     if(arr1.length){
+        //         // arr2 数组已经为空
+        //         return arr1.every(item => Number(item)===0) ? 0 : 1
+        //     }
+        //     if(arr2.length){
+        //         // arr1 数组已经为空
+        //         return arr2.every(item=>Number(item)===0) ? 0 : -1
+        //     }
+        //     return 0;
+        // };
+        // console.log(compareVersion('1.1.2', '1.2.3.4')); // -1
+        // console.log(compareVersion('2.5.33', '0.1')); // 1
+        // console.log(compareVersion('1.0', '1.1')); // -1
+        // console.log(compareVersion('1.1', '1.1.0')); // 0
+
+        // 快速排序
+        // function quickSort(arr, t) {
+        //     if (arr.length <= 1) return arr; // 如果数组长度小于等于1，则直接返回原始数组
+        //     const pivotIndex = Math.floor(arr.length / 2); // 选取基准元素（pivot）所在位置
+        //     const pivot = arr[pivotIndex]; // 获取基准元素值
+        //     console.log(pivotIndex);
+        //     let leftArr = []; // 存放比基准元素小的元素
+        //     let rightArr = []; // 存放比基准元素大的元素
+        //     for (let i = 0; i < arr.length; i++) {
+        //         if (i === pivotIndex) continue; // 跳过基准元素本身
+        //         if (arr[i] < pivot) {
+        //             leftArr.push(arr[i]); // 将比基准元素小的元素添加到左侧数组
+        //         } else {
+        //             rightArr.push(arr[i]); // 将比基准元素大的元素添加到右侧数组
+        //         }
+        //     }
+        //     console.log(leftArr, rightArr, t);
+        //     return [...quickSort(leftArr, 1), pivot, ...quickSort(rightArr, 2)]; // 合并左、右两部分结果及基准元素
+        // }
+        // // 测试样例
+        // const array = [5, 3, 8, 4, 6, 7, 9, 2, 1];
+        // console.log(quickSort(array)); // 输出：[1, 2, 3, 4, 5, 6, 7, 8, 9]
+        
+        //  选择排序
+        // function selectSort(arr){
+        //     for(var i = 0; i<arr.length-1; i++){
+        //         var maxIndex = 0;
+        //         for(var j = 1; j<arr.length-i; j++){
+        //             console.log(i, j, maxIndex);
+        //             if(arr[j]>arr[maxIndex]){
+        //                 maxIndex = j;
+        //             }
+        //         }
+        //         var temp = arr[j-1]; // j = arr.length -1
+        //         arr[j-1] = arr[maxIndex];
+        //         arr[maxIndex] = temp;
+        //     }
+        //     return arr;
+        // }
+        // var arr = [4,9,3,2,1];
+        // arr = selectSort(arr);
+        // console.log(arr);// [1, 2, 3, 4, 9]
+
+        // 冒泡排序
+        // function bubbleSort(arr){
+        //     for(var i = 0; i < arr.length-1; i++){
+        //         for(var j = 0; j<arr.length-i-1; j++){
+        //             console.log(arr[j], arr[j+1]);
+        //             if(arr[j] > arr[j+1]){
+        //                 var tmp = arr[j];
+        //                 arr[j] = arr[j+1];
+        //                 arr[j+1] = tmp;
+        //             }
+        //         }
+        //     }
+        //     return arr;
+        // }
+        // var arr = [4,9,3,2,1]
+        // arr = bubbleSort(arr)
+        // console.log(arr); // [1, 2, 3, 4, 9]
+
+        // 实现a同时等于1/2/3
+        // var i = 0;
+        // Object.defineProperty(window, 'a', {
+        //     get () {
+        //         // 获取window.a的时候触发getter函数
+        //         return ++i;
+        //     },
+        //     set (value) {
+        //         // 设置window.a属性值的时候触发setter函数
+        //     }
+        // })
+        // if (a == 1 && a == 2 && a == 3) {
+        //     console.log('OK');
+        // }
+
+        // 扁平数据结构转Tree
+        // function arrayToTree(items) {
+        //     let res = []
+        //     let getChildren = (resArr, pId) => {
+        //         console.log(resArr, pId, 111111);
+        //         for (const i of items) {
+        //             console.log(i, pId, 2222);
+        //             if (i.pid === pId) {
+        //                 const newItem = { ...i, children: [] }
+        //                 resArr.push(newItem)
+        //                 getChildren(newItem.children, newItem.id)
+        //             }
+        //         }
+        //     }
+        //     getChildren(res, 0)
+        //     return res
+        // }
+        // function arrayToTree(items) {
+        //     let res = [] // 存放结果集
+        //     let map = {}
+        //     // 先转成map存储
+        //     for (const i of items) {
+        //         map[i.id] = { ...i, children: [] }
+        //     }
+        //     console.log(map, 111);
+        //     for (const i of items) {
+        //         const newItem = map[i.id]
+        //         if (i.pid === 0) {
+        //             res.push(newItem)
+        //         } else {
+        //             // if (Object.prototype.hasOwnProperty.call(map, i.pid)) {
+        //             if (map.hasOwnProperty(i.pid)) {
+        //                 map[i.pid].children.push(newItem)
+        //             }
+        //         }
+        //     }
+        //     return res
+        // }
+        // let arr = [
+        //     {id: 1, name: '部门1', pid: 0},
+        //     {id: 5, name: '部门5', pid: 4},
+        //     {id: 2, name: '部门2', pid: 1},
+        //     {id: 3, name: '部门3', pid: 1},
+        //     {id: 4, name: '部门4', pid: 3},
+        //     {id: 11, name: '部门11', pid: 0},
+        // ]
+        // console.log(arrayToTree(arr), 11);
+
+        // 将金额转为千分位
+        // let num = 12345678.9989
+        // let arr = num.toString().split(".");
+        // function fn1(str) {
+        //     let result = "", index = 0, len = str.length - 1;
+        //     for (let i = str.length -1; i >= 0; i--) {
+        //         if (index % 3 === 0 && index !== 0) {
+        //             result += "," + str[i]
+        //         } else {
+        //             result += str[i]
+        //         }
+        //         index ++;
+        //     }
+        //     return result.split("").reverse().join("")
+        // }
+        // function fn2(str) {
+        //     let result = "", index = 0;
+        //     for (let i = 0; i < str.length; i++) {
+        //         if (i % 3 === 0 && i !== 0) {
+        //             result += "," + str[i]
+        //         } else {
+        //             result += str[i]
+        //         }
+        //     }
+        //     return result
+        // }
+
+        // let res = fn1(arr[0]) + "." + fn2(arr[1])
+        // console.log(res, 'res');
+        // var result="", index = 0, len = arr[0].length-1;
+        // while(len >= 0) {
+        //     index % 3 === 0 && index !== 0 ? result += "," + arr[0][len] : result += arr[0][len];
+        //     len --;
+        //     index ++;
+        //     console.log(result, 222);
+        // };
+        // result = result.split("").reverse().join("") + "." + arr[1];
+        // console.log(result);
+
+        // var a = 10;
+        // function add() {
+        //     var a = 0;
+        //     return function () {
+        //         a += 1;
+        //         console.log(a);
+        //     }
+        // }
+        // var a1 = add();
+        // var a2 = add();
+        // a1(); // 1
+        // a2(); // 1
+        // a1(); // 2
+        // a2(); // 2
+
+        // 将字符串qin_chuang_qin_chuang转为qinChuangQinChuang
+        // let str1 = "qin_chuang_qin_chuang";
+        // let arr = str1.split("_");
+        // let str = arr[0];
+        // for (let i = 1; i < arr.length; i ++) {
+        //     arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].substring(1);
+        //     str += arr[i]
+        // }
+        // console.log(str, 111);
+
+        // 判断两个数组是否相等
+            // 统计数组中每个元素出现的次数，记录为一个计数对象；
+            // 检查计数对象是否相等。
+        // function areArraysContentEqual(arr1, arr2) {
+        //     if (arr1.length !== arr2.length) {
+        //         return false;
+        //     }
+        //     // 创建计数对象，用于记录每个元素在数组中的出现次数
+        //     const countMap1 = count(arr1)
+        //     const countMap2 = count(arr2)
+        //     // 检查计数对象是否相等
+        //     for (const [key, count] of countMap1) {
+        //         if (countMap2.get(key) !== count) {
+        //         return false;
+        //         }
+        //     }
+        //     return true;
+        // }
+        // // 统计数组中元素出现的次数
+        // function count(arr) {
+        //     let map = new Map()
+        //     for (let item of arr) {
+        //         // map.set(item, (map.get(item) || 0) + 1)
+        //         if (!map.has(item)) {
+        //             map.set(item, 1)
+        //         } else {
+        //             map.set(item, map.get(item) + 1)
+        //         }
+        //     }
+        //     return map
+        // }
+        // const array1 = ["apple", "banana", "cherry", "banana", 1, '1', '11', 11, NaN, NaN];
+        // const array2 = ["banana", "apple", "banana", "cherry", '1', 1, '11', 11, NaN, NaN];
+        // console.log(areArraysContentEqual(array1, array2)); // true
+        // console.log(count(array1), 111);
+
+        // 数组去重
+        // function fn1(arr) {
+        //     for (let i = 0; i < arr.length; i++) {
+        //         if (arr.indexOf(arr[i]) !== i) {
+        //             arr.splice(i, 1);
+        //             i--;
+        //         }
+        //     }
+        //     return arr
+        // }
+        // function fn1(arr) {
+        //     return [...new Set(arr)]
+        // }
+        // function fn1(arr) {
+        //     return arr.reduce((pre, cur) => {
+        //         if(!pre.includes(cur)){
+        //             return pre.concat(cur);
+        //         } else {
+        //             return pre;
+        //         }
+        //     }, [])
+        // }
+        // var arr=[1,1,2,3,4,5,6,2,3,4,5,6,7,1,2,3,4,5,6];
+        // console.log(fn1(arr)); //[1, 2, 3, 4, 5, 6, 7]
+        // console.log(arr);
+
+    </script>
+</body>
+</html>

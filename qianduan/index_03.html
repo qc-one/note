@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="debounce">防抖</button>
+    <button id="throttle">节流</button>
+    <script>
+        let p1 = new Promise((resolve, reject) => {
+            // resolve('success' + 11111);
+            reject('error' + 11111);
+        })
+        let p2 = new Promise((resolve, reject) => {
+            // resolve('success' + 22222);
+            reject('error' + 22222);
+        })
+        let p3 = new Promise((resolve, reject) => {
+            resolve('success' + 33333);
+            // reject('error' + 33333);
+        })
+        Promise.all([p1, p2, p3]).then((res) => {
+            console.log(res);
+        }).catch((err) => {
+            console.log(err);
+        })
+
+        // function judgeNumber(num){
+        //     var promise1 = new Promise(function(resolve,reject){
+        //         num =5;
+        //         if(num<5){
+        //             resolve("num小于5，值为："+num);
+        //         }else{
+        //             reject("num不小于5，值为："+num);
+        //         }
+        //     });
+        //     return promise1;
+        // }
+        // judgeNumber(6).then(
+        //     function(message){
+        //         console.log(message, 'resolve');
+        //     },
+        //     function(message){
+        //         console.log(message, 'reject111');
+        //         console.log(a);
+        //     }
+        // )
+        // .catch(function(message){
+        //     console.log(message, 'reject222');
+        // })
+
+        // eval('var a=1');
+        // let b = eval('({a: 1234})')
+        // console.log(a, eval('({a: 123})'), b);
+
+        // let arr = [1, 2, 34];
+        // for (let value in arr) {
+        //     console.log(value); // 输出 '1', '2', '3' (按照数组顺序)
+        // }
+
+        // 深拷贝
+        // function deepClone(source) {
+        //     // null数据需要特殊处理
+        //     if (source === null) {
+        //         return source
+        //     }
+        //     // 校验要拷贝的数据是对象还是数组
+        //     const target = Array.isArray(source) ? [] : {}
+        //     for (const k in source) {
+        //         const val = source[k]
+        //         const valueType = typeof val
+        //         // 校验拷贝的数据类型
+        //         if (valueType === 'function') {
+        //         target[k] = new Function(`return ${val.toString()}`)()
+        //         } else if (valueType === 'object') {
+        //         target[k] = deepClone(val)
+        //         } else {
+        //         target[k] = val
+        //         }
+        //     }
+        //     return target
+        // }
+        // const obj1 = { name: 'dog', info: { age: 3 }, fn: function () {} }
+        // const obj2 = deepClone(obj1)
+        // obj2.name = 'cat'
+        // obj2.info.age = 4
+        // console.log(obj1) // { name: 'dog', info: { age: 3 }, fn: function(){} }
+        // console.log(obj2) // { name: 'cat', info: { age: 4 }, fn: function(){} }
+
+        // 手动实现bind
+        // Function.prototype.bind2 = function (context) {
+        //     var self = this;
+        //     // 获取bind2函数从第二个参数到最后一个参数
+        //     var args = Array.prototype.slice.call(arguments, 1);
+        //     return function () {
+        //         console.log(this, 11);
+        //         // 这个时候的arguments是指bind返回的函数传入的参数
+        //         var bindArgs = Array.prototype.slice.call(arguments);
+        //         return self.apply(context, args.concat(bindArgs));
+        //     }
+        // }
+        // var value = 2;
+        // var foo = {
+        //     value: 1
+        // };
+        // function bar(name, age) {
+        //     console.log(this, 222);
+        //     this.habit = 'shopping';
+        //     console.log(this.value);
+        //     console.log(name);
+        //     console.log(age);
+        // }
+        // bar.prototype.friend = 'kevin';
+        // var bindFoo = bar.bind(foo, 'daisy');
+        // var obj = new bindFoo('18');
+        // // undefined
+        // // daisy
+        // // 18
+        // console.log(obj.habit);
+        // console.log(obj.friend);
+        // shopping
+        // kevin
+
+        // 手动实现call
+        // Function.prototype.newCall = function(context){
+        //     var ctx = arguments[0] || window;
+        //     ctx.fn = this;
+        //     var arr = []
+        //     for(var i = 1; i < arguments.length;i++){
+        //         arr.push('arguments[' + i + ']')
+                
+        //     }
+        //     var result = eval('ctx.fn(' + arr.join(',')+')');
+        //     delete ctx.fn
+        //     return result
+        // }
+        // Function.prototype.newCall = function(context, ...args){
+        //     context.fn = this;   //将当前调用myCall的函数赋值给这个属性
+        //     const result = context.fn(...args); //处理参数，传入第一个参数后的其余参数,这里可以理解为obj.foo(...args)
+        //     delete context.fn  //调用函数后即删除该Symbol属性
+        //     return result
+        // }
+        // var foo = {
+        //     value: 1
+        // };
+        // function bar(name) {
+        //     console.log(this)
+        //     console.log(name)
+        //     console.log(this.value);
+        // }
+        // // bar.call(foo) // 1
+        // bar.newCall(foo,"qin", 1)
+
+        // 防抖
+        // function debounce(fn, interval) {
+        //     let timer = null; // 定时器
+        //     return function() {
+        //         // 清除上一次的定时器
+        //         clearTimeout(timer);
+        //         // 拿到当前的函数作用域
+        //         let _this = this;
+        //         // 拿到当前函数的参数数组
+        //         let args = Array.prototype.slice.call(arguments, 0);
+        //         // 开启倒计时定时器
+        //         timer = setTimeout(function() {
+        //             // 通过apply传递当前函数this，以及参数
+        //             fn.apply(_this, args);
+        //             // 默认300ms执行
+        //         }, interval || 300)
+        //     }
+        // }
+        // let debounceBtn = document.getElementById("debounce")
+        // debounceBtn.onclick = debounce(function() {
+        //     console.log('点击了');
+        // }, 5000)
+        
+        // // 节流
+        // function throttle(fn, interval) {
+        //     let timer = null; // 定时器
+        //     let firstTime = true; // 判断是否是第一次执行
+        //     // 利用闭包
+        //     return function() {
+        //         // 拿到函数的参数数组
+        //         let args = Array.prototype.slice.call(arguments, 0);
+        //         // 拿到当前的函数作用域
+        //         let _this = this;
+        //         // 如果是第一次执行的话，需要立即执行该函数
+        //         if(firstTime) {
+        //             // 通过apply，绑定当前函数的作用域以及传递参数
+        //             fn.apply(_this, args);
+        //             // 修改标识为null，释放内存
+        //             firstTime = null;
+        //         }
+        //         // 如果当前有正在等待执行的函数则直接返回
+        //         if(timer) return;
+        //         // 开启一个倒计时定时器
+        //         timer = setTimeout(function() {
+        //             // 通过apply，绑定当前函数的作用域以及传递参数
+        //             // fn.apply(_this, args);
+        //             // 清除之前的定时器
+        //             timer = null;
+        //             // 默认300ms执行一次
+        //             firstTime = true;
+        //         }, interval || 300)
+        //     }
+        // }
+        // let throttleBtn = document.getElementById("throttle")
+        // throttleBtn.onclick = throttle(function() {
+        //     console.log('点击了');
+        // }, 5000)
+
+        // let set = new Set([0,12,3,3]);
+        // console.log(set);
+        // // for (let i = 0; i < set.length; i ++) {
+        // //     console.log(set[i]);
+        // // }
+        // set.forEach((item) => {
+        //     console.log(item);
+        // })
+        // let set = new Set(['red', 'green', 'blue']);
+        // for (let item of set.keys()) {
+        //     console.log(item);
+        // }
+        // let obj = {a:123}
+        // let set = new Set([1, 4, 9]);
+        // set.forEach((value, key) => {
+        //     console.log(key + ' : ' + value)
+        //     console.log(this); // window
+        // }, obj)
+        // set.forEach(function(value, key){
+        //     console.log(key + ' : ' + value)
+        //     console.log(this); // {a: 123}
+        // }, obj)
+        // for (let key of set) {
+        //     console.log(key, 'key');
+        // }
+    </script>
+</body>
+</html>

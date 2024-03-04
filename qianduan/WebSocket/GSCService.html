@@ -1,0 +1,59 @@
+<! DOCTYPE html>
+  <html>
+
+  <head>
+    <script src="sgcWebSocketsA.js"></script>
+    <script src="jquery.js"></script>
+    <script src="jquery.mobile.js"></script>
+    <script src="GSCService.js"></script>
+    <script type="text/javascript">
+      gscservice = new GSCService("127.0.0.1");
+      gscservice2 = new GSCService("192.168.132.68");
+
+      function callbackFunc(data) {
+        var x = document.getElementById("gscinfo");
+        x.innerHTML = "<ol>" + gscservice.getJsonResponse(data) + "</ol>" + x.innerHTML;
+      }
+
+      function listCardProducts() {
+        var s = document.getElementById("devicenum").value;
+        gscservice.listCardProducts(s);
+      }
+
+      function signData() {
+        var s = document.getElementById("devicenum").value;
+        var d = document.getElementById("unsigneddata").value;
+        gscservice.signData(s, d);
+      }
+
+      function findProducts() {
+        gscservice.findProducts(1, 209);
+      }
+
+      gscservice.connect(callbackFunc);
+    </script>
+  </head>
+
+  <body>
+    <button type="button" onclick="gscservice.getVersion(1)">GetVersion</button>
+    <button type="button" onclick="gscservice.getFileVersion(0)">GetFileVersion</button>
+    <button type="button" onclick="gscservice.listCards()">ListCards</button><br />
+    <br />
+
+    <input id="devicenum" type="text">
+    <button type="button" onclick="listCardProducts()">ListCardProducts</button><br />
+
+    <input id="unsigneddata" type="text">
+    <button type="button" onclick="signData()">SignData</button><br />
+    <button type="button" onclick="gscservice.getHidInfo()">GetHidInfo</button><br />
+    <button type="button" onclick="findProducts()">findProducts</button><br />
+    <button type="button" onclick="gscservice.getServerList()">getServerList</button><br />
+
+
+    <button type="button" onclick="gscservice.alertInnerInfo()">gscservice</button><br />
+    <button type="button" onclick="gscservice2.alertInnerInfo()">gscservice1</button><br />
+
+    <ol id="gscinfo"></ol>
+  </body>
+
+  </html>
