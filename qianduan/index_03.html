@@ -10,23 +10,51 @@
     <button id="debounce">防抖</button>
     <button id="throttle">节流</button>
     <script>
-        let p1 = new Promise((resolve, reject) => {
-            // resolve('success' + 11111);
-            reject('error' + 11111);
-        })
-        let p2 = new Promise((resolve, reject) => {
-            // resolve('success' + 22222);
-            reject('error' + 22222);
-        })
-        let p3 = new Promise((resolve, reject) => {
-            resolve('success' + 33333);
-            // reject('error' + 33333);
-        })
-        Promise.all([p1, p2, p3]).then((res) => {
+        let a = () => {
+            return new Promise((resolve, reject) => {
+                let aa = false;
+                if (aa) {
+                    resolve(aa+'111');
+                } else {
+                    reject(aa+'222')
+                }
+            })
+        }
+        let b = () => {
+            return new Promise((resolve, reject) => {
+                let bb = true;
+                if (bb) {
+                    resolve(bb+'333');
+                } else {
+                    reject(bb+'444')
+                }
+            })
+        }
+        a().then(() => {
+            return b()
+        }).then((res) => {
             console.log(res);
         }).catch((err) => {
             console.log(err);
         })
+
+        // let p1 = new Promise((resolve, reject) => {
+        //     // resolve('success' + 11111);
+        //     reject('error' + 11111);
+        // })
+        // let p2 = new Promise((resolve, reject) => {
+        //     // resolve('success' + 22222);
+        //     reject('error' + 22222);
+        // })
+        // let p3 = new Promise((resolve, reject) => {
+        //     resolve('success' + 33333);
+        //     // reject('error' + 33333);
+        // })
+        // Promise.all([p1, p2, p3]).then((res) => {
+        //     console.log(res);
+        // }).catch((err) => {
+        //     console.log(err);
+        // })
 
         // function judgeNumber(num){
         //     var promise1 = new Promise(function(resolve,reject){
