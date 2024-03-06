@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* .header {
+            max-width: 960px;
+            height: 100px;
+            margin: 0 auto;
+            background-color: green;
+        }
+        .contant {
+            max-width: 960px;
+            height: 500px;
+            margin: 0 auto;
+            background-color: yellow;
+        }
+        .footer {
+            max-width: 960px;
+            height: 100px;
+            margin: 0 auto;
+            background-color: gray;
+        } */
+
+        /* .box1 {
+            width: 200px;
+            height: 300px;
+            float: left;
+            background-color: blue;
+        }
+        .box2 {
+            height: 300px;
+            background-color: red;
+            overflow: hidden;
+            zoom: 1;
+        } */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* .container {
+            padding-left: 220px;
+            padding-right: 220px;
+        }
+        .left {
+            float: left;
+            width: 200px;
+            height: 300px;
+            background-color: green;
+            margin-left: -100%;
+            position: relative;
+            left: -220px;
+        }
+        .center {
+            float: left;
+            width: 100%;
+            height: 400px;
+            background-color: yellow;
+        }
+        .right {
+            float: left;
+            width: 200px;
+            height: 300px;
+            background-color: red;
+            margin-left: -200px;
+            position: relative;
+            right: -220px;
+        } */
+
+        /* .container {
+            min-width: 600px;
+        }
+        .left {
+            float: left;
+            width: 200px;
+            background-color: green;
+            margin-left: -100%;
+        }
+        .center {
+            float: left;
+            width: 100%;
+            background-color: yellow;
+        }
+        .center .inner {
+            margin: 0 200px;
+        }
+        .right {
+            float: left;
+            width: 200px;
+            background-color: red;
+            margin-left: -200px;
+        } */
+
+        .HolyGrail {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header,footer {
+            height: 100px;
+            background-color: yellow;
+        }
+        .HolyGrail-body {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+        }
+        .HolyGrail-nav, .HolyGrail-ads {
+            flex: 0 0 100px;
+            background-color: red;
+        }
+        .HolyGrail-content {
+            flex: 1;
+            background-color: blueviolet;
+        }
+        .HolyGrail-nav {
+            /* 导航放置最左边 */
+            order: -1;
+        }
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .HolyGrail-body {
+                flex-direction: column;
+            }
+
+            .HolyGrail-nav, .HolyGrail-ads, .HolyGrail-content {
+                flex: 1;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- 双飞翼布局 -->
+    <!-- <div class="container">
+        <div class="center">
+            <div class="inner">
+                <p>双飞翼布局</p>
+                <p>双飞翼布局</p>
+                <p>双飞翼布局</p>
+                <p>双飞翼布局</p>
+            </div>
+        </div>
+        <div class="left">
+            <p>left</p>
+        </div>
+        <div class="right">
+            <p>right</p>
+        </div>
+    </div> -->
+
+    <!-- 圣杯布局 -->
+    <!-- <div class="container">
+        <div class="center">
+            圣杯布局
+        </div>
+        <div class="left">
+            <p>left</p>
+        </div>
+        <div class="right">
+            <p>right</p>
+        </div>
+    </div> -->
+    <div class="HolyGrail">
+        <header>header</header>
+        <div class="HolyGrail-body">
+            <main class="HolyGrail-content">content</main>
+            <nav class="HolyGrail-nav">nav</nav>
+            <aside class="HolyGrail-ads">ads</aside>
+        </div>
+        <footer>footer</footer>
+    </div>
+
+    <!-- 自适应两列布局 -->
+    <!-- <div class="box">
+        <div class="box1">
+            <p>left</p>
+        </div>
+        <div class="box2">
+            <p>right</p>
+        </div>
+    </div> -->
+
+    <!-- 单利布局 -->
+    <!-- <div class="header"></div>
+    <div class="contant"></div>
+    <div class="footer"></div> -->
+</body>
+</html>

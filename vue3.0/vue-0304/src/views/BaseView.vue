@@ -10,6 +10,7 @@
         <h2>{{ a }}</h2>
         <button @click="changeName">改变值</button>
         <h2>obj{{ obj.brand }}</h2>
+        <div v-for="item in items" v-if="item === 2">{{ item }}</div>
     </div>
 </template>
 <script setup>
@@ -106,4 +107,6 @@ var getInfo = function () {
     return { ...toRefs(student) };
 };
 console.log(getInfo().name.value, getInfo().contact.value.qq);
+
+let items = ref([2, 4, 5, 3]);
 </script>
