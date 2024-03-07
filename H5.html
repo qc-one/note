@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div
+        class="box"
+        draggable="true"
+        ondragstart="handleOndragstart()"
+        ondrag="handleOndrag()"
+        ondragend="handleOndragend()">
+        box
+    </div>
+    <script>
+        function handleOndragstart() {
+            /*
+            该事件为拖拽元素被拖拽时调用。一般用于获取该拖拽元素的唯一标识，如id等。以方便后续数据更新时进行元素定位
+            */
+            console.log(1);
+        }
+
+        function handleOndragend() {
+            /*
+            该事件在拖拽元素被放置时调用。一般用于重置变量操作
+            */
+            console.log(2);
+        }
+
+        function handleOndrag() {
+            /*
+            该事件凭个人需求进行功能实现
+            */
+            console.log(3);
+        }
+
+
+    </script>
+</body>
+</html>
