@@ -9,14 +9,15 @@
 </head>
 
 <body>
-    <script>
+    <script type="module">
         // app 文件
         import {
             count,
-            addCount
-        } from './a'
-        count = 2 // 报错，不可以修改
-        addCount() // 可以正常修改
+            // addCount
+        } from './a.js'
+        // count = 2 // 报错，不可以修改
+        // addCount() // 可以正常修改
+        console.log(count);
     </script>
 </body>
 
