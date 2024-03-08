@@ -8,20 +8,52 @@
 </head>
 <body>
     <script>
-        // 手写instanceof
-        let myInstanceof = (target, origin) => {
-            while(target) {
-                console.log(target, 111);
-                if (target.__proto__ === origin.prototype) {
-                return true
-                }
-                console.log(target.__proto__, 222);
-                target = target.__proto__
+        // js中根据数组对象中某个属性排序
+        var newArray = [
+            {
+                name: "aaa",
+                value: 0
+            },
+            {
+                name: "ddd",
+                value: 3
+            },
+            {
+                name: "bbb",
+                value: 1
+            },
+            {
+                name: "eee",
+                value: 4
+            },
+            {
+                name: "ccc",
+                value: 2
             }
-            return false
+        ];
+        // 排序
+        function compare(arr) {
+            return arr.sort((a, b) => {
+                return a.value - b.value
+            })
         }
-        let a = [1, 2, 3];
-        console.log(myInstanceof(123, Array)); // true
+        //打印看结果
+        console.log(compare(newArray))
+
+        // 手写instanceof
+        // let myInstanceof = (target, origin) => {
+        //     while(target) {
+        //         console.log(target, 111);
+        //         if (target.__proto__ === origin.prototype) {
+        //         return true
+        //         }
+        //         console.log(target.__proto__, 222);
+        //         target = target.__proto__
+        //     }
+        //     return false
+        // }
+        // let a = [1, 2, 3];
+        // console.log(myInstanceof(123, Array)); // true
         // console.log(myInstanceof(a, Object)); // true
 
         // 无重复字符串的最长子串
