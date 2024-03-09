@@ -5,40 +5,104 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .keyword-match {
+            color: red;
+        }
+    </style>
 </head>
 <body>
+    <div>
+        原文本：我是中国人，我爱中华人民共和国，中华人民共和国万岁！<br />
+        关键词: 我，中华，中华人民共和国 <br />
+        结果如下：<br /><br />
+    </div>
+    <div id="content"></div>
+    <div id="content2"></div>
+
     <script>
+        // 文本高亮
+        const content2 = document.getElementById('content2');
+        const text2 = '我是中国人，我爱中华人民共和国，中华人民共和国万岁！';
+        const keyword2 = ['中华人民共和国', '中华', '我']; // 将字数多的关键词放到前面，保证字数多的关键词优先匹配
+        let hightlightText2 = text2.replace(new RegExp(`(${keyword2.join('|')})`, 'g'), `<span class="keyword-match">$1</span>`);
+        content2.innerHTML = hightlightText2;
+
+        // 判断字符串是否符合XXX-XXX-XXXX的格式
+        // function matchesPattern(str) {
+        //     let reg=/^\d{3}-\d{3}-\d{4}/
+        //     return reg.test(str)
+        // }
+        // console.log(matchesPattern("122-322-2233"));
+
+        /**
+         * 封装rgbaTo16color功能函数
+         * 功能: 把rgba颜色(或rgb颜色)转成十六进制颜色
+         */
+        // function rgbaTo16color(color) {
+        //     let val = color
+        //         .replace(/(rgba|rgb)\(/, '')
+        //         .replace(/\)/, '')
+        //         .replace(/[\s+]/g, '')
+        //         .split(',');
+        //     let c = val.every((item, index) => {
+        //         if (index !== 3) {
+        //             return item >= 0 && item <= 255;
+        //         } else {
+        //             return item >=0 && item <=1;
+        //         }
+                
+        //     })
+        //     if (!c) return color;
+        //     // 提取R、G、B和A的值
+        //     let r = parseInt(val[0]).toString(16).padStart(2, '0');
+        //     let g = parseInt(val[1]).toString(16).padStart(2, '0');
+        //     let b = parseInt(val[2]).toString(16).padStart(2, '0');
+        //     let a = Math.round(parseFloat(val[3]) * 255).toString(16).padStart(2, '0');
+        //     if (val.length === 3) {
+        //         return `#${r}${g}${b}`;
+        //     }
+        //     return `#${r}${g}${b}${a}`;
+        // }
+        // // 示例
+        // console.log(rgbaTo16color("rgba(255, 0, 0, 0.5)")); // #ff000080
+        // console.log(rgbaTo16color("rgba(255, 1, 1, 0.5)")); // #ff010180
+        // console.log(rgbaTo16color("rgb(255, 0, 0)"));      // #ff0000
+        // console.log(rgbaTo16color("rgb(255, 1, 1)"));      // #ff0101
+        // console.log(rgbaTo16color("blue"));                 // blue
+        // console.log(rgbaTo16color('rgba(255, 2, 2, 1)')); // #ff0202ff
+
         // js中根据数组对象中某个属性排序
-        var newArray = [
-            {
-                name: "aaa",
-                value: 0
-            },
-            {
-                name: "ddd",
-                value: 3
-            },
-            {
-                name: "bbb",
-                value: 1
-            },
-            {
-                name: "eee",
-                value: 4
-            },
-            {
-                name: "ccc",
-                value: 2
-            }
-        ];
-        // 排序
-        function compare(arr) {
-            return arr.sort((a, b) => {
-                return a.value - b.value
-            })
-        }
-        //打印看结果
-        console.log(compare(newArray))
+        // var newArray = [
+        //     {
+        //         name: "aaa",
+        //         value: 0
+        //     },
+        //     {
+        //         name: "ddd",
+        //         value: 3
+        //     },
+        //     {
+        //         name: "bbb",
+        //         value: 1
+        //     },
+        //     {
+        //         name: "eee",
+        //         value: 4
+        //     },
+        //     {
+        //         name: "ccc",
+        //         value: 2
+        //     }
+        // ];
+        // // 排序
+        // function compare(arr) {
+        //     return arr.sort((a, b) => {
+        //         return a.value - b.value
+        //     })
+        // }
+        // //打印看结果
+        // console.log(compare(newArray))
 
         // 手写instanceof
         // let myInstanceof = (target, origin) => {
