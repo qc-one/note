@@ -1,6 +1,6 @@
 <template>
     <div class="about">
-        <h1>This is an about page</h1>
+        <h1>This is an about page {{ aaa }}</h1>
     </div>
 </template>
 <script setup>
@@ -33,6 +33,7 @@ onBeforeUnmount(() => {
 onUnmounted(() => {
     console.log("onUnmounted");
 });
+const aaa = ref("aaa");
 // 创建一个响应式的计数器
 // const count = ref(props.initialCount || 0);
 // // 定义一个增加计数的方法
