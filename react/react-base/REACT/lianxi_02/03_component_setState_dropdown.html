@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="base/react.min.js" ></script>
+		<script src="base/browser.min.js" ></script>
+		<script src="base/react-dom.min.js" ></script>
+		<style type="text/css">
+			.show{display: block;}
+			.hide{display: none;}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			
+		</div>
+		<script type="text/babel">
+//			以通过ref来对组件dom结构里的某一个dom做出标记，这样的话可以在组件内部通过this.refs来进行获取
+			var DropDown = React.createClass({
+				getInitialState(){
+					return{
+						isShow : true
+					}
+				},
+				toggle(){
+					this.setState((prevState) => {
+						this.refs.ul.style.display= !prevState.isShow ? "block" : "none"
+						return {isShow : !prevState.isShow}
+					})
+				},
+				render(){
+					let {isShow}=this.state
+					return (
+						<div>
+							<button onClick={this.toggle}>toggle</button>
+							<ul>
+								<li style={{display: isShow ? 'block' : 'none'}}>qinchuang---01</li>
+							</ul>
+							<ul>
+								<li className={isShow?"show":"hide"}>qinchuang---02</li>
+							</ul>
+							
+							{
+								!isShow || <ul><li className={isShow?"show":"hide"}>qinchuang---03</li></ul>
+							}
+							
+							<ul ref ="ul"> <li>qinchuang---04</li> </ul>
+							<hr/>
+						</div> 
+					)
+				}
+			})
+			ReactDOM.render(<DropDown/>,app)
+		</script>
+	</body>
+</html>

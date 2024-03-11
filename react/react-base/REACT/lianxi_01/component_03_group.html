@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="./base/react.min.js"></script>
+    	<script src="./base/react-dom.min.js"></script>
+    	<script src="./base/browser.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<p>wjifwejf</p>
+		</div>
+		<script type="text/babel">
+			var Hello = React.createClass({
+				render(){
+					return (
+						<div>
+							<h1>Hello<Message/></h1>
+						</div>
+					)
+				}
+			})
+			var Message = React.createClass({
+				render(){
+					return (
+						<div>
+							<span>qinchuang</span>
+						</div>
+					)
+				}
+			})
+			ReactDOM.render(<Hello/>,app)
+		</script>
+	</body>
+</html>

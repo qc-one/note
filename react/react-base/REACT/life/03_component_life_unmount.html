@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="./base/react.min.js"></script>
+    	<script src="./base/react-dom.min.js"></script>
+    	<script src="./base/browser.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			
+		</div>
+		
+		<script type="text/babel">
+			var Father = React.createClass({
+				getInitialState(){
+					return{
+						isShow : true
+					}
+				},
+				toggle(){
+					
+					this.setState({isShow : !this.state.isShow})
+						
+					
+				},
+				render(){
+					return(
+						<div>
+							<p>我是父组件</p>
+							<p><button onClick={this.toggle}>+</button></p>
+							<hr/>
+							{ !this.state.isShow || <Son/> }
+						</div>
+					)
+				}
+			})
+			var Son = React.createClass({
+				componentWillUnmount(){
+					//在销毁动作执行之前触发
+					//特点: 临死前的挣扎
+					//作用 : 善后  释放内存空间
+					alert("11111---componentWillUnmount")
+				},
+				render(){
+					return(
+						<div>
+							<p>我是子组件</p>
+						</div>
+					)
+				}
+			})
+			ReactDOM.render(<Father/>,app)
+		</script>
+	</body>
+</html>

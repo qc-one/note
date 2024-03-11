@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./base/react.min.js"></script>
+    <script src="./base/react-dom.min.js"></script>
+    <script src="./base/browser.min.js"></script>
+</head>
+
+<body>
+    
+    <div id="app"></div>
+    <div id="app1"></div>
+    
+    <script type="text/babel">
+
+        var Hello = React.createClass ({
+            getDefaultProps () {
+                //作用： 专门负责设置组件的默认属性
+                //特点： 无论实例化多少次组件，这个函数都只执行一次
+                //因为在这里设置的是默认的属性，组件也无法更改，而组件的实例都可以共享默认属性，为了减少对内存的占用，所以让实例都去共享，在执行创建的时候，只创建一次
+                console.log('1.getDefaultProps')
+                return {
+                    num: 0
+                }
+            },
+            getInitialState () {
+                //作用：为每个组件实例都挂载独立的初始状态
+                console.log('2.getInitialState')
+                return {
+                    num: 1
+                }
+            },
+            componentWillMount () { // created beforeMount
+                //作用： 做初始数据的获取
+                //特点： 在这里更改状态不会触发后续钩子函数的重新中心, 不能使用到真实的dom
+                this.setState({num: 6})
+                console.log('3.componentWillMount')
+            },
+            render () {
+                //专门负责创建组件虚拟dom结构
+                console.log('4.render')
+                return (
+                    <div>
+                        <h1>Hello World</h1>
+                        <p>props-num:{this.props.num}</p>
+                        <p>state-num:{this.state.num}</p>
+                    </div>
+                )
+            },
+            componentDidMount () {// mounted
+                //作用： 在这里可以使用到真实dom了，可以操作真实dom
+                console.log('5.componentDidMount')
+            }
+        })
+        
+        ReactDOM.render(<Hello/>,document.getElementById("app"))
+       
+
+      
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="./base/react.min.js" ></script>
+		<script src="./base/react-dom.min.js" ></script>
+		<script src="./base/browser.min.js" ></script>
+	</head>
+	<body>
+		<div id="app">
+			
+		</div>
+		<script type="text/babel">
+			var Qc = React.createClass({
+				getInitialState(){
+					return {
+						doing : "学习"
+					}
+				},
+//				play(){
+////					alert(1)
+//					this.setState({
+//						doing : "去玩儿"
+//					})
+//				},
+				toggle(){
+					//函数的方式，第一个参数为当前的状态，第二个参数为传进去的属性，最后要返回一个修改的配置
+					this.setState((prevStat,prop) => {
+						let doing = prevStat.doing === '学习' ? "玩游戏"+prop.gansha : "学习"
+						return {doing}
+					})
+				},
+				render(){
+					return(
+						<div>
+						   <p><button onClick={this.play}>去玩儿</button></p>
+						   <p><button onClick={this.toggle}>toggle</button></p>
+							<p>我正在{this.state.doing}</p>
+						</div>	
+					)
+				}
+			})
+			ReactDOM.render(<Qc gansha="玩玩玩"/>,app)
+		</script>
+	</body>
+</html>

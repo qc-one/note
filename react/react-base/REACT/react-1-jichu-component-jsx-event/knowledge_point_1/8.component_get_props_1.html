@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./base/react.min.js"></script>
+    <script src="./base/react-dom.min.js"></script>
+    <script src="./base/browser.min.js"></script>
+</head>
+
+<style>
+    
+</style>
+
+<body>
+    <p>当组价被渲染的时候被赋予属性</p>
+    <p>在组件内部通过this.props来获取</p>
+    <hr>
+
+    <div id="app"></div>
+   
+
+    <script type="text/babel">
+
+       var Gouzi = React.createClass({
+           render () {
+               console.log(this)
+               return (
+                   <div>
+                       { this.props.name } <br/>
+                       { this.props.age + 1  } <br/>
+                       { this.props.girl.name  } <br/>
+                       { this.props.mother  } <br/>
+                       { this.props.father  } <br/>
+                   </div>
+               )
+           }
+       })
+
+
+       var girlFriend = {
+           name: '小花'
+       }
+
+       var parents = {
+           mother: '惠芬',
+           father: '建国'
+       }
+
+       ReactDOM.render(<Gouzi  {...parents} girl = {girlFriend} name = { "二狗" } age = { 13 } />,document.getElementById('app'))
+
+     </script>
+</body>
+</html>

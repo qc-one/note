@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="./base/react.min.js"></script>
+    	<script src="./base/react-dom.min.js"></script>
+    	<script src="./base/browser.min.js"></script>
+		
+	</head>
+	<body>
+		<div id="app">
+			
+		</div>
+		<script type="text/babel">
+//react中，事件直接绑定在虚拟dom的身上，使用小驼峰的形式，传入一个函数体
+			let Hello = React.createClass({
+				//方法直接写这里
+				alertHander(){
+					alert(1)
+				},
+				render(){
+					return(
+						<button onClick={this.alertHander}>click</button>
+					)
+				}
+			})
+			ReactDOM.render(<Hello/>,app)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="./base/react.min.js"></script>
+    	<script src="./base/react-dom.min.js"></script>
+    	<script src="./base/browser.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			
+		</div>
+		<script type="text/babel">
+			var Father = React.createClass({
+				render(){
+					return (
+						<div>
+							<p>我是父组件</p>
+							<hr/>
+							<Son name="大狗"/>
+							<Son/>
+						</div>
+					)
+				}
+			})
+			var Son = React.createClass({
+				getName(){
+					if(this.props.name){
+						return this.props.name
+					}
+					return "傻狗子"
+				},
+				render(){
+					return (
+						<div>
+							<p>我是子组件{this.props.name || "野狗子"}</p>
+							<p>我是子组件{this.props.name ? this.props.name : "疯狗子"}</p>
+							<p>我是子组件{this.getName()}</p>
+							<p>我是子组件{(function(obj){
+											if(obj.props.name){
+												return obj.props.name
+											}
+											return "死狗子"
+										})(this)}</p>
+						</div>
+					)
+				}
+			})
+			ReactDOM.render(<Father/>,app)
+		</script>
+	</body>
+</html>

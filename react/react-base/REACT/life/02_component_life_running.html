@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="./base/react.min.js"></script>
+    	<script src="./base/react-dom.min.js"></script>
+    	<script src="./base/browser.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			
+		</div>
+		
+		<script type="text/babel">
+			var Father = React.createClass({
+//				shouldComponentUpdate(){
+//					//当组件的属性或者状态改变的时候，执行该函数
+//					console.log("22222---shouldComponentUpdate")
+//				},
+				getInitialState(){
+					return{
+						num : -3
+					}
+				},
+				add(){
+					this.setState({
+						num : ++this.state.num
+					})
+				},
+				render(){
+					return(
+						<div>
+							<p>我是父组件</p>
+							<p><button onClick={this.add
+							
+							}>+</button></p>
+							<hr/>
+							<Son m={this.state.num}/>
+						</div>
+					)
+				}
+			})
+			var Son = React.createClass({
+				getInitialState(){
+					return{
+						message:"qin"
+					}
+				},
+				componentWillReceiveProps(props,state){
+					//当接受到的属性发生变化的时候触发，或者父组件给子组件传入的属性发生变化的时候
+					//作用:在这里根据变化后的属性更改自己的状态
+					//特点: 1.在这里更改状态不会触发其它函数的执行
+					//     2.在这里新的属性还没有更新到组件上,最新的属性从props参数上获取
+//					this.setState({message:"chuang"})
+					console.log(this.props.m,props.m)
+					if(this.props.m > 5){
+						this.setState({message:"已经大于5了"})
+					}
+					console.log("11111---componentWillReveiveProps")
+			        
+				},
+				shouldComponentUpdate(props,state){
+					//当组件的属性或者状态改变的时候，执行该函数
+					//特点 : 在这里有一个返回，如果返回true就向下执行，如果返回false就不向下执行，在这里新的属性和状态都没有挂载
+					//作用 : 性能优化！！！
+					console.log("22222---shouldComponentUpdate")
+					if(props.m>=0) return true
+				},
+				componentWillUpdate(){//beforeUpdate
+					//在这里进行输出和测试
+					console.log("33333---componentWillUpdate")
+				},
+				render(){
+					console.log("44444---render")
+					return(
+						<div>
+							<p>我是子组件</p>
+							<p>m:{this.props.m}</p>
+							<p>message::{this.state.message}</p>
+						</div>
+					)
+				},
+				componentDidUpdate(){
+					//当组件更新完成，重新render结束之后触发该函数
+					//可以操作更新后的真实dom了
+					console.log("55555---componentDidUpdate")
+				}
+			})
+			ReactDOM.render(<Father/>,app)
+		</script>
+	</body>
+</html>

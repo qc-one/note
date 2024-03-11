@@ -1,0 +1,21 @@
+
+
+.home {
+    .banner .img-box {
+        height: 2.1094rem;
+        
+        img {
+            display: block;
+        }
+        
+        
+    }
+    .banner {
+        .swiper-pagination-bullet-active {
+            background: #f3195e;
+        }
+    }
+    .banner .swiper-wrapper{
+        height: 2.1094rem;
+    }
+}

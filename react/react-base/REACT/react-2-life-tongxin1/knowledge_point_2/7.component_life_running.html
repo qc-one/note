@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./base/react.min.js"></script>
+    <script src="./base/react-dom.min.js"></script>
+    <script src="./base/browser.min.js"></script>
+</head>
+<style>
+   
+</style>
+<body>
+    
+    
+
+    <hr>
+    <div id="app"></div>
+    
+
+
+
+    <script type="text/babel">
+    var Father = React.createClass({
+        
+        getInitialState () {
+            return {
+                num: -3
+            }
+        },
+        increment () {
+            this.setState({
+                num: ++ this.state.num
+            })
+        },
+        render () {
+            return (
+                <div>
+                    <p>这里是父组件</p>
+                    <p> <button onClick = {this.increment}> + </button> </p>
+                    <hr/>
+                    <Son num = { this.state.num } />
+                </div>
+            )
+        }
+    })
+    var Son = React.createClass({
+        getInitialState () {
+            return {
+                message: ''
+            }
+        },
+        componentWillReceiveProps (props, state) {
+            //触发： 当接收的属性发生变化的时候（父组件给子组件传入的属性变化的时候）
+            //作用： 我们在这里会根据变化后的属性去更改自己的状态
+            //特点： 1. 在这里更改状态不会触发其他的函数重复执行 2. 在这里，新的属性还没有更新到组件上ね,最新的属性从props参数上接收
+           
+            if ( props.num>5 ) {
+                this.setState({message: '已经大于5了'})
+            }
+
+            console.log('1.componentWillReceiveProps')
+        },
+        shouldComponentUpdate (props, state) {
+            //触发： 当属性或者状态改变的时候都会触发
+            //特点： 在这里必须有一个返回，返回true就会向下执行，否则的话不向下执行了,在这里新的属性和状态都没有挂载,最新的属性和状态从参数里取
+            //作用： 性能优化！
+            console.log('2.shouldComponentUpdate')
+            if( props.num >= 0 ) return true;
+        },
+        componentWillUpdate () { // beforeUpdate
+            //作用： 在这里可以进行输出，测试
+            console.log('3.componentWillUpdate')
+        },  
+        render () {
+            console.log('4. render')
+            return (
+                <div>
+                    <p>这里是子组件</p>
+                    <p> num: {this.props.num}</p>
+                    <p> message: {this.state.message}</p>
+
+                </div>
+            )
+        },
+        componentDidUpdate () { // updated
+            // 触发： 当组件更新完成，重新render结束之后
+            //作用： 可以操作更新后的真实dom 了
+            console.log('5.componentDidUpdate ')
+        }
+    })
+     
+    ReactDOM.render(<Father/>,app)
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="./base/react.min.js"></script>
+    <script src="./base/react-dom.min.js"></script>
+    <script src="./base/browser.min.js"></script>
+</head>
+<style>
+
+</style>
+<body>
+    <div id="app">
+        
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/babel">
+
+        var App = React.createClass ({
+            render () {
+                return (
+                    <div className ="container">
+                        <div className ="panel panel-primary">
+                            <Header/>
+                            <div className ="panel-body">
+                               <Login/>
+                               <Content/>                                
+                            </div>
+                        </div>
+
+                    </div>
+                )
+            }
+        })
+        var Header = React.createClass ({
+            render () {
+                return (
+                    <div className ="panel-heading">
+                        <p>登陆</p>
+                        <p>欢迎...回来  <button className ="btn btn-danger">注销</button></p>
+                    </div>
+                )
+            }
+        })
+        var Login = React.createClass ({
+            render () {
+                return (
+                    <form >
+                            
+                        <div className ="form-group">
+                            <label for="">用户名：</label>
+                            <input type="text" className ="form-control" />
+                        </div>
+                        <div className ="form-group">
+                            <label for="">密码</label>
+                            <input type="password" className ="form-control" />
+                        </div>
+                        <div className ="form-group">
+                            <button className ="btn btn-success">提交</button>
+                        </div>
+                    </form>
+                )
+            }
+        })
+        var Content = React.createClass ({
+            render () {
+                return (
+                    <div>
+                        content ....
+                    </div>
+                )
+            }
+        })
+
+
+        ReactDOM.render(<App/>,document.getElementById('app'))
+        
+    </script>
+</body>
+</html>

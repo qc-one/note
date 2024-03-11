@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./base/react.min.js"></script>
+    <script src="./base/react-dom.min.js"></script>
+    <script src="./base/browser.min.js"></script>
+</head>
+<body>
+    <p>组件不能直接去修改this.state上的数据，因为这样修改不会触发render的重新执行</p>
+    <p>需要使用setState的方法来修改状态</p>
+    <hr>
+    <div id="app"></div>
+
+
+
+    <script type="text/babel">
+        //如果要更改状态的话，需要使用setState方法，这样的话，组件才会意识到状态更改，马上会创建本次更改数据对应的虚拟dom，进行diff对比，重新render       
+        var Gouzi = React.createClass({   
+            getInitialState () {
+                return {
+                    doing: '玩游戏..'
+                }
+            },
+            Study () {
+                // this.state.doing = '学习....'
+                this.setState({
+                    doing: '学习....'
+                })
+            },
+            Toggle () {
+                //函数的方式，第一个参数为当前的状态，最后要返回一个修改的配置
+                this.setState((prevState, props) => {
+                    var doing = prevState.doing === '玩游戏..'? '学习'+props.knowledge : '玩游戏..'
+
+                    return {doing}
+                })
+            },
+            render:function () {
+               console.log('render')
+                return (
+                    <div>
+                        <p> <button onClick = {this.Study}>study</button> </p>
+                        <p> <button onClick = {this.Toggle}>toggle</button> </p>
+                        <p>我正在{this.state.doing}</p>
+                    </div>
+                )
+            }
+        })
+
+
+        ReactDOM.render(<Gouzi  knowledge = {'英语'} />,document.getElementById("app"))
+        
+    </script>
+</body>
+</html>

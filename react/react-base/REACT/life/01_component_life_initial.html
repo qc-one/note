@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="./base/react.min.js"></script>
+    	<script src="./base/react-dom.min.js"></script>
+    	<script src="./base/browser.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			
+		</div>
+		<div id="app1">
+			
+		</div>
+		<script type="text/babel">
+			var Qc = React.createClass({
+				getDefaultProps(){
+					//作用:专门负责设置组件的默认属性
+					//特点:无论实例化多少次组件，这个函数只执行一次
+					//因为在这里设置的是组件的默认属性，组件无法更改，而组件的实例都可以共享默认属性，为了减少内存的占用，所以让这个实例都去共享，在执行创建的时候只创建一次
+					console.log("11111---getDefaultProps")
+					return {
+						num :1
+					}
+				},
+				getInitialState(){
+					//作用:初始化组件实例的状态
+					//有几次实例，这个函数就执行几次
+					//因为每个实例的状态都不一样，每实例一次就初始化一次
+					console.log("22222---getInitialState")
+					return{
+						num :2
+					}
+				},
+				componentWillMount(){
+					//作用:作初始数据的获取
+					//特点:在这里更改状态不会触发后续钩子函数的执行，不能使用真实的dom
+					this.setState({num:3})
+					console.log("33333---componentWillMount")
+				},
+				render(){
+					//作用:专门负责创建虚拟dom结构，准备渲染
+					
+					console.log("44444---render")
+					return(
+						<div>
+							<h1>qinchuang---{this.props.num}</h1>
+							<h1>qinchuang---{this.state.num}</h1>
+						</div>
+					)
+				},
+				componentDidMount(){//相当vue中的mounted
+					//作用: 在这里可以操作真实的dom了
+					console.log("55555---componentDidMount")
+				}
+//				初始化生命周期结束
+			})
+			ReactDOM.render(<Qc/>,app)
+			ReactDOM.render(<Qc/>,app1)
+		</script>
+	</body>
+</html>

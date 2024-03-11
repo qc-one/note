@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="./base/react.min.js"></script>
+    	<script src="./base/react-dom.min.js"></script>
+    	<script src="./base/browser.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			
+		</div>
+		<script type="text/babel">
+			var Father = React.createClass({
+				dada(){
+					this.refs.son.gotostudy()
+				},
+				render(){
+					return (
+						<div>
+							我是父组件:
+							<button onClick={this.dada}>给他一脚</button>
+							<hr/>
+							<Son ref="son"/>
+						</div>
+					)
+				}
+			})
+			var Son = React.createClass({
+				getInitialState(){
+					return {
+						doing : "玩游戏..."
+					}
+				},
+				gotostudy(){
+					this.setState({doing:"xuexi"})
+				},
+				render(){
+					return (
+						<div>
+							我是子组件:
+							<p>我正在...{this.state.doing}</p>
+						</div>
+					)
+				}
+			})
+			ReactDOM.render(<Father/>,app)
+		</script>
+	</body>
+</html>

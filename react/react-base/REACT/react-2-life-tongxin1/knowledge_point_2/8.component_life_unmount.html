@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./base/react.min.js"></script>
+    <script src="./base/react-dom.min.js"></script>
+    <script src="./base/browser.min.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script type = "text/babel">
+
+    var Hello = React.createClass({
+        getInitialState () {
+            return {
+                isShow: true
+            }
+        },
+        toggle () {
+            this.setState({isShow: !this.state.isShow})
+        },
+        render () {
+            return (
+                <div>
+                    这里是hello <br/>
+
+                    <button onClick = {this.toggle}>toggle</button>
+                    { !this.state.isShow || <World/> }
+                    
+                   
+                    
+                </div>
+            )
+        }
+    })
+    var World = React.createClass({
+        componentWillUnmount () {// beforeDestroy
+            //触发： 在销毁动作执行前触发
+            //特点： 临死前的挣扎
+            //作用： 善后，释放内存空间
+            alert('componentWillUnmount')
+        },
+        render () {
+            return (
+                <div>
+                    这里是world
+                </div>
+            )
+        }
+    })
+    ReactDOM.render(<Hello/>,document.getElementById('app'))
+</script>
+
+</html>

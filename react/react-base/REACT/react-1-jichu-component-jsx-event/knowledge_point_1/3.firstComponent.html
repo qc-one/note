@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./base/react.min.js"></script>
+    <script src="./base/react-dom.min.js"></script>
+    <script src="./base/browser.min.js"></script>
+</head>
+<body>
+
+    <div id="app"></div>
+    <div id="app1"></div>
+   
+    <script type = "text/babel">
+    // <script >
+    //browser可以编译JSX，在编译之前，将script标签的type改为text/babel
+    // <div></div> -> React.createElement('div')
+       
+        //这就是一个组件！其实就是一个构造器
+        var Hello = React.createClass({
+            //作用和vue的render一样，只是，在vue中可以指定template作为组件的模板，但是在react中只能在render里写入虚拟dom结构
+            render () {
+                //在return的内容中，可以使用jsx语法来创建组件的虚拟dom结构
+                return (
+                    <div>
+                        <h1>Hello World</h1>
+                    </div>
+                    
+                )
+            }
+        })
+        console.log(Hello)
+
+//      var world = React.createElement('div',{className: 'haha'},'Hello World')
+
+
+        //渲染组件
+        // ReactDOM.render(<Hello/> , document.getElementById('app'))
+        // ReactDOM.render(world , document.getElementById('app1'))
+
+    </script>
+</body>
+</html>

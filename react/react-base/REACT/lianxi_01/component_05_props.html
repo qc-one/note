@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="./base/react.min.js"></script>
+    	<script src="./base/react-dom.min.js"></script>
+    	<script src="./base/browser.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			
+		</div>
+		<script type="text/babel">
+			var Father = React.createClass({
+				render(){
+					return (
+						<div>
+							<p>我是父组件</p>
+							<hr/>
+							<Son name="gouzi" hirestyle="小平头"/>
+							
+						</div>
+					)
+				}
+			})
+			var Son = React.createClass({
+				getDefaultProps(){
+				//给组件挂载默认的属性，优先级低，会被外部传入的属性覆盖
+					console.log("hahah")
+					return {
+						hirestyle:"杀马特"
+					}
+				},
+				render(){
+					return (
+						<div>
+							<p>我是子组件{this.props.name}</p>
+							<p>我的发型是{this.props.hirestyle}</p>
+						</div>
+					)
+				}
+			})
+			ReactDOM.render(<Father/>,app)
+		</script>
+	</body>
+</html>

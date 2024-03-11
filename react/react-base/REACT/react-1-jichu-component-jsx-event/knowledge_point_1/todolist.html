@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="./base/react.min.js" ></script>
+		<script type="text/javascript" src="./base/react-dom.min.js" ></script>
+		<script type="text/javascript" src="./base/browser.min.js" ></script>
+	</head>
+	<body>
+		<div id="app">
+			
+		</div>
+		<script type="text/babel">
+			var Todo = React.createClass({
+				getInitialState () {
+	                return {
+	                    sonname: '狗蛋儿'
+	                }
+	            },
+	            changeSonName () {
+	                this.setState({
+	                    sonname: '李铁锤'
+	                })
+	            },
+	            render:function () {
+	                return (
+	                    <div>
+	                       <p>这里是父组件 
+	                            <button>给儿子改名字</button>
+	                       </p>
+	                       <hr />
+	                       
+	                    </div>
+	                )
+	            }
+			})
+			
+			ReactDOM.render(<Todo/>,document.getElementById('app'))
+		</script>
+	</body>
+</html>
