@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>Document</title>
+	    <script src="./js/react15/react.js"></script>
+	    <script src="./js/react15/react-dom.js"></script>
+	    <script src="./js/Browser.js"></script>
+	</head>
+	<style type="text/css">
+		.red{
+			color: red;
+		}
+		.blue{
+			color: blue;
+		}
+	</style>
+	<body>
+		<p>页面不同显示还是需要有数据来控制</p>
+	    <p>可以通过ref来对组件dom结构里的某一个dom做出标记，这样的话可以在组件内部通过this.refs来进行获取</p>
+	    <hr>
+		<div id="app"></div>
+		<script type="text/babel">
+			var Dropdown = React.createClass({
+				getInitialState(){
+					return {
+						isShow:true
+					}
+				},
+				
+				toggle(){
+					this.setState((prevState,props) => {
+//						console.log(prevState)
+						this.refs.ul.style.display = !prevState.isShow ? 'block' : 'none'
+						return {isShow:!prevState.isShow}
+					})
+					//找到对应的ul控制它的css
+					console.log(document.getElementById("ul"))
+					console.log(this.refs.ul)
+				},
+				render(){
+					let { isShow } = this.state
+					return(
+						<div>
+							<button onClick={this.toggle}>toggle</button>
+							<ul style = {{display: isShow?'block': 'none'}} > <li> HelloWorld - 1 </li> </ul>
+							<ul className = {isShow?'red':'blue'} > <li> HelloWorld - 2 </li> </ul>
+							 
+							{
+							 	!isShow || <ul> <li> HelloWorld - 3</li> </ul>
+							}
+							<ul ref="ul" id="ul"> <li> HelloWorld - 4</li> </ul>
+							<hr/>
+						</div>
+					)
+				}
+			})
+			
+			ReactDOM.render(<Dropdown />,app)
+
+		</script>
+	</body>
+</html>

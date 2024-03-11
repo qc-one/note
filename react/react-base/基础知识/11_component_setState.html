@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>Document</title>
+	    <script src="./js/react15/react.js"></script>
+	    <script src="./js/react15/react-dom.js"></script>
+	    <script src="./js/Browser.js"></script>
+	</head>
+	<style type="text/css">
+		
+	</style>
+	<body>
+		
+		<div id="app"></div>
+		<script type="text/babel">
+			var Gouzi = React.createClass({
+				getInitialState(){
+					return {
+						doing:'玩游戏'
+					}
+				},
+				playing(){
+					this.setState({
+						doing:'学习'
+					})
+				},
+				Toggle(){
+					this.setState((prevState,props) => {
+						//函数的方式，第一个参数为当前的状态，第二个参数为组件的属性，最后要返回一个修改的配置
+						console.log(prevState)
+						console.log(props)
+						let doing = prevState.doing == "玩游戏" ? "学习"+props.knowledge : "玩游戏"
+						return {doing}
+					})
+				},
+				render(){
+					console.log(1111)
+					return(
+						<div>
+							<button onClick={this.playing}>playing</button>
+							<button onClick={this.Toggle}>Toggle</button>
+							<p>我正在{this.state.doing}</p>
+							<hr/>
+						</div>
+					)
+				}
+			})
+			
+			ReactDOM.render(<Gouzi knowledge={"数学"}/>,app)
+
+		</script>
+	</body>
+</html>

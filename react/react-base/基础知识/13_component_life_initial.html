@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>Document</title>
+	    <script src="./js/react15/react.js"></script>
+	    <script src="./js/react15/react-dom.js"></script>
+	    <script src="./js/Browser.js"></script>
+	</head>
+	<style type="text/css">
+		.red{
+			color: red;
+		}
+		.blue{
+			color: blue;
+		}
+	</style>
+	<body>
+		
+		<div id="app"></div>
+		<div id="app1"></div>
+		<script type="text/babel">
+			var Hello = React.createClass({
+				getDefaultProps(){
+					//作用：专门负责设置组件的默认属性
+					//特点：无论实例化多少次，这个函数只执行一次 
+					//因为在这里设置的是默认的属性，组件也无法更改，而组件的实例都可以共享默认的属性，为了减少对内存的占用，所以让实例去共享，在执行创建的时候，只创建一次
+					console.log("1.getDefaultProps")
+					return{
+						num:0
+					}
+				},
+				getInitialState(){
+					//作用：为每个组件实例都挂载独立的初始状态
+					console.log('2.getInitialState')
+					return{
+						num:1
+					}
+				},
+				componentWillMount(){
+					//作用：做初始数据的获取
+					//特点：在这里更改状态不会触发后续钩子函数的重新执行，不能使用到真是的dom
+					this.setState({num:2})
+					console.log('3.componentWillMount')
+				},
+				render(){
+					//专门负责创建组件的虚拟dom结构，准备渲染
+					console.log("4.render")
+					return(
+						<div>
+							<h1>Hello Word!!!</h1>
+							<p>props-num:{this.props.num}</p>
+							<p>state-num:{this.state.num}</p>
+						</div>
+					)
+				},
+				componentDidMount(){
+					//作用：在这里可以使用到真实的dom，可以操作dom
+					console.log("5.componentDidMount")
+				}
+			})
+			
+			ReactDOM.render(<Hello />,app)
+//			ReactDOM.render(<Hello />,app1)
+
+		</script>
+	</body>
+</html>

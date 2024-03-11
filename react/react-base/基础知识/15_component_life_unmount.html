@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>Document</title>
+	    <script src="./js/react15/react.js"></script>
+	    <script src="./js/react15/react-dom.js"></script>
+	    <script src="./js/Browser.js"></script>
+	</head>
+	<style type="text/css">
+		.red{
+			color: red;
+		}
+		.blue{
+			color: blue;
+		}
+	</style>
+	<body>
+		
+		<div id="app"></div>
+		<div id="app1"></div>
+		<script type="text/babel">
+			var Hello = React.createClass({
+				getInitialState(){
+					return{
+						isShow:true
+					}
+				},
+				toggle(){
+					this.setState({
+						isShow:!this.state.isShow
+					})
+				},
+				render(){
+					return(
+						<div>
+							<p>这里是Hello</p>
+							<p><button onClick={this.toggle}>toggle</button></p>
+							<hr/>
+							{!this.state.isShow || <Word />}
+							
+						</div>
+					)
+				}
+			})
+			var Word = React.createClass({
+				componentWillUnmount(){//beforeDestroy
+					//触发：在销毁动作执行前触发
+					//特点：临死前的挣扎
+					//作用：善后，释放内存空间
+					alert("componentWillUnmount")
+				},
+				render(){
+					return(
+						<div>
+							<p>这里是Word</p>
+						</div>
+					)
+				}
+			})
+			
+			ReactDOM.render(<Hello />,app)
+//			ReactDOM.render(<Hello />,app1)
+
+		</script>
+	</body>
+</html>

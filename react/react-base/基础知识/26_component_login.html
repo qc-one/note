@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="./js/react15/react.js"></script>
+	<script src="./js/react15/react-dom.js"></script>
+	<script src="./js/Browser.js"></script>
+</head>
+<style>
+
+</style>
+<body>
+    <div id="app">
+        
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/babel">
+
+        var App = React.createClass ({
+        	getInitialState(){
+        		return{
+        			 username:null
+        		}
+        	},
+        	changeUsername(username){
+        		this.setState({username})
+        	},
+            render () {
+            	let {username} = this.state
+                return (
+                    <div className ="container">
+                        <div className ="panel panel-primary">
+                            <Header username={username} changeUsername={this.changeUsername}/>
+                            <div className ="panel-body">
+                              	{
+                              		username?<Content/> :<Login changeUsername={this.changeUsername}/>
+                              	}                        
+                            </div>
+                        </div>
+
+                    </div>
+                )
+            }
+        })
+        var Header = React.createClass ({
+            render () {
+            	let {username} = this.props
+                return (
+                    <div className ="panel-heading">
+                    	{
+                    		username?<p>欢迎{username}回来  <button onClick={this.props.changeUsername.bind(this,null)} className ="btn btn-danger">注销</button></p>: <p>登陆</p>
+                    	}
+                       
+                        
+                    </div>
+                )
+            }
+        })
+        var Login = React.createClass ({ 
+        	login(e){
+        		e.preventDefault()
+        		let username = this.refs.username.value;
+        		let password = this.refs.password.value;
+        		setTimeout(() => {
+        			if(username === "123" && password === "456"){
+        				//登录成功更改父组件的状态
+        				this.props.changeUsername(username)
+        			}
+        		},1000)
+        	},
+            render () {
+                return (
+                    <form onSubmit={this.login}>
+                            
+                        <div className ="form-group">
+                            <label for="">用户名：</label>
+                            <input ref="username" type="text" className ="form-control" />
+                        </div>
+                        <div className ="form-group">
+                            <label for="">密码</label>
+                            <input ref="password" type="password" className ="form-control" />
+                        </div>
+                        <div className ="form-group">
+                            <button className ="btn btn-success">提交</button>
+                        </div>
+                    </form>
+                )
+            }
+        })
+        var Content = React.createClass ({
+            render () {
+                return (
+                    <div>
+                        content ....
+                    </div>
+                )
+            }
+        })
+
+
+        ReactDOM.render(<App/>,document.getElementById('app'))
+        
+    </script>
+</body>
+</html>

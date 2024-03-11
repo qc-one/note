@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>Document</title>
+	    <script src="./js/react15/react.js"></script>
+	    <script src="./js/react15/react-dom.js"></script>
+	    <script src="./js/Browser.js"></script>
+	</head>
+	<body>
+		 <div id="app"></div>
+		 <div id="app1"></div>
+		<script type="text/babel">
+			//browser可以编译JSX，在编译之前，将script标签的type改为text/babel
+//			alert(1)
+
+			//这就是一个组件！！！其实就是一个构造器
+			//组件其实就是一个构造器,每次使用组件都相当于在实例化组件
+			//react的组件必须使用render函数来创建组件的虚拟dom结构
+			
+			//组件需要使用ReactDOM.render方法将其挂载在某一个节点上
+			
+			//组件的首字母必须大写
+			//组件是通过React.createClass创建的（ES5），在es6中直接通过class关键字来创建
+			var Hello = React.createClass({//es5的组件写法，需要引入react15
+				render(){//作用和vue的render一样，只是在vue中可以指定template作为组件的模板，但是在react中只能在render里写入虚拟dom结构
+					//在return的内容中，可以使用jsx语法来创建组件的虚拟dom结构
+					return(
+						<div>
+							<h1>Hello React!!</h1>
+						</div>
+					)
+				}
+			})
+//			console.log(Hello)
+
+			//渲染组件
+			ReactDOM.render(<Hello/>,document.getElementById("app"))
+			
+			//不使用jsx语法
+			var world = React.createElement('div',{className: 'haha'},'Hello World')
+			ReactDOM.render(world , document.getElementById('app1'))
+		</script>
+	</body>
+</html>

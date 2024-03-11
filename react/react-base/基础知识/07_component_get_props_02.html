@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>Document</title>
+	    <script src="./js/react15/react.js"></script>
+	    <script src="./js/react15/react-dom.js"></script>
+	    <script src="./js/Browser.js"></script>
+	</head>
+	<style type="text/css">
+		
+	</style>
+	<body>
+		
+		<p>子组件的属性由父组件设置</p>
+		<hr>
+		<div id="app"></div>
+		<script type="text/babel">
+			var Father = React.createClass({
+				render(){
+					return(
+						<div>
+							<p>我是父组件</p>
+							<hr/>
+							<Son name={"大狗子"}/>
+							<Son name={"二狗子"}/>
+						</div>
+					)
+				}
+			})
+			var Son = React.createClass({
+				render(){
+					return(
+						<div>
+							<p>我是子组件,名字是{this.props.name}</p>
+						</div>
+					)
+				}
+			})
+			ReactDOM.render(<Father/>,app)
+		</script>
+	</body>
+</html>

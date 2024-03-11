@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="./js/react15/react.js"></script>
+	<script src="./js/react15/react-dom.js"></script>
+	<script src="./js/Browser.js"></script>
+</head>
+<style>
+   .panel button{
+       margin: 0px 5px;
+   }
+   .list-group{
+       width: 40%;
+       float: left;
+   }
+</style>
+<body>
+
+    <div id="app" class="container"> 
+
+            
+       
+    </div> 
+    
+    
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/babel">
+    // http://api.douban.com/v2/movie/in_theaters
+        //循环虚拟dom用map，事件处理函数传参用bind
+       var MovieBox = React.createClass({
+           //准备挂载城市信息在属性上,方便与更新维护
+           getDefaultProps () {
+               return {
+                   citys: [
+                       {id: 1, title: '北京'},
+                       {id: 2, title: '上海'},
+                       {id: 3, title: '广州'},
+                       {id: 4, title: '大同'}
+                   ]
+               }
+           },
+           getInitialState () {
+               return {
+                    activeId: 1,
+                    activeCity: '北京'
+               }
+           },
+        //    changeActiveCity (id) {  
+        //         let that = this
+        //         //神奇的闭包   
+        //         return function () {
+        //             that.setState({activeId: id})
+        //         }
+        //    },
+            changeActiveCity (id, city) {
+                // 3. 在修改状态前就判断是否可以修改
+                if ( this.state.activeCity === city ) {
+                    return false;
+                }
+                this.setState({activeId: id, activeCity: city})
+            },
+            shouldComponentUpdate (props, state) {
+                // 2. 父组件判断如果更改后的状态和当前的状态相同的话，也不需要向下执行
+                // if ( state.activeCity !== this.state.activeCity ) {
+                //     return true
+                // }
+                return true
+            },
+           render () {
+               let { citys } = this.props
+               let { activeId, activeCity } = this.state
+               return (
+                    <div className="panel panel-primary">
+                        <div className="panel-heading">
+                            {
+                               citys.map(item => {
+                                   return <button onClick = {this.changeActiveCity.bind(this, item.id, item.title)} className={"btn btn-" + (activeId === item.id ? 'danger' : 'default')} key = {item.id}>{item.title}</button>
+                               })
+                            }                          
+                        </div>
+                        <MovieList city = { activeCity } />
+                    </div>
+               )
+           }
+       })
+       var MovieList = React.createClass({
+           getInitialState () {
+               return {
+                   movies: []
+               }
+           },
+           getMovies (city) {
+                $.ajax({
+                    url: 'http://api.douban.com/v2/movie/in_theaters',
+                    data: {city: city || this.props.city},
+                    dataType: 'jsonp',
+                    success: (results) => {
+                        this.setState({movies: results.subjects})
+                    }
+                })
+            },
+            componentWillReceiveProps (props) {
+                //1. 如果父组件传过来的城市没有发送变化的话，在这里就不做数据获取了
+                // if (props.city === this.props.city) {
+                //     return false;
+                // }
+                this.getMovies(props.city)
+            },
+            componentWillMount () {
+                this.getMovies()
+            },
+           render () {
+               let { movies } = this.state
+               return (
+                    
+                    <div className="panel-body">
+                        <ul className="list-group">
+                        {
+                            movies.map(item => {
+                                return <li key = {item.id} className="list-group-item">{item.title}</li>
+                            })
+                        }
+                            
+                        </ul>
+                    </div>
+
+               )
+           }
+       })
+
+        ReactDOM.render(<MovieBox  />,document.getElementById('app'))
+
+    </script>
+</body>
+</html>

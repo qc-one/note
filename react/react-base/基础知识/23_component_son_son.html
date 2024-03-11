@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/react15/react.js"></script>
+	<script src="./js/react15/react-dom.js"></script>
+	<script src="./js/Browser.js"></script>
+</head>
+<style type="text/css">
+	.son2{
+	    width: 100px;height: 100px;
+	    border:1px solid #333;
+	}
+</style>
+<body>
+    <div id="app" class="container"> 
+    </div> 
+    
+    <script type="text/babel">
+    	 //把非父子组件公用的数据挂载在共同的父级组件身上来使用->状态提升
+    	var Box = React.createClass({
+    		getInitialState(){
+    			return{
+    				bgcolor:'red'
+    			}
+    		},
+    		changeColor(){
+    				const RandomColor = () => "#" + Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, "0");
+    				this.setState({
+    					bgcolor:RandomColor()
+    				})
+    		},
+    		render(){
+    			return(
+    				<div>
+    					<Button changeColor={this.changeColor}/>
+    					<Content bgcolor={this.state.bgcolor}/>
+    				</div>
+    			)
+    		}
+    	})
+    	var Button = React.createClass({
+    		render(){
+    			return(
+    				<div>
+    					<button onClick={this.props.changeColor}>button</button>
+    				</div>
+    			)
+    		}
+    	})
+    	var Content = React.createClass({
+    		
+    		render(){
+    			let {bgcolor} = this.props
+    			return(
+    				<div className="son2" style={{background:bgcolor}}>
+    					
+    				</div>
+    			)
+    		}
+    	})
+    	ReactDOM.render(<Box/>,app)
+    </script>
+</body>
+</html>

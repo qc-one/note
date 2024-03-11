@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>Document</title>
+	    <script src="./js/react15/react.js"></script>
+	    <script src="./js/react15/react-dom.js"></script>
+	    <script src="./js/Browser.js"></script>
+	</head>
+	<style type="text/css">
+		
+	</style>
+	<body>
+		<p>因为有些数据是只能自己设置和自己更改的，我们就把这些数据挂载到状态上，getInitialState，组件内部通过this.state来获取</p>
+		<div id="app"></div>
+		<script type="text/babel">
+			var Gouzi = React.createClass({
+				getInitialState(){
+					return {
+						doing:'学习'
+					}
+				},
+				render(){
+					return(
+						<div>
+							<p>我正在{this.state.doing}</p>
+							<hr/>
+						</div>
+					)
+				}
+			})
+			
+			ReactDOM.render(<Gouzi/>,app)
+
+		</script>
+	</body>
+</html>

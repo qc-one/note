@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>Document</title>
+	    <script src="./js/react15/react.js"></script>
+	    <script src="./js/react15/react-dom.js"></script>
+	    <script src="./js/Browser.js"></script>
+	</head>
+	<body>
+		<div id="app"></div>
+		<div id="app1"></div>
+		<script type="text/babel">
+			var Hello = React.createClass({
+				getInitialState(){
+					return{
+						name:'二狗子'
+					}
+				},
+				changeName(){
+					this.setState({
+						name:"李铁柱"
+					})
+				},
+				render(){
+					return(
+						<div>
+							<p>这里是父组件</p>
+							<button onClick={this.changeName}>改名字</button>
+							<hr/>
+							<Son name={this.state.name}/>
+						</div>
+					)
+				}
+			})
+			var Son = React.createClass({
+				render(){
+					return(
+						<div>
+							<p>这里是子组件</p>
+							<p>我叫{this.props.name}</p>
+						</div>
+					)
+				}
+			})
+			
+			
+			ReactDOM.render(<Hello />,app)
+		</script>
+	</body>
+</html>

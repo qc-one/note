@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>Document</title>
+	    <script src="./js/react15/react.js"></script>
+	    <script src="./js/react15/react-dom.js"></script>
+	    <script src="./js/Browser.js"></script>
+	</head>
+	<style type="text/css">
+		#big {
+		    font-size: 3em;
+		}
+		h1[data-red] { color: red; }
+		
+		.bg-green {
+		    background: green;
+		}
+	</style>
+	<body>
+		<div id="app"></div>
+		<script type="text/babel">
+			//react中，事件需要直接绑定在虚拟dom节点身上，使用小驼峰的形式，传入一个函数体！
+			var Hello = React.createClass({
+				clickHandle(){
+					alert(11)
+				},
+				render(){
+					let style = {"font-style": "italic"}
+					return(
+						<div>
+							<h1 style={{"font-style":"italic"}} className="bg-green" data-red id="big">Hello React!!</h1>
+							<h1 style={style} className="bg-green" data-red id="big">Hello React!!</h1>
+							<button onClick={this.clickHandle}>click</button>
+							<button onDoubleClick={this.clickHandle}>dblclick</button>
+						</div>
+					)
+				}
+			})
+			//渲染组件
+			ReactDOM.render(<Hello/>,app)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>Document</title>
+	    <script src="./js/react15/react.js"></script>
+	    <script src="./js/react15/react-dom.js"></script>
+	    <script src="./js/Browser.js"></script>
+	</head>
+	<body>
+		<div id="app"></div>
+		<div id="app1"></div>
+		<button id="btn">abc</button>
+		<script type="text/javascript">
+			btn.onclick = function(e){
+				console.log(e)
+			}
+		</script>
+		<script type="text/babel">
+			var Hello = React.createClass({
+				clickHandler(e){
+					console.log(e)
+				},
+				render(){
+					return(
+						<div>
+							<button onClick={this.clickHandler}>click</button>
+						</div>
+					)
+				}
+			})
+			
+			ReactDOM.render(<Hello />,app)
+		</script>
+	</body>
+</html>

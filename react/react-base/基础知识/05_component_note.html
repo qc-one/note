@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>Document</title>
+	    <script src="./js/react15/react.js"></script>
+	    <script src="./js/react15/react-dom.js"></script>
+	    <script src="./js/Browser.js"></script>
+	</head>
+	<style type="text/css">
+		
+	</style>
+	<body>
+		<div id="app"></div>
+		<script type="text/babel">
+			
+			//组件的简单组合
+			var Hello = React.createClass({
+				render(){
+					let style = {"font-style": "italic"}
+					return(
+						<div>
+							<h1>Hello <Message></Message> </h1>
+							{/*注释内容*/}
+							{"jsdkfj"}
+						</div>
+					)
+				}
+			})
+			var Message = React.createClass({
+				render(){
+					return(
+						<div>
+							 <span>World</span>
+						</div>
+					)
+				}
+			})
+//			渲染组件
+			ReactDOM.render(<Hello/>,app)
+
+
+
+		
+		</script>
+	</body>
+</html>

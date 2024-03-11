@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>Document</title>
+	    <script src="./js/react15/react.js"></script>
+	    <script src="./js/react15/react-dom.js"></script>
+	    <script src="./js/Browser.js"></script>
+	</head>
+	<style type="text/css">
+		
+	</style>
+	<body>
+		
+		<p>组件可以通过getDefaultProps钩子函数来进行设置，但是优先级不高，如果有父级组件传入相同属性的话会使用传入的属性</p>
+		<hr>
+		<div id="app"></div>
+		<script type="text/babel">
+			var Father = React.createClass({
+				render(){
+					return(
+						<div>
+							<p>我是父组件</p>
+							<hr/>
+							<Son name={"bbb"}/>
+						</div>
+					)
+				}
+			})
+			var Son = React.createClass({
+				getDefaultProps(){//可以给组件挂载默认的属性,优先级不高，如果有父级组件传入相同属性的话会使用传入的属性
+					console.log("aaa")
+					return{
+						name:'aaa'
+					}
+				},
+				render(){
+					return(
+						<div>
+							<p>我是子组件,名字是{this.props.name}</p>
+						</div>
+					)
+				}
+			})
+			ReactDOM.render(<Father/>,app)
+		</script>
+	</body>
+</html>
