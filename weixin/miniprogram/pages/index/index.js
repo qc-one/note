@@ -67,6 +67,34 @@ Page({
     selectedEnv: envList[0],
     haveCreateCollection: false
   },
+  onLoad() {
+    wx.setStorageSync('key111', 'value');
+    wx.setStorage({
+      key: 'key222',
+      data: 'value',
+      success: function (res) {
+        wx.getStorage({
+          key: 'key',
+          success: function(res) {
+            console.log(res.data, 44)
+          }
+        })
+      }
+    })
+    wx.getFileSystemManager().writeFile({
+      filePath: wx.env.USER_DATA_PATH + '/data.txt',
+      data: 'data',
+      success: function(res) {
+        wx.getFileSystemManager().readFile({
+          filePath: wx.env.USER_DATA_PATH + '/data.txt',
+          encoding: 'utf8',
+          success: function(res) {
+            console.log(res.data, 999)
+          }
+        })
+        }
+      })
+  },
 
   onClickPowerInfo(e) {
     const index = e.currentTarget.dataset.index;
