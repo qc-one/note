@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3_回调ref中回调执行次数</title>
+</head>
+
+<body>
+
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script src="../../js/new/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作dom -->
+    <script src="../../js/new/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script src="../../js/new/babel.min.js"></script>
+    <script type="text/babel">
+        // 创建组件
+        class Demo extends React.Component {
+            constructor(props) {
+                super(props);
+                this.handle = this.handle.bind(this);
+                this.changeWeather = this.changeWeather.bind(this);
+                this.getIpt = this.getIpt.bind(this);
+            }
+            state = {
+                isHot: false
+            }
+            render() {
+                const {isHot} = this.state;
+                // 如果 ref 回调函数是以内联函数的方式定义的，在更新过程中它会被执行两次，第一次传入参数 null，然后第二次会传入参数 DOM 元素。这是因为在每次渲染时会创建一个新的函数实例，所以 React 清空旧的 ref 并且设置新的。通过将 ref 的回调函数定义成 class 的绑定函数的方式可以避免上述问题，但是大多数情况下它是无关紧要的。
+                return (
+                    <div>
+                        <h1>今天天气很{isHot ? "炎热" : "凉爽"}</h1>
+                        <input ref={(e) => {this.input1 = e;console.log(1);}} type="text" placeholder="点击提示数据"/>
+                        <input ref={this.getIpt} type="text" placeholder="点击提示数据" onBlur={this.handle2}/>
+                        <button style={{margin: "20px"}} onClick={this.handle}>点击提示数据</button>
+                        <button onClick={this.changeWeather}>切换天气</button>
+                    </div>  
+                );
+            }
+            getIpt(e) {
+                this.input2 = e;
+            }
+            changeWeather() {
+                this.setState({
+                    isHot: !this.state.isHot
+
+                })
+            }
+            handle() {
+                console.log(this.input1.value);
+            }
+            handle2 = () => {
+                console.log(this.input2.value);
+            }
+        }
+        // 渲染组件到页面
+        ReactDOM.render(<Demo/>, document.getElementById("test"))
+    </script>
+</body>
+
+</html>

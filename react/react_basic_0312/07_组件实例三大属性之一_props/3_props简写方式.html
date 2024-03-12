@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>state</title>
+</head>
+<body>
+    
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+
+    <!-- 引入react核心库 -->
+    <script src="../../js/new/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作dom -->
+    <script src="../../js/new/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script src="../../js/new/babel.min.js"></script>
+    <!-- 引入props-types，用于对组件标签属性限制 -->
+    <script src="../../js/new/prop-types.js"></script>
+    <script type="text/babel">
+        // props是只读的
+        class Person extends React.Component {
+            // 1、类中的构造器有什么作用？
+            /* 
+                1、通过给this.state赋值对象来初始化内部的state
+                2、为事件处理函数绑定实例
+            */
+            // 2、props传与不传有什么作用？
+            /* 
+                在 React 组件挂载之前，会调用它的构造函数。在为 React.Component 子类实现构造函数时，应在其他语句之前前调用 super(props)。否则，this.props 在构造函数中可能会出现未定义的 bug。
+            */
+            constructor(props) {
+                /* 
+                    构造器是否接受props，是否传递给super，取决于：是否希望在构造器中通过this访问props
+                */
+                super(props);
+            }
+            static propTypes = {
+                // name: React.PropTypes.string  16版本之前这样写
+                name: PropTypes.string.isRequired,
+                age: PropTypes.number.isRequired,
+                speak: PropTypes.func
+            }
+            static defaultProps = {
+                sex: "未知"
+            }
+            render() {
+                let {name,age,sex} = this.props;
+                return (
+                    <ul>
+                        <li>姓名：{name}</li>
+                        <li>年龄：{age + 1}</li>
+                        <li>性别：{sex}</li>
+                    </ul>
+                )
+            }
+        }
+        // 属性类型限制、添加属性默认值、属性是否必传
+        ReactDOM.render(<Person name="jsdkjf" age={18} speak={speak}/>, document.getElementById("test1"));
+        ReactDOM.render(<Person name="tom" age={98} sex="男"/>, document.getElementById("test2"));
+        // 批量传递props
+        let p = {
+            name: "jerry",
+            age: 12,
+            sex: "nv"
+        }
+        // {}是一个分割符
+        ReactDOM.render(<Person {...p}/>, document.getElementById("test3"));
+        function speak() {
+            console.log("说话了");
+        }
+    </script>
+</body>
+</html>

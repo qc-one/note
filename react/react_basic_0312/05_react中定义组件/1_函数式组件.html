@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_函数式组件</title>
+</head>
+
+<body>
+
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script src="../../js/new/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作dom -->
+    <script src="../../js/new/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script src="../../js/new/babel.min.js"></script>
+    <script type="text/babel">
+        // 1、创建函数式组件
+        function Demo() {
+            // console.log(this); // 此处的this是undefined，因为babel编译后开启了严格模式
+            const [count, setCount] = React.useState(0);
+            const [t, setTr] = React.useState(true);
+            console.log(t);
+            function add() {
+                // setCount(count+1);
+                // console.log(2, count);
+                // setCount(count+2)
+                setCount((value) => {
+                    console.log(value, 'vvv');
+                    return value + 1
+                })
+                setCount((value) => {
+                    console.log(value, 'llll');
+                    return value + 2
+                })
+                console.log(1, count);
+            }
+
+            const [arr, setArr] = React.useState([0]);
+            let ref = React.useRef();
+            React.useEffect(() => {
+                // console.log(ref, 'ref');
+                ref.current = arr;
+                console.log(arr);
+            }, [arr]);
+            const handleClick = () => {
+                Promise.resolve().then(() => {
+                    // setArr([...arr, 1])
+
+                    let now = [...ref.current, 1];
+                    ref.current = now;
+                    setArr(now);
+
+                }).then(() => {
+                    // setArr([...arr, 2])
+
+                    setArr([...ref.current, 2]);
+                })
+            }
+
+            return (
+                <div>
+                    <h2>我是用函数定义的组件（适用于【简单组件】的定义）</h2>
+                    <h1>count:{count}</h1>
+                    <button onClick={add}>修改count</button>
+                    <button onClick={handleClick}>修改arr</button>
+                </div>
+            )
+        }
+        // 2、渲染组件到页面
+        ReactDOM.render(<Demo/>, document.getElementById("test"));
+        /* 
+            执行了ReactDOM.render(<Demo/>)之后发生了什么？
+                1.react解析组件标签，找到了Demo组件。
+                2.发现组件是使用函数定义的，随后调用函数，将返回的虚拟dom转为真实dom，随后呈现在页面中。
+        */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_受控组件</title>
+</head>
+<body>
+    
+    <div id="test"></div>
+    <!-- 引入react核心库 -->
+    <script src="../../js/new/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作dom -->
+    <script src="../../js/new/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script src="../../js/new/babel.min.js"></script>
+    <script type="text/babel">
+        /* 
+            高阶函数：如果一个函数符合下面2个规则中的任何一个，则就是高阶函数。
+                1、若A函数，接收的参数是一个函数，那么A就是高阶函数。
+                2、若A函数，调用的返回值依然是一个函数，那么A就是高阶函数。
+            函数柯里化：通过函数调用继续返回函数的方式，实现多次接收参数最后统一处理的函数编码形式。
+        */
+        // 创建组件
+        class Demo extends React.Component {
+            constructor(props) {
+                super(props);
+                this.handleSub = this.handleSub.bind(this);
+            }
+            state = {
+                username: '',
+                password: ''
+            }
+            render() {
+                return (
+                    <form action="http://www.baidu.com" onSubmit={this.handleSub}>
+                        用户名：<input onChange={this.saveFormData("username")} type="text" name="username"/>
+                        密码：<input onChange={(event) => {this.saveFormData(event, "password")}} type="password" name="password"/>
+                        <button>登录</button>    
+                    </form> 
+                );
+            }
+            saveFormData = (dataType) => {
+                console.log(dataType);
+                // this.setState({
+                //     [event.target.name]: event.target.value
+                // })
+                return (event) => {
+                    this.setState({
+                        [dataType]: event.target.value
+                    })
+                }
+            }
+            handleSub(event) {
+                event.preventDefault();
+                let {username, password} = this.state;
+                console.log(username);
+                console.log(password);
+            }
+        }
+        // 渲染组件到页面
+        ReactDOM.render(<Demo/>, document.getElementById("test"))
+    </script>
+</body>
+</html>

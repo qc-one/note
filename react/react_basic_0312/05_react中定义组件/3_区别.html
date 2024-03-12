@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3_区别</title>
+</head>
+
+<body>
+
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script src="../../js/new/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作dom -->
+    <script src="../../js/new/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script src="../../js/new/babel.min.js"></script>
+    <script type="text/babel">
+        // function ProfilePageOne(props) {
+        //     const showMessage = () => alert('你好 ' + props.user);
+        //     const handleClick = () => setTimeout(showMessage, 3000);
+        //     return <button onClick={handleClick}>FollowFunction</button>
+        // }
+
+        // function ProfilePageOne() {
+        //     const [message, setMessage] = React.useState('');
+        //     const showMessage = () => {
+        //         alert('You said: ' + message);
+        //     };
+        //     const handleSendClick = () => {
+        //         setTimeout(showMessage, 3000);
+        //     };
+        //     const handleMessageChange = (e) => {
+        //         setMessage(e.target.value);
+        //     };
+
+        //     return (
+        //         <div>
+        //             <input value={message} onChange={handleMessageChange} />
+        //             <button onClick={handleSendClick}>Send</button>
+        //         </div>
+        //     );
+        // }
+
+        function ProfilePageOne() {
+            const [message, setMessage] = React.useState('');
+            const latestMessage = React.useRef('');
+            const showMessage = () => {
+                alert('You said: ' + latestMessage.current);  };
+
+            const handleSendClick = () => {
+                setTimeout(showMessage, 3000);
+            };
+
+            const handleMessageChange = (e) => {
+                setMessage(e.target.value);
+                latestMessage.current = e.target.value;  
+            };
+
+            return (
+                <div>
+                    <input value={message} onChange={handleMessageChange} />
+                    <button onClick={handleSendClick}>Send</button>
+                </div>
+            );
+        }
+
+
+        class ProfilePageTwo extends React.Component {
+            // 在React中props是不可变的，所以他们永远不会改变，而this是可变的。类组件this存在的意义是能在渲染方法以及生命周期方法中得到最新的实例。所以如果在改变数据的情况下我们的组件进行了重新渲染，this.props将会改变。showMessage方法从一个“过于新”的props中得到了user。从this中读取数据的这种行为，调用一个回调函数读取this.props的timeout会让showMessage回调并没有与任何一个特定的渲染“绑定”在一起，所以它“失去”了正确的props。
+            // showMessage = () => alert('Followed ' + this.props.user);
+            // handleClick = () => setTimeout(this.showMessage, 3000);
+
+            // 解决上述问题方法一：在调用事件之前读取this.props，然后显示地传递到timeout回调函数中
+            // showMessage = (user) => alert('Followed ' + user);
+            // handleClick = () => {
+            //     const {user} = this.props;
+            //     setTimeout(() => {
+            //         this.showMessage(user)
+            //     }, 3000)
+            // };
+
+            // render() {
+            //     return <button onClick={this.handleClick}>FollowClass</button>;
+            // }
+
+            // 解决上述问题方法二：利用JavaScript闭包的话问题将迎刃而解
+            // 如果你在一次特定的渲染中捕获那一次渲染所用的props或者state，你会发现他们总是会保持一致，
+            render() {
+                const props = this.props;
+                const showMessage = () => {
+                    alert('Followed ' + props.user);
+                };
+                const handleClick = () => {
+                    setTimeout(showMessage, 3000);
+                };
+
+                return <button onClick={handleClick}>Follow</button>;
+            }
+            
+        }
+        
+        class Demo extends React.Component {
+            state = {
+                user: 'Dan',
+            };
+            render() {
+                return (
+                    <div>
+                        <label>
+                            <b>Choose profile to view: </b>
+                            <select
+                                value={this.state.user}
+                                onChange={e => this.setState({ user: e.target.value })}
+                            >
+                                <option value="Dan">Dan</option>
+                                <option value="Sophie">Sophie</option>
+                                <option value="Sunil">Sunil</option>
+                            </select>
+                        </label>
+                        <hr></hr>
+                        <ProfilePageOne user={this.state.user}></ProfilePageOne>
+                        <ProfilePageTwo user={this.state.user}></ProfilePageTwo>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<Demo/>, document.getElementById("test"));
+    </script>
+</body>
+
+</html>
