@@ -1,8 +1,8 @@
 import { lazy } from "react";
 // import { createBrowserRouter } from "react-router-dom";
 // import AuthProvider from '@/components/authProvider';
-const Home = lazy(() => import("../pages/Home.js"));
-const Layout = lazy(() => import("../pages/Layout.js"));
+const Home = lazy(() => import("../pages/Home/index.js"));
+const Layout = lazy(() => import("../pages/Layout/index.js"));
 // const Donate = lazy(() => import('@/pages/donate/index'))
 
 const routers = [
@@ -30,7 +30,7 @@ const routers = [
     // },
     {
         path: "*",
-        Component: lazy(() => import("../pages/Home.js")),
+        Component: lazy(() => import("../pages/Home/index.js")),
     },
 ];
 

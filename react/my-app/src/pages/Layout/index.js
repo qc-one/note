@@ -1,5 +1,5 @@
 import { useRoutes } from "react-router-dom";
-import routes from "../router/index";
+import routes from "../../router/index";
 function Layout() {
     const element = useRoutes(routes);
     return (
