@@ -1,0 +1,4 @@
+{
+    "/api/posts/*": "./db1.json",
+    "/api/todos/*": "/db2.json"
+}

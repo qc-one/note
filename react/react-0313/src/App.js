@@ -1,6 +1,49 @@
 // 项目的根组件：APP -> index.js -> public/index.html(root)
-import { useState, useRef } from "react";
+import { useState, useRef, createContext, useContext, useEffect } from "react";
 import classnames from "classnames";
+import { useSelector, useDispatch } from "react-redux";
+import { inscrement, decrement } from "./store/modules/counterStore";
+// import { fetchChannels } from "./store/modules/channelStore";
+
+import { Link, RouterProvider } from "react-router-dom";
+import router from "./router";
+import "./App.scss";
+
+function useToggle() {
+    let [showDiv, setShowDiv] = useState(true);
+    const toggle = () => {
+        setShowDiv(!showDiv);
+    };
+    return {
+        showDiv,
+        toggle,
+    };
+}
+
+let MsgContext = createContext();
+
+function A() {
+    let a = useContext(MsgContext);
+    return <div>this is A:{a}</div>;
+}
+
+function Son(props) {
+    console.log(props, "props");
+    return (
+        <div>
+            this is son:{props.name}
+            {props.children}
+            <button
+                onClick={() => {
+                    props.onHandle(123);
+                }}
+            >
+                我是子组件{" "}
+            </button>
+            <A></A>
+        </div>
+    );
+}
 
 function App() {
     let list = [
@@ -39,11 +82,77 @@ function App() {
     // 1.通过value属性绑定react状态
     // 2.绑定onChange事件，通过事件参数e拿到输入框最新的值，反向修改react状态
     const [value, setValue] = useState("123");
-
     const inputRef = useRef(null);
+    // 清空并聚焦
+    function clearValue() {
+        setValue("");
+        inputRef.current.focus();
+    }
+    let [name, setName] = useState("this is app name");
+    // function onParentsHandle(s) {
+    //     console.log(s, "我是父组件");
+    // }
+    let [msg] = useState("11");
+    const dispatch = useDispatch();
+    useEffect(() => {
+        console.log("useEffect");
+        // setTimeout(() => {
+        //     setMsg(msg);
+        // }, 3000);
+        // dispatch(fetchChannels());
+    });
+
+    const { showDiv, toggle } = useToggle();
+
+    const { countS } = useSelector((state) => {
+        return state.counter;
+    });
+
+    const { channel } = useSelector((state) => {
+        return state.channel;
+    });
     return (
         <div className="App">
             this is app
+            <RouterProvider router={router}></RouterProvider>
+            {/* <Link to="/article">跳转到文章页</Link> */}
+            {/* <ul>
+                {channel.map((item) => (
+                    <li>{item}</li>
+                ))}
+            </ul>
+            <button
+                onClick={() => {
+                    dispatch(
+                        decrement({
+                            num: 10,
+                        })
+                    );
+                }}
+            >
+                -10
+            </button>
+            countS:{countS}
+            <button
+                onClick={() => {
+                    dispatch(inscrement({ num: 10 }));
+                }}
+            >
+                +10
+            </button>
+            {showDiv && <div>this is div</div>}
+            <button
+                onClick={() => {
+                    toggle();
+                }}
+            >
+                showDiv
+            </button>
+            <MsgContext.Provider value={msg}>
+                <Son name={name} onHandle={setName}>
+                    <div>345</div>
+                </Son>
+            </MsgContext.Provider>
             {list.map((item) => {
                 return <li key={item.id}>{item.name}</li>;
             })}
@@ -72,6 +181,13 @@ function App() {
                 ref={inputRef}
             />
             <div>{value}</div>
+            <button
+                onClick={() => {
+                    clearValue();
+                }}
+            >
+                清空并聚焦
+            </button> */}
         </div>
     );
 }

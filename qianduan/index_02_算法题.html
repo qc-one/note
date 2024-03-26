@@ -21,12 +21,128 @@
     <div id="content2"></div>
 
     <script>
+        Array.prototype.myMap = function (callback) {
+            let self = this;
+            let result = [];
+            for (let i = 0; i < self.length; i++) {
+                result.push(callback(self[i], i, self));
+            }
+            return result;
+        }
+        // 示例使用
+        const numbers = [1, 2, 3, 4, 5];
+        // const squares = myMap(numbers, num => num * num);
+        const squares = numbers.myMap(num => num * num);
+        console.log(squares); // 输出: [1, 4, 9, 16, 25]
+        
+        // let arr = [1,2,3,4,5];
+        // Array.prototype.myReverse = function() {
+        //     let self = this;
+        //     console.log(self);
+        //     let left = 0;
+        //     let right = self.length -1
+        //     while(left < right) {
+        //         let temp = self[left];
+        //         self[left] = self[right];
+        //         self[right] = temp
+        //         left ++;
+        //         right --
+        //     }
+        // }
+        // arr.myReverse()
+        // console.log(arr);
+
+        // js 数组中寻找两个值相加等于目标值， 三个值相加等于目标值
+        // let nums = [1, 5, 2, 4, 6, 8];
+        // let target = 12;
+        // function twoNum (nums, target){
+        //     let arr = [];
+        //     let res = [];
+        //     for(let i = 0;i < nums.length;i++){
+        //         let otherNum = target - nums[i];
+        //         let secondNum = nums.slice(i+1).filter(val => val == otherNum);
+        //         if(secondNum.length > 0){
+        //             arr.push(i, nums.indexOf(secondNum[0]));
+        //             res.push(nums[i], secondNum[0])
+        //         }
+        //     }
+        //     console.log(res, 'res');
+        //     return arr;
+        // }
+        // console.log(twoNum(nums, target));
+        // function three(nums, target){
+        //     let resultArr = [];
+        //     for(let i = 0;i < nums.length;i++){
+        //         // let otherNum = target - nums[i];
+        //         // let arr = twoNum(nums.slice(i+1), otherNum);
+        //         // if(arr.length > 0){
+        //         //     resultArr.push(i, nums.indexOf(nums.slice(i+1)[arr[0]]), nums.indexOf(nums.slice(i+1)[arr[1]]));
+        //         //     break;
+        //         // }
+        //         // console.log(nums[i], 'iii');
+        //         for (let j = i+1;j < nums.length; j++) {
+        //             let o = target - nums[i] - nums[j];
+        //             let n = nums.slice(j+1).filter(val => val === o);
+        //             if (n.length > 0) {
+        //                 let m = [nums[i], nums[j], n[0]]
+        //                 resultArr.push(m)
+        //                 break;
+
+        //             }
+        //         }
+        //     }
+        //     return resultArr
+        // }
+        // console.log(three([2, 20, 1, 4, 8, 15, 12, 19, 16, 26, 10, 2, 7], 42), 333);
+        // console.log(three([1, 4, 8, 15, 12, 19, 16, 26, 10, 2, 7], 24), 333);
+        // function threeSum(nums, target) {
+        //     let result = [];
+        //     if (nums.length < 3) return result;
+        //     nums.sort((a, b) => a - b); // 排序数组
+        //     for (let i = 0; i < nums.length - 2; i++) {
+        //         if (i === 0 || nums[i] !== nums[i - 1]) { // 避免重复
+        //         let left = i + 1;
+        //         let right = nums.length - 1;
+        //         while (left < right) {
+        //             let sum = nums[i] + nums[left] + nums[right];
+        //             if (sum === target) {
+        //                 result.push([nums[i], nums[left], nums[right]]);
+        //                 while (left < right && nums[left] === nums[++left]); // 跳过重复
+        //                 while (left < right && nums[right] === nums[--right]); // 跳过重复
+        //             } else if (sum < target) {
+        //                 left++;
+        //             } else {
+        //                 right--;
+        //             }
+        //         }
+        //         }
+        //     }
+        //     return result;
+        // }
+        // 示例
+        // const nums = [-1, 0, 1, 2, -1, -4],
+        //     target = 0;
+        // console.log(threeSum(nums, target)); // 输出 [[-1, -1, 2], [-1, 0, 1]]
+
+
+        // 把数组排成最小的数
+        // 示例 1:
+        // 输入: [10,2]
+        // 输出: “102”
+        // 示例 2:
+        // 输入: [3,30,34,5,9]
+        // 输出: “3033459”
+        // var minNumber = function(nums) {
+        //     // 采用模板字符串
+        //     return nums.sort((a,b) => `${a}${b}` - `${b}${a}`).join("");
+        // };
+
         // 文本高亮
-        const content2 = document.getElementById('content2');
-        const text2 = '我是中国人，我爱中华人民共和国，中华人民共和国万岁！';
-        const keyword2 = ['中华人民共和国', '中华', '我']; // 将字数多的关键词放到前面，保证字数多的关键词优先匹配
-        let hightlightText2 = text2.replace(new RegExp(`(${keyword2.join('|')})`, 'g'), `<span class="keyword-match">$1</span>`);
-        content2.innerHTML = hightlightText2;
+        // const content2 = document.getElementById('content2');
+        // const text2 = '我是中国人，我爱中华人民共和国，中华人民共和国万岁！';
+        // const keyword2 = ['中华人民共和国', '中华', '我']; // 将字数多的关键词放到前面，保证字数多的关键词优先匹配
+        // let hightlightText2 = text2.replace(new RegExp(`(${keyword2.join('|')})`, 'g'), `<span class="keyword-match">$1</span>`);
+        // content2.innerHTML = hightlightText2;
 
         // 判断字符串是否符合XXX-XXX-XXXX的格式
         // function matchesPattern(str) {

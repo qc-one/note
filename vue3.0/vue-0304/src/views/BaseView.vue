@@ -7,11 +7,13 @@
         <h3>爱好：{{ hobby[0] }},{{ hobby[1] }},{{ hobby[2] }}</h3>
         <h2>薪资：{{ job.salary }}</h2>
         <button @click="say">修改</button>
-        <h2>{{ a }}</h2>
-        <button @click="changeName">改变值</button>
+        <h2>{{ a }}aaa</h2>
+        <button @click="changeName">改变值changeName</button>
         <h2>obj{{ obj.brand }}</h2>
-        <div v-for="item in items" v-if="item === 2">{{ item }}</div>
+        <!-- <div v-for="item in items" v-if="item === 2">{{ item }}</div> -->
     </div>
+    显示一下吧 -- {{ testObject.show }}
+    <div v-show="testObject.show">123</div>
 </template>
 <script setup>
 import { ref, reactive, watch, watchEffect, toRef, toRefs } from "vue";
@@ -25,7 +27,9 @@ let job = reactive({
 console.log(name);
 console.log(age);
 console.log(job, "job");
-let a = ref(123);
+let a = reactive(123);
+console.log(a, "aaaaaa");
+
 let hobby = reactive(["刷剧", "吃鸡", "睡觉"]);
 //方法
 function say() {
@@ -75,18 +79,20 @@ const changeName = () => {
     obj.name = "ls";
     obj.brand.name = "奔驰";
     obj.brand.price = 1000;
+    a = 345;
+    testObject.show = !testObject.show;
 };
-watch(
-    obj,
-    () => {
-        console.log("监听的obj.name改变了");
-        console.log("监听的obj.brand.name改变了");
-    },
-    {
-        // deep: true,
-        // immediate: true,
-    }
-);
+// watch(
+//     obj,
+//     () => {
+//         console.log("监听的obj.name改变了");
+//         console.log("监听的obj.brand.name改变了");
+//     },
+//     {
+//         // deep: true,
+//         // immediate: true,
+//     }
+// );
 
 var student = reactive({
     name: "张三",
@@ -109,4 +115,11 @@ var getInfo = function () {
 console.log(getInfo().name.value, getInfo().contact.value.qq);
 
 let items = ref([2, 4, 5, 3]);
+
+const testObject = reactive({
+    show: false,
+    titleL: "这里是标题！",
+});
+let basData = reactive(123);
+console.log(basData, "basData");
 </script>

@@ -6,26 +6,22 @@
 </template>
 
 <script>
-    export default {
-        name: 'SonSon',
-        created() {
-            console.log('son', this.$EventBus);
-            console.log(this.aaa, 'aaa');
+export default {
+    name: "SonSon",
+    created() {
+        // console.log('son', this.$EventBus);
+        // console.log(this.aaa, 'aaa');
+    },
+    inject: ["aaa"],
+    data() {
+        return {};
+    },
+    methods: {
+        sayFu() {
+            this.$EventBus.$emit("getData", 123);
         },
-        inject: ['aaa'],
-        data() {
-            return {
-
-            }
-        },
-        methods: {
-            sayFu() {
-                this.$EventBus.$emit("getData", 123);
-            }
-        }
-    }
+    },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

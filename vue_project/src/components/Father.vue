@@ -6,27 +6,21 @@
 </template>
 
 <script>
-    export default {
-        name: 'FatherFather',
-        created() {
-            console.log('Father', this.$EventBus);
-            this.$EventBus.$on("getData", (res) => {
-                console.log(res);
-            })
-        },
-        data() {
-            return {
-
-            }
-        },
-        methods: {
-            sayZizujian() {
-
-            }
-        }
-    }
+export default {
+    name: "FatherFather",
+    created() {
+        // console.log('Father', this.$EventBus);
+        // this.$EventBus.$on("getData", (res) => {
+        //     console.log(res);
+        // })
+    },
+    data() {
+        return {};
+    },
+    methods: {
+        sayZizujian() {},
+    },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
