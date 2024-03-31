@@ -1,17 +1,47 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import HelloWorld from "./components/HelloWorld.vue";
+</script> -->
+<!-- <script>
+export default {
+    data() {
+        return {
+            aa: 123,
+        };
+    },
+    methods: {
+        test() {},
+    },
+    setup() {
+        const a = 1;
+
+        return {
+            a,
+        };
+    },
+};
+</script> -->
+
+<script setup lang="ts">
+import BaseData from "./components/BaseData.vue";
+import { reactive, shallowRef, triggerRef } from "vue";
+
+const a: number[] = [1, 2];
+
+const xxx = () => {
+    console.log("点击了");
+};
+const handleType = "click";
 </script>
 
 <template>
     <div>
-        <a href="https://vitejs.dev" target="_blank">
-            <img src="/vite.svg" class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://vuejs.org/" target="_blank">
-            <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-        </a>
+        {{ a }}
+        <button v-on:click="xxx">点击</button>
+        <button @click="xxx">点击</button>
+        <button @[handleType]="xxx">点击</button>
+        <BaseData></BaseData>
     </div>
-    <HelloWorld msg="Vite + Vue" />
+    <!-- <HelloWorld msg="Vite + Vue" /> -->
 </template>
 
 <style scoped>
