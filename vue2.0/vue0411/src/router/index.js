@@ -1,21 +1,28 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import Layout from "../views/Layout";
+import DraggableView from "../views/Draggable";
+import VueGridLayout from "../views/VueGridLayout";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: HomeView,
+    name: "Layout",
+    component: Layout,
+    children: [
+      { path: "/draggable", name: "Dragable", component: DraggableView },
+      {
+        path: "/vue-grid-layout",
+        name: "VueGridLayout",
+        component: VueGridLayout,
+      },
+    ],
   },
   {
     path: "/about",
     name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
