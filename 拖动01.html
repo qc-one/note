@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Drag and Drop Example</title>
+    <style>
+        .dropzone {
+            width: 300px;
+            height: 100px;
+            border: 2px dashed #aaa;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #folder {
+            width: 300px;
+            height: 100px;
+            border: 2px solid #000;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="menu1"
+        class="dropzone"
+        draggable="true"
+        ondragover="dragOver(event)"
+        ondragstart="dragStart(event)">
+        菜单1
+    </div>
+
+    <div id="menu2"
+        class="dropzone"
+        draggable="true"
+        ondragover="dragOver(event)"
+        ondragstart="dragStart(event)">
+        菜单2
+    </div>
+
+    <div id="folder"
+        ondragover="dragOver(event)"
+        ondrop="drop(event)">
+        文件夹
+    </div>
+
+    <script>
+        function dragStart(event) {
+            event.dataTransfer.setData("text/plain", event.target.id);
+        }
+
+        function dragOver(event) {
+            event.preventDefault(); // 阻止默认行为
+        }
+
+        function drop(event) {
+            event.preventDefault(); // 阻止默认行为
+            var id = event.dataTransfer.getData("text/plain");
+            event.target.appendChild(document.getElementById(id));
+        }
+    </script>
+
+</body>
+
+</html>
