@@ -98,69 +98,98 @@
 // })
 // let cookie:string = document.cookie
 
-interface Options {
-    el: string | HTMLElement
-}
-interface VueCls {
-    options: Options
-    init():void
-}
+// interface Options {
+//     el: string | HTMLElement
+// }
+// interface VueCls {
+//     options: Options
+//     init(): void
+// }
 
-interface Vnode {
-    tag: string // div span
-    text?: string // 123
-    children?: Vnode[]
-}
-// 虚拟dom
-class Dom {
-    // 创建节点
-    createElement(el: string) {
-        return document.createElement(el)
-    }
-    // 填充文本的方法
-    setText(el:HTMLElement, text: string | null) {
-        el.textContent = text
-    }
-    // 渲染函数
-    render(data: Vnode) {
-        let root = this.createElement(data.tag)
-        if (data.children && Array.isArray(data.children)) {
-            data.children.forEach(item => {
-                let child = this.render(item)
-                root.appendChild(child)
-            })
-        } else {
-            this.setText(root, data.text)
-        }
-        return root
-    }
-}
+// interface Vnode {
+//     tag: string // div span
+//     text?: string // 123
+//     children?: Vnode[]
+// }
+// // 虚拟dom
+// class Dom {
+//     // 创建节点
+//     createElement(el: string) {
+//         return document.createElement(el)
+//     }
+//     // 填充文本的方法
+//     setText(el: HTMLElement, text: string | null) {
+//         el.textContent = text
+//     }
+//     // 渲染函数
+//     render(data: Vnode) {
+//         let root = this.createElement(data.tag)
+//         if (data.children && Array.isArray(data.children)) {
+//             data.children.forEach(item => {
+//                 let child = this.render(item)
+//                 root.appendChild(child)
+//             })
+//         } else {
+//             this.setText(root, data.text)
+//         }
+//         return root
+//     }
+// }
 
-class Vue extends Dom implements VueCls {
-    options: Options
-    constructor(options: Options) {
-        super()
-        this.options = options
-        this.init()
-    }
-    init():void {
-        let data:Vnode = {
-            tag: 'div',
-            children: [
-                {
-                    tag: 'span',
-                    text: '我是子节点'
-                },
-                {
-                    tag: 'button',
-                    text: '点击'
-                }
-            ]
-        }
-        let app = typeof this.options.el === 'string' ? document.querySelector(this.options.el) : this.options.el
-        app.appendChild(this.render(data))
-    }
-}
-new Vue({
-    el: '#app'
-})
+// class Vue extends Dom implements VueCls {
+//     options: Options
+//     constructor(options: Options) {
+//         super()
+//         this.options = options
+//         this.init()
+//     }
+//     init(): void {
+//         let data: Vnode = {
+//             tag: 'div',
+//             children: [
+//                 {
+//                     tag: 'span',
+//                     text: '我是子节点'
+//                 },
+//                 {
+//                     tag: 'button',
+//                     text: '点击'
+//                 }
+//             ]
+//         }
+//         // let app = typeof this.options.el === 'string' ? document.querySelector(this.options.el) : this.options.el
+//         // app.appendChild(this.render(data))
+//     }
+// }
+// new Vue({
+//     el: '#app'
+// })
+
+// 交叉类型
+// interface People {
+//     name: string,
+//     age: number
+// }
+// interface Man {
+//     sex: number
+// }
+// const qin = (man: People & Man) => {
+//     console.log(man)
+// }
+// qin({
+//     name: 'qinc0',
+//     age: 18,
+//     sex: 0
+// })
+
+// // 类型断言
+// let fn = function (num: number | string): void {
+//     console.log((num as string).length)
+// }
+// fn('1234')
+
+// let fn1 = (type: any): boolean => {
+//     return type as boolean
+// }
+// let b = fn1(1)
+// console.log(b, 123);
