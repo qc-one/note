@@ -3,75 +3,96 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 
 <body>
     <script>
-        let arr = [
-            {
-                path: '/home',
-                name: 'home',
-                label: '首页',
-                icon: 's-home',
-                url: 'Home/index'
-            },
-            {
-                path: "/other",
-                name: 'Other',
-                label: "其他",
-                icon: "s-tools",
-                url: "Other/index",
-                children: [{
-                        path: "pageone",
-                        name: "page1",
-                        label: "页面1",
-                        icon: "setting",
-                        url: "PageOne/index",
-                        children: [{
-                            path: "pageone",
-                            name: "page3",
-                            label: "页面3",
-                            icon: "setting",
-                            url: "PageOne/index",
-                        }, ],
-                    },
-                    {
-                        path: "pagetwo",
-                        name: "page2",
-                        label: "页面2",
-                        icon: "setting",
-                        url: "PageTwo/index",
-                    },
-                ],
-            },
-        ]
-        function fn(o) {
-            let a = [];
-            o.forEach(item => {
-                let obj = {};
-                if (item.children) {
-                    // item.children.map(i => {
-                    //     i.component = () => import(`../views/${i.url}`);
-                    //     return i;
-                    // })
-                    // menuArr.push(...item.children);
-                    // obj = {...item, abc: item.url}
-                    // obj.children.push(obj);
-                    fn(item.children)
+        // 二分查找
+        let arr = [1, 2, 4, 65, 76, 89, 90]
+        var search = function (nums, target) {
+            let low = 0, high = nums.length - 1;
+            while (low <= high) {
+                const mid = Math.floor((high - low) / 2) + low;
+                const num = nums[mid];
+                if (num === target) {
+                    return mid;
+                } else if (num > target) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
                 }
-                // else {
-                //     // obj = {...item, abc: item.url}
-                //     // a.push(obj);
-                //     item.abc = item.url
-                // }
-                item.abc = item.url
-            });
-            return o
-        }
-        console.log(fn(arr));
+            }
+            return -1;
+        };
+        console.log(search(arr, 90)); // 6
+
+        // let arr = [
+        //     {
+        //         path: '/home',
+        //         name: 'home',
+        //         label: '首页',
+        //         icon: 's-home',
+        //         url: 'Home/index'
+        //     },
+        //     {
+        //         path: "/other",
+        //         name: 'Other',
+        //         label: "其他",
+        //         icon: "s-tools",
+        //         url: "Other/index",
+        //         children: [{
+        //                 path: "pageone",
+        //                 name: "page1",
+        //                 label: "页面1",
+        //                 icon: "setting",
+        //                 url: "PageOne/index",
+        //                 children: [{
+        //                     path: "pageone",
+        //                     name: "page3",
+        //                     label: "页面3",
+        //                     icon: "setting",
+        //                     url: "PageOne/index",
+        //                 }, ],
+        //             },
+        //             {
+        //                 path: "pagetwo",
+        //                 name: "page2",
+        //                 label: "页面2",
+        //                 icon: "setting",
+        //                 url: "PageTwo/index",
+        //             },
+        //         ],
+        //     },
+        // ]
+        // function fn(o) {
+        //     let a = [];
+        //     o.forEach(item => {
+        //         let obj = {};
+        //         if (item.children) {
+        //             // item.children.map(i => {
+        //             //     i.component = () => import(`../views/${i.url}`);
+        //             //     return i;
+        //             // })
+        //             // menuArr.push(...item.children);
+        //             // obj = {...item, abc: item.url}
+        //             // obj.children.push(obj);
+        //             fn(item.children)
+        //         }
+        //         // else {
+        //         //     // obj = {...item, abc: item.url}
+        //         //     // a.push(obj);
+        //         //     item.abc = item.url
+        //         // }
+        //         item.abc = item.url
+        //     });
+        //     return o
+        // }
+        // console.log(fn(arr));
 
         // 查找字符串中是否包含特定单词
         // function wordInString(s, word) {
