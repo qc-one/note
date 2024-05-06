@@ -12,24 +12,35 @@
 
 <body>
     <script>
+        // 斐波那契数列
+        // function fibonacci(n) {
+        //     let sequence = [0, 1];
+        //     for (let i = 2; i < n; i++) {
+        //         sequence[i] = sequence[i - 1] + sequence[i - 2];
+        //     }
+        //     return sequence;
+        // }
+        // // 使用示例
+        // console.log(fibonacci(10)); // 输出: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+
         // 二分查找
-        let arr = [1, 2, 4, 65, 76, 89, 90]
-        var search = function (nums, target) {
-            let low = 0, high = nums.length - 1;
-            while (low <= high) {
-                const mid = Math.floor((high - low) / 2) + low;
-                const num = nums[mid];
-                if (num === target) {
-                    return mid;
-                } else if (num > target) {
-                    high = mid - 1;
-                } else {
-                    low = mid + 1;
-                }
-            }
-            return -1;
-        };
-        console.log(search(arr, 90)); // 6
+        // let arr = [1, 2, 4, 65, 76, 89, 90]
+        // var search = function (nums, target) {
+        //     let low = 0, high = nums.length - 1;
+        //     while (low <= high) {
+        //         const mid = Math.floor((high - low) / 2) + low;
+        //         const num = nums[mid];
+        //         if (num === target) {
+        //             return mid;
+        //         } else if (num > target) {
+        //             high = mid - 1;
+        //         } else {
+        //             low = mid + 1;
+        //         }
+        //     }
+        //     return -1;
+        // };
+        // console.log(search(arr, 90)); // 6
 
         // let arr = [
         //     {

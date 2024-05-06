@@ -78,3 +78,45 @@ type Option<T extends object> = {
     readonly [key in keyof T]?: T[key]
 }
 type B = Option<Data>
+
+// namespace中所有的变量以及方法必须要导出才能访问
+namespace Test {
+    interface Data {
+        name: string,
+        age: number,
+        sex: boolean
+    }
+    type Option<T extends object> = {
+        // [key in keyof T]?: T[key]
+        readonly [key in keyof T]?: T[key]
+    }
+    export let obj: Option<Data> = {
+        name: 'q',
+        age: 12,
+        sex: true
+    }
+    export namespace Test2 {
+        export let obj: Option<Data> = {
+            name: 'q',
+            age: 12,
+            sex: true
+        }
+    }
+}
+// 同名namespace会进行合并
+namespace Test {
+    export let obj2: Option<Data> = {
+        name: 'q',
+        age: 12,
+        sex: true
+    }
+}
+console.log(Test.obj);
+
+export namespace Test2 {
+    export let obj2: Option<Data> = {
+        name: 'q',
+        age: 12,
+        sex: true
+    }
+}
