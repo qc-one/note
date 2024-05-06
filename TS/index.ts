@@ -194,3 +194,28 @@
 // let b = fn1(1)
 // console.log(b, 123);
 
+// let a1: symbol = Symbol(1);
+// let a2: symbol = Symbol(1);
+
+// console.log(a1 === a2); // false
+// // symbol.for(key)，会在symbol中查找key，如果存在则返回该symbol，如果不存在则创建并返回
+// console.log(Symbol.for('a') === Symbol.for('a')); // true
+
+// let obj = {
+//     [a1]: 1,
+//     [a2]: 2
+// }
+// console.log(obj[a1], obj[a2]); // 1, 2
+
+// // for in不能读到symbol
+// for (let key in obj) {
+//     console.log(key);
+// }
+// // keys,getOwnPropertyNames不能读到symbol
+// console.log(Object.keys(obj));
+// console.log(Object.getOwnPropertyNames(obj));
+// // getOwnPropertySymbols可以读到symbol
+// console.log(Object.getOwnPropertySymbols(obj));
+// // 普通属性和symbol都可以读到
+// Reflect.ownKeys(obj);
+

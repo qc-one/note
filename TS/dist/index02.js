@@ -21,3 +21,4 @@ const rain = () => {
     });
 };
 setInterval(rain, 40);
+//# sourceMappingURL=index02.js.map

@@ -57,3 +57,4 @@ class Vue extends Dom {
 new Vue({
     el: "#app"
 });
+//# sourceMappingURL=class.js.map
