@@ -2,6 +2,23 @@
   lang="ts">
   import { RouterLink, RouterView } from 'vue-router'
   import HelloWorld from './components/HelloWorld.vue'
+  import { onMounted, ref, nextTick } from 'vue'
+
+  const loadTime = ref(0)
+  const startTime = ref(0)
+  startTime.value = Date.now()
+  // for (let i = 0; i < 100000; i++) {
+  //   console.log(i);
+  // }
+  onMounted(() => {
+    nextTick(() => {
+      const endTime = Date.now()
+      loadTime.value = endTime - startTime.value
+      console.log(loadTime.value, '---')
+      console.log(performance);
+    })
+  })
+
 </script>
 
 <template>

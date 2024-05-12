@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            color: blue !important;
+        }
+
+        ul>li {
+            color: green;
+        }
+
+        ul li+li {
+            color: red;
+        }
+
+        li {
+            color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        // 写一个traverse函数，输出所有页面宽度和高度大于50像素的节点。
+        // function traverse() {
+        //     var arr = [];
+        //     var elements = [];
+        //     if (document.all) {
+        //         elements = document.all;
+        //     } else {
+        //         elements = document.getElementsByTagName("*");
+        //     }
+        //     //console.log(elements.length);
+        //     for (var i = 0; i < elements.length; i++) {
+        //         var ele = elements[i];
+        //         //console.log(ele.tagName);
+
+        //         //width返回的是字符串   offsetWidth返回的是带边框的Number型的数字
+        //         var width = parseFloat(ele.style.width) || ele.offsetWidth;
+        //         //console.log(width);
+        //         var height = parseFloat(ele.style.height) || ele.offsetHeight;
+        //         //console.log(height);
+        //         if (width > 500 && height > 50) {
+        //             arr.push(elements[i].tagName);
+        //         }
+        //     }
+        //     return arr;
+        // }
+        // window.onload = function ()    //注意onload的使用方式
+        // {
+        //     console.log(traverse());
+        // }
+
+        // 15.一个求和的函数sum，达到下面的效果
+        // // Should equal 15
+        // sum(1, 2, 3, 4, 5);
+        // // Should equal 0
+        // sum(5, null, -5);
+        // // Should equal 10
+        // sum('1.0', false, 1, true, 1, 'A', 1, 'B', 1, 'C', 1, 'D', 1,
+        //     'E', 1, 'F', 1, 'G', 1);
+        // // Should equal 0.3, not 0.30000000000000004
+        // sum(0.1, 0.2);
+        // function sum(...args) {
+        //     // console.log(args);
+        //     let num = 0
+        //     for (let i = 0; i < args.length; i++) {
+        //         // console.log(parseInt(args[i]), parseInt(args[i]) > 0);
+        //         if (Number(args[i] > 0 && Number(args[i]) < 1)) {
+        //             num += Number(args[i]) * 10
+        //             if (i === args.length - 1) return num / 10
+        //         } else if (Math.floor(parseInt(args[i])) === parseInt(args[i])) {
+        //             num += parseInt(args[i])
+        //         }
+        //     }
+        //     // console.log(num);
+        //     return num
+        // }
+        // console.log(sum(1, 2, 3, 4, 5));
+        // console.log(sum(5, null, -5));
+        // console.log(sum('1.0', false, 1, true, 1, 'A', 1, 'B', 1, 'C', 1, 'D', 1, 'E', 1, 'F', 1, 'G', 1));
+        // console.log(sum(0.1, 0.2));
+
+
+        // const promiseA = Promise.resolve('a')
+        // promiseA.then((res) => {
+        //     console.log(res)
+        // }).then((res) => {
+        //     console.log(res)
+        // })
+        // const promiseB = Promise.resolve('b')
+        // promiseB.then((res) => {
+        //     console.log(res)
+        // })
+        // promiseB.then((res) => {
+        //     console.log(res)
+        // })
+
+        // let a = [1, 2, 3]
+        // let b = a.slice()
+        // console.log(b, a == b);
+
+        // 红灯3秒亮一次，绿灯2秒亮一次，黄灯1秒亮一次；如何让三个灯不断交替重复亮灯？要求：用Promise实现
+        // const task = (timer, light) =>
+        //     new Promise((resolve, reject) => {
+        //         setTimeout(() => {
+        //             if (light === 'red') {
+        //                 red()
+        //             }
+        //             else if (light === 'green') {
+        //                 green()
+        //             }
+        //             else if (light === 'yellow') {
+        //                 yellow()
+        //             }
+        //             resolve()
+        //         }, timer)
+        //     })
+        // function task(timer, light) {
+        //     return new Promise((resolve, reject) => {
+        //         setTimeout(() => {
+        //             if (light === 'red') {
+        //                 red()
+        //             }
+        //             else if (light === 'green') {
+        //                 green()
+        //             }
+        //             else if (light === 'yellow') {
+        //                 yellow()
+        //             }
+        //             resolve()
+        //         }, timer)
+        //     })
+        // }
+        // const step = () => {
+        //     task(3000, 'red').then(() => {
+        //         return task(2000, 'green')
+        //     }).then(() => {
+        //         return task(1000, 'yellow')
+        //     }).then(step)
+        // }
+        // step()
+        // function red() {
+        //     console.log('red');
+        // }
+        // function green() {
+        //     console.log('green');
+        // }
+        // function yellow() {
+        //     console.log('yellow');
+        // }
+    </script>
+</body>
+
+
+</html>

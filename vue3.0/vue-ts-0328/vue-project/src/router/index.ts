@@ -50,4 +50,23 @@ const router = createRouter({
   ]
 })
 
+// 在路由切换之前记录时间
+let navigationStart = 0
+
+// 添加路由切换的钩子
+router.beforeEach((to, from, next) => {
+  // 在进入路由前记录时间
+  navigationStart = performance.now()
+  next()
+})
+
+router.afterEach((to, from) => {
+  // 在进入路由后计算时间差并输出
+  const navigationEnd = performance.now()
+  const timeToLoad = navigationEnd - navigationStart
+  console.log(`页面加载时长: ${timeToLoad.toFixed(2)} ${timeToLoad}毫秒`)
+  console.log(performance);
+
+})
+
 export default router
