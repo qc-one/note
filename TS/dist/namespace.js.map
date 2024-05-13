@@ -1,1 +1,1 @@
-{"version":3,"file":"namespace.js","sourceRoot":"","sources":["../namespace.ts"],"names":[],"mappings":";;AAAA,sCAA4B;AAE5B,OAAO,CAAC,GAAG,CAAC,SAAK,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC"}
+{"version":3,"file":"namespace.js","sourceRoot":"","sources":["../namespace.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAE,MAAM,MAAM,CAAA;AAE5B,OAAO,CAAC,GAAG,CAAC,KAAK,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC"}

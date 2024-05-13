@@ -1,13 +1,2 @@
-interface Obj {
-    name: string;
-    [key: string]: string;
+declare namespace Interface {
 }
-interface Obj3 {
-    age: string;
-}
-type Obj2 = {
-    name: string;
-};
-declare let a: Obj;
-declare let b: Obj2;
-declare let user: Record<string, string>;
