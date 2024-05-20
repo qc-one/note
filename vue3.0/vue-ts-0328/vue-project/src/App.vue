@@ -14,8 +14,8 @@
     nextTick(() => {
       const endTime = Date.now()
       loadTime.value = endTime - startTime.value
-      console.log(loadTime.value, '---')
-      console.log(performance);
+      // console.log(loadTime.value, '---')
+      // console.log(performance);
     })
   })
 

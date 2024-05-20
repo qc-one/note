@@ -5,6 +5,9 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+import { injectJsError } from './monitor/lib/jsError.ts'
+
+injectJsError()
 
 const app = createApp(App)
 

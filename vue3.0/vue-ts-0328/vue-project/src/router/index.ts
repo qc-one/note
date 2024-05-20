@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
+import Monitor from '../views/Monitor.vue'
 import DraggableView01 from '../views/DraggableView01.vue'
 import DraggableView02 from '../views/DraggableView02.vue'
 import DraggableView03 from '../views/DraggableView03.vue'
@@ -14,6 +15,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/monitor',
+      name: 'Monitor',
+      component: Monitor
     },
     {
       path: '/about',
@@ -70,8 +76,8 @@ router.afterEach((to, from) => {
   // 在进入路由后计算时间差并输出
   const navigationEnd = performance.now()
   const timeToLoad = navigationEnd - navigationStart
-  console.log(`页面加载时长: ${timeToLoad.toFixed(2)} ${timeToLoad}毫秒`)
-  console.log(performance);
+  // console.log(`页面加载时长: ${timeToLoad.toFixed(2)} ${timeToLoad}毫秒`)
+  // console.log(performance);
 
 })
 
