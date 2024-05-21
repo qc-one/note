@@ -7,6 +7,12 @@ import VueDevTools from 'vite-plugin-vue-devtools'
 import { visualizer } from 'rollup-plugin-visualizer'
 import importTOcdn, { autoComplete } from 'vite-plugin-cdn-import'
 import viteCompression from 'vite-plugin-compression'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import path from 'path'
+import IconResolver from 'unplugin-icons/resolver'
+import Icons from 'unplugin-icons/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -40,6 +46,33 @@ export default defineConfig({
         //   package: 'element-plus'
         // }
       ]
+    }),
+    // AutoImport({
+    //   resolvers: [ElementPlusResolver()],
+    //   dts: path.resolve(__dirname, 'auto-imports.d.ts')
+    // }),
+    // Components({
+    //   resolvers: [
+    //     ElementPlusResolver(),
+    //     // 自动注册图表组件
+    //     // IconResolver({
+    //     //   prefix: 'i', // 默认为i，设置false则不显示前缀
+    //     //   // componentPrefix: 'el-icon', // 图标前缀
+    //     // })
+    //   ],
+    // })
+    // iconify图表库
+    Components({
+      resolvers: [
+        ElementPlusResolver(),
+        // 自动注册图表组件
+        IconResolver({
+          // prefix: 'i', // 默认为i，设置false则不显示前缀
+          // componentPrefix: 'el-icon', // 图标前缀
+          enabledCollections: ['el-icon'], // 启用图标集合
+        })
+      ],
+      dts: path.resolve(__dirname, 'auto-imports.d.ts')
     })
   ],
   resolve: {

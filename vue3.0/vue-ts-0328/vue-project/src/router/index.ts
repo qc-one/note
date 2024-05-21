@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import Monitor from '../views/Monitor.vue'
+import ElementView from '../views/ElementView.vue'
 import DraggableView01 from '../views/DraggableView01.vue'
 import DraggableView02 from '../views/DraggableView02.vue'
 import DraggableView03 from '../views/DraggableView03.vue'
@@ -15,6 +16,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/elementui',
+      name: 'ElementView',
+      component: ElementView
     },
     {
       path: '/monitor',
