@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <!-- <router-view /> -->
+    <router-view />
     <!-- eslint-disable -->
-    <div>
+    <!-- <div>
       <div class="folder"
         v-for="(folder, index) in   folders  "
         :key="folder.id"
@@ -20,7 +20,7 @@
           {{ item }}
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>

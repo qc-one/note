@@ -21,7 +21,6 @@
     "terser": "^5.31.0",
     "vite-plugin-cdn-import": "^1.0.1",
     "vue": "^3.4.21",
-    "vue-draggable": "^2.0.6",
     "vue-router": "^4.3.0",
     "vuedraggable": "^4.1.0"
   },

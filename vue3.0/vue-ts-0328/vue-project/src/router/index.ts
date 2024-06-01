@@ -3,11 +3,13 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import Monitor from '../views/Monitor.vue'
 import ElementView from '../views/ElementView.vue'
+import TrabnsitionView from '../views/TrabnsitionView.vue'
 import DraggableView01 from '../views/DraggableView01.vue'
 import DraggableView02 from '../views/DraggableView02.vue'
 import DraggableView03 from '../views/DraggableView03.vue'
 import DraggableView04 from '../views/DraggableView04.vue'
 import DraggableView05 from '../views/DraggableView05.vue'
+import DraggableView06 from '../views/DraggableView06.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +18,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/transition',
+      name: 'TrabnsitionView',
+      component: TrabnsitionView
     },
     {
       path: '/elementui',
@@ -56,6 +63,11 @@ const router = createRouter({
       path: '/draggableview05',
       name: 'DraggableView05',
       component: DraggableView05
+    },
+    {
+      path: '/draggableview06',
+      name: 'DraggableView06',
+      component: DraggableView06
     },
     {
       path: '/about',
