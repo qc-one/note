@@ -26,5 +26,17 @@ export default defineConfig({
             // 代表不想参与模块化的文件，默认是空数组
             // globalModulePaths: ['./componentA.module.css']
         },
+        preprocessorOptions: {
+            // 配置对css进行预处理，默认是空对象，整个配置对象最终都会给到less的执行参数（全局参数）中去            
+            less: {
+                math: 'always', // 开启math计算，默认是never
+                // 配置全局变量，默认是空对象
+                globalVars: {
+                    primaryColor: '#333',
+                },
+                javascriptEnabled: true, // 开启js语法解析
+            },
+            // sass: {}
+        }
     }
 })
