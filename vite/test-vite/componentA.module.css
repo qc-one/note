@@ -3,3 +3,9 @@
     height: 200px;
     background-color: olivedrab;
 }
+
+.footer-content {
+    width: 100px;
+    height: 100px;
+    background-color: darkgreen;
+}
