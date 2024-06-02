@@ -37,6 +37,7 @@ export default defineConfig({
                 javascriptEnabled: true, // 开启js语法解析
             },
             // sass: {}
-        }
+        },
+        devSourcemap: true, // 开启开发环境下的sourcemap
     }
 })
