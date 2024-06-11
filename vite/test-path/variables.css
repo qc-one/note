@@ -1,0 +1,4 @@
+/* // 使用一些未来的css特性是不需要经过less sass的预处理进行编译，只能交给postcss去处理，所以需要使用一些变量 */
+:root {
+    --mainColor: red;
+}
