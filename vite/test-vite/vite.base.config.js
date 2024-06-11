@@ -1,4 +1,6 @@
 import { defineConfig } from 'vite'
+const postcssPresetEnv = require('postcss-preset-env');
+const path = require('path');
 
 export default defineConfig({
     //     optimizeDeps: {
@@ -39,5 +41,36 @@ export default defineConfig({
             // sass: {}
         },
         devSourcemap: true, // 开启开发环境下的sourcemap
+        postcss: {
+            plugins: [
+                postcssPresetEnv({
+                    importFrom: path.resolve(__dirname, "./variables.css"), // 让postcss知道全局变量文件在哪里，默认是空
+                })
+                // 配置postcss的插件，默认是空数组
+                // require('autoprefixer')({
+                //     overrideBrowserslist: ['last 2 versions', '>1%'], // 指定浏览器版本
+                // }),
+                // require('postcss-nested'), // 开启嵌套语法
+                // require('postcss-px-to-viewport')({
+                //     unitToConvert: 'px', // 需要转换的单位，默认是px
+                //     viewportWidth: 750, // 视窗的宽度，
+                //     unitPrecision: 3, // 指定`单位转换后`保留的精度，默认是0
+                //     propList: ['*'], // 指定转换的属性，默认是['*']
+                //     viewportUnit: 'vw', // 指定视窗单位，默认是vw
+                //     fontViewportUnit: 'vw', // 指定字体视窗单位，默认是vw
+                //     selectorBlackList: ['.ignore', '.hairlines'], // 指定不转换为视窗单位的类名，默认是[]
+                //     minPixelValue: 1, // 小于或等于`1px`不转换为视窗单位，默认是1
+                //     mediaQuery: false, // 允许在媒体查询中转换`px`，默认是false
+                //     exclude: [/TabBar/i], // 指定不转换的类名，默认是[]
+                //     landscape: false, // 允许在横屏下转换`px`，默认是false
+                //     landscapeUnit: 'vw', // 横屏时使用的视窗单位，默认是`vw`
+                //     landscapeWidth: 568, // 横屏时使用的视窗宽度，默认是`750px`
+                //     // landscapeMinPixelValue: 1, // 小于或等于`1px`不转换为视窗单位，默认是1
+                //     // transformUnit: 'vw', // 转换后使用的视窗单位，默认是`vw`
+                //     // transformValue: 1, // 转换值，默认是1
+                //     // transformFunction: 'rem', // 转换函数，默认是rem
+                // })
+            ]
+        }
     }
 })

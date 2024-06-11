@@ -1,12 +1,19 @@
 // @mainColor: red;
-@import url(./variables.less);
+// @import url(./variables.less);
 
 .content {
+    width: 400px;
+
     .main {
-        background-color: darkblue;
+        // background-color: darkblue;
         padding: (100px / 2);
         margin: 100px / 2;
-        color: @mainColor;
-        background-color: @primaryColor;
+        // color: @mainColor;
+        // background-color: @primaryColor;
+        // 父容器-400px-800px
+        // main元素-200px-200px
+        width: clamp(100px, 50%, 200px);
+        user-select: none;
+        color: var(--mainColor);
     }
 }
