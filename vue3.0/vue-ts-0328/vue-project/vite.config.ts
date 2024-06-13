@@ -64,13 +64,14 @@ export default defineConfig({
     // iconify图表库
     Components({
       resolvers: [
-        ElementPlusResolver(),
+        // ElementPlusResolver(),
         // 自动注册图表组件
         IconResolver({
           // prefix: 'i', // 默认为i，设置false则不显示前缀
           // componentPrefix: 'el-icon', // 图标前缀
           enabledCollections: ['el-icon'], // 启用图标集合
-        })
+        }),
+        ElementPlusResolver({ importStyle: "sass" })
       ],
       dts: path.resolve(__dirname, 'auto-imports.d.ts')
     })
@@ -78,6 +79,16 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // 2.自动导入定制化样式文件进行样式覆盖
+        additionalData: `
+          @use "@/styles/element/index.scss" as *;
+        `
+      }
     }
   },
   // build: {

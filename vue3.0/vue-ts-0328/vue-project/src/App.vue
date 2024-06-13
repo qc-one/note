@@ -25,11 +25,26 @@
   <header>
 
   </header>
+  <el-config-provider namespace="ep">
+    <RouterView />
 
-  <RouterView />
+  </el-config-provider>
 </template>
 
-<style scoped>
+<style>
+:root {
+  --ep-color-primary: red;
+  /* 默认的主色 */
+  --ep-color-success: #67C23A;
+  /* 成功色 */
+  --ep-color-warning: #E6A23C;
+  /* 警告色 */
+  --ep-color-danger: #F56C6C;
+  /* 危险色 */
+  --ep-color-info: #909399;
+  /* 信息色 */
+}
+
 header {
   line-height: 1.5;
   max-height: 100vh;
