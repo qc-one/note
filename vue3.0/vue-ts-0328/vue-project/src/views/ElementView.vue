@@ -8,12 +8,18 @@
     </el-icon>
     <el-icon size="250"
       color="red">
-      <Edit />
+      <!-- <Edit /> -->
     </el-icon>
   </div>
 </template>
 
 <script setup>
+import { getUsersApi } from "@/api/users.ts"
+async function getUsers() {
+  let res = await getUsersApi()
+  console.log('res', res)
+}
+getUsers()
 </script>
 
 <style>

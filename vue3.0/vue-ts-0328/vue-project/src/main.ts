@@ -14,6 +14,8 @@ import 'element-plus/dist/index.css'
 
 // import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
+import "@/mock/index.ts"
+
 const app = createApp(App)
 // console.log(ElementPlusIconsVue, 111)
 // for (const [key, component] of Object.entries(ElementPlusIconsVue)) {

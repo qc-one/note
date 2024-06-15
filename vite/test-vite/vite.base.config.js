@@ -72,5 +72,12 @@ export default defineConfig({
                 // })
             ]
         }
+    },
+    resolve: {
+        alias: [
+            { find: '@', replacement: path.resolve(__dirname, './src') },
+            { find: '@assets', replacement: path.resolve(__dirname, './src/assets') },
+            // { find: 'vue', replacement: 'vue/dist/vue.esm-bundler.js' }
+        ]
     }
 })
