@@ -79,5 +79,23 @@ export default defineConfig({
             { find: '@assets', replacement: path.resolve(__dirname, './src/assets') },
             // { find: 'vue', replacement: 'vue/dist/vue.esm-bundler.js' }
         ]
+    },
+    build: {
+        rollupOptions: {
+            output: {
+                // 配置输出文件名，默认是index.html
+                entryFileNames: 'js/[name]-[hash].js',
+                chunkFileNames: 'js/[name]-[hash].js',
+                assetFileNames: '[name]-[hash].[ext]',
+            },
+            // 配置输入文件的入口，默认是src/main.js
+            input: ['main.js'],
+            // 配置是否生成sourceMap，默认是true
+            sourcemap: true,
+            // 配置是否生成
+        },
+        assetsInlineLimit: 409600, // 配置资源大小，默认是4096
+        outDir: 'distTest', // 配置输出目录，默认是dist
+        assetsDir: 'assets', // 配置静态资源目录，默认是assets
     }
 })

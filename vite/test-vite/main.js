@@ -6,7 +6,8 @@
 // import "./componentB.js"
 // import "./componentA.js"
 
-import "./src/imageLoader"
+// import "./src/imageLoader"
+import "./src/svgLoader"
 // import jsonFile from "./src/assets/json/001.json" // 以一个对象的形式使用，vite会将这个对象中所有属性都打包进来
 import { name } from "./src/assets/json/001.json" // 只引入需要的属性，vite不会将整个对象打包进来，而是单独打包这个属性
 console.log(name)
