@@ -1,12 +1,12 @@
-// 测试vite配置
-
 import { defineConfig } from 'vite'
+const postcssPresetEnv = require('postcss-preset-env');
+const path = require('path');
 
 export default defineConfig({
-    optimizeDeps: {
-        // include: ['vue', 'vue-router']
-    },
-    envPrefix: 'QC_', // 配置vite注入客户端环境变量校验的env前缀
+    //     optimizeDeps: {
+    //         // exclude: ['lodash-es'], // 当遇到lodash-es时，不进行tree shaking预构建，将指定数组中的依赖不进行依赖预构建
+    //     },
+    envPrefix: 'ENV_',
     // 对css进行配置
     css: {
         // 是对css模块化的默认行为进行覆盖，所有的配置最终会丢给postcss-modules插件
@@ -41,5 +41,62 @@ export default defineConfig({
             // sass: {}
         },
         devSourcemap: true, // 开启开发环境下的sourcemap
+        postcss: {
+            plugins: [
+                postcssPresetEnv({
+                    importFrom: path.resolve(__dirname, "./variables.css"), // 让postcss知道全局变量文件在哪里，默认是空
+                })
+                // 配置postcss的插件，默认是空数组
+                // require('autoprefixer')({
+                //     overrideBrowserslist: ['last 2 versions', '>1%'], // 指定浏览器版本
+                // }),
+                // require('postcss-nested'), // 开启嵌套语法
+                // require('postcss-px-to-viewport')({
+                //     unitToConvert: 'px', // 需要转换的单位，默认是px
+                //     viewportWidth: 750, // 视窗的宽度，
+                //     unitPrecision: 3, // 指定`单位转换后`保留的精度，默认是0
+                //     propList: ['*'], // 指定转换的属性，默认是['*']
+                //     viewportUnit: 'vw', // 指定视窗单位，默认是vw
+                //     fontViewportUnit: 'vw', // 指定字体视窗单位，默认是vw
+                //     selectorBlackList: ['.ignore', '.hairlines'], // 指定不转换为视窗单位的类名，默认是[]
+                //     minPixelValue: 1, // 小于或等于`1px`不转换为视窗单位，默认是1
+                //     mediaQuery: false, // 允许在媒体查询中转换`px`，默认是false
+                //     exclude: [/TabBar/i], // 指定不转换的类名，默认是[]
+                //     landscape: false, // 允许在横屏下转换`px`，默认是false
+                //     landscapeUnit: 'vw', // 横屏时使用的视窗单位，默认是`vw`
+                //     landscapeWidth: 568, // 横屏时使用的视窗宽度，默认是`750px`
+                //     // landscapeMinPixelValue: 1, // 小于或等于`1px`不转换为视窗单位，默认是1
+                //     // transformUnit: 'vw', // 转换后使用的视窗单位，默认是`vw`
+                //     // transformValue: 1, // 转换值，默认是1
+                //     // transformFunction: 'rem', // 转换函数，默认是rem
+                // })
+            ]
+        }
+    },
+    resolve: {
+        alias: [
+            { find: '@', replacement: path.resolve(__dirname, './src') },
+            { find: '@assets', replacement: path.resolve(__dirname, './src/assets') },
+            // { find: 'vue', replacement: 'vue/dist/vue.esm-bundler.js' }
+        ]
+    },
+    build: {
+        rollupOptions: {
+            output: {
+                // 配置输出文件名，默认是index.html
+                entryFileNames: 'js/[name]-[hash].js',
+                chunkFileNames: 'js/[name]-[hash].js',
+                assetFileNames: '[name]-[hash].[ext]',
+            },
+            // 配置输入文件的入口，默认是src/main.js
+            input: ['main.js'],
+            // 配置是否生成sourceMap，默认是true
+            sourcemap: true,
+            // 配置是否生成
+        },
+        assetsInlineLimit: 409600, // 配置资源大小，默认是4096
+        outDir: 'distTest', // 配置输出目录，默认是dist
+        assetsDir: 'assets', // 配置静态资源目录，默认是assets
+        emptyOutDir: true, // 配置是否清空输出目录，默认是true
     }
 })

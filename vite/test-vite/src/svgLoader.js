@@ -1,5 +1,5 @@
 // import svgIcon from './assets/svgs/svg.sv?url'
-import svgRaw from './assets/svgs/svg.svg?raw'
+import svgRaw from '@assets/svgs/svg.svg?raw'
 
 // 第一种使用svg的方式
 // const img = document.createElement('img');

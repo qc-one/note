@@ -1,6 +1,9 @@
 import { defineConfig } from 'vite'
 const postcssPresetEnv = require('postcss-preset-env');
 const path = require('path');
+import { ViteAliases } from "vite-aliases"
+// const { ViteAliases } = require('vite-aliases')
+import MyViteAlias from "./plugins/viteAliases"
 
 export default defineConfig({
     //     optimizeDeps: {
@@ -73,13 +76,13 @@ export default defineConfig({
             ]
         }
     },
-    resolve: {
-        alias: [
-            { find: '@', replacement: path.resolve(__dirname, './src') },
-            { find: '@assets', replacement: path.resolve(__dirname, './src/assets') },
-            // { find: 'vue', replacement: 'vue/dist/vue.esm-bundler.js' }
-        ]
-    },
+    // resolve: {
+    //     alias: [
+    //         { find: '@', replacement: path.resolve(__dirname, './src') },
+    //         { find: '@assets', replacement: path.resolve(__dirname, './src/assets') },
+    //         // { find: 'vue', replacement: 'vue/dist/vue.esm-bundler.js' }
+    //     ]
+    // },
     build: {
         rollupOptions: {
             output: {
@@ -97,5 +100,10 @@ export default defineConfig({
         assetsInlineLimit: 409600, // 配置资源大小，默认是4096
         outDir: 'distTest', // 配置输出目录，默认是dist
         assetsDir: 'assets', // 配置静态资源目录，默认是assets
-    }
+        emptyOutDir: true, // 配置是否清空输出目录，默认是true
+    },
+    plugins: [
+        // ViteAliases(),
+        MyViteAlias()
+    ]
 })
