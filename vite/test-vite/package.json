@@ -20,6 +20,7 @@
     "postcss-cli": "^11.0.0",
     "postcss-preset-env": "^9.5.14",
     "vite": "^5.2.11",
-    "vite-aliases": "^0.9.2"
+    "vite-aliases": "^0.9.2",
+    "vite-plugin-html": "^3.2.2"
   }
 }

@@ -4,6 +4,8 @@ const path = require('path');
 import { ViteAliases } from "vite-aliases"
 // const { ViteAliases } = require('vite-aliases')
 import MyViteAlias from "./plugins/viteAliases"
+import { createHtmlPlugin } from "vite-plugin-html"
+import CreateHtmlPlugin from "./plugins/CreateHtmlPlugin"
 
 export default defineConfig({
     //     optimizeDeps: {
@@ -87,8 +89,8 @@ export default defineConfig({
         rollupOptions: {
             output: {
                 // 配置输出文件名，默认是index.html
-                entryFileNames: 'js/[name]-[hash].js',
-                chunkFileNames: 'js/[name]-[hash].js',
+                // entryFileNames: 'js/[name]-[hash].js',
+                // chunkFileNames: 'js/[name]-[hash].js',
                 assetFileNames: '[name]-[hash].[ext]',
             },
             // 配置输入文件的入口，默认是src/main.js
@@ -103,7 +105,28 @@ export default defineConfig({
         emptyOutDir: true, // 配置是否清空输出目录，默认是true
     },
     plugins: [
-        // ViteAliases(),
-        MyViteAlias()
+        ViteAliases(),
+        // MyViteAlias(),
+        CreateHtmlPlugin({
+            inject: {
+                data: {
+                    title: 'vite-test', // 配置注入的变量名，默认是html
+                },
+            }
+        }),
+        // createHtmlPlugin({
+        //     minify: true, // 配置是否压缩html，默认是true
+        //     inject: {
+        //         // 配置是否注入，默认是true
+        //         data: {
+        //             title: 'vite-test', // 配置注入的变量名，默认是html
+        //         },
+        //         injectOptions: {
+        //             // 配置注入的选项，默认是空对象
+        //             script: true, // 配置是否注入js文件，默认是true
+        //             style: false, // 配置是否注入css文件，默认是false
+        //         },
+        //     }
+        // })
     ]
 })
