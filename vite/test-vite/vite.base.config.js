@@ -5,7 +5,9 @@ import { ViteAliases } from "vite-aliases"
 // const { ViteAliases } = require('vite-aliases')
 import MyViteAlias from "./plugins/viteAliases"
 import { createHtmlPlugin } from "vite-plugin-html"
-import CreateHtmlPlugin from "./plugins/CreateHtmlPlugin"
+// import CreateHtmlPlugin from "./plugins/CreateHtmlPlugin"
+import { viteMockServe} from 'vite-plugin-mock'
+import VitePluginMock from './plugins/VitePluginMock';
 
 export default defineConfig({
     //     optimizeDeps: {
@@ -105,28 +107,24 @@ export default defineConfig({
         emptyOutDir: true, // 配置是否清空输出目录，默认是true
     },
     plugins: [
+        // viteMockServe(),
+        VitePluginMock(),
         ViteAliases(),
         // MyViteAlias(),
-        CreateHtmlPlugin({
+        // CreateHtmlPlugin(),
+        createHtmlPlugin({
+            minify: true, // 配置是否压缩html，默认是true
             inject: {
+                // 配置是否注入，默认是true
                 data: {
                     title: 'vite-test', // 配置注入的变量名，默认是html
                 },
+                injectOptions: {
+                    // 配置注入的选项，默认是空对象
+                    script: true, // 配置是否注入js文件，默认是true
+                    style: false, // 配置是否注入css文件，默认是false
+                },
             }
-        }),
-        // createHtmlPlugin({
-        //     minify: true, // 配置是否压缩html，默认是true
-        //     inject: {
-        //         // 配置是否注入，默认是true
-        //         data: {
-        //             title: 'vite-test', // 配置注入的变量名，默认是html
-        //         },
-        //         injectOptions: {
-        //             // 配置注入的选项，默认是空对象
-        //             script: true, // 配置是否注入js文件，默认是true
-        //             style: false, // 配置是否注入css文件，默认是false
-        //         },
-        //     }
-        // })
+        })
     ]
 })

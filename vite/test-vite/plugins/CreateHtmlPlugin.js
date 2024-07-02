@@ -1,5 +1,3 @@
-const { transform } = require("lodash")
-
 // 转换html
 module.exports = (options) => {
     return {
@@ -7,7 +5,7 @@ module.exports = (options) => {
         transformIndexHtml: {
             enforce: "pre",
             transform: (html, ctx) => {
-                console.log(html, ctx, 999)
+                // console.log(html, ctx, 999)
                 return html.replace(/<%= title %>/g, options.inject.data.title)
             }
         }

@@ -16,3 +16,11 @@ console.log(name)
 // console.log(jsonFile) // 如果不是vite，在其他构建工具中json文件的导入会作为一个json字符串形式存在
 
 import "./src/components/baseComponents/Button/index.js"
+
+fetch("/api/users", {
+    method: "POST"
+}).then((res) => {
+    console.log('res',res)
+}).catch((err) => {
+    console.log('err',err)
+})
