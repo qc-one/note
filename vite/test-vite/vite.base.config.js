@@ -125,6 +125,31 @@ export default defineConfig({
                     style: false, // 配置是否注入css文件，默认是false
                 },
             }
-        })
+        }),
+        // vite插件调用原理
+        {
+            config(options) {
+                console.log('config执行了', options);
+            },
+            configureServer(server) {},
+            transformIndexHtml() {},
+            configResolved(resolvedConfig) {
+                // 整个配置文件的解析流程完全完毕以后会走的钩子
+                // vite在内部有一个默认的配置文件，这个配置文件会和用户自定义的配置文件进行合并
+                console.log('configResolved执行了', resolvedConfig);
+            },
+            configurePreviewServer(server) {},
+            handleHotUpdate() {},
+            generateBundle() {},
+            // universal hooks -->vite和rollup的钩子函数
+            options(rollupOptions) {
+                console.log('rollupOptions执行了', rollupOptions);
+            },
+            buildStart(fullRollupOptions) {
+                console.log('buildStart执行了', fullRollupOptions); v
+            },
+            transform() {},
+            closeBundle() {},
+        }
     ]
 })
