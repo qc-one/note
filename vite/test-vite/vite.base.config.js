@@ -80,26 +80,37 @@ export default defineConfig({
             ]
         }
     },
-    // resolve: {
-    //     alias: [
-    //         { find: '@', replacement: path.resolve(__dirname, './src') },
-    //         { find: '@assets', replacement: path.resolve(__dirname, './src/assets') },
-    //         // { find: 'vue', replacement: 'vue/dist/vue.esm-bundler.js' }
-    //     ]
-    // },
+    resolve: {
+        alias: [
+            { find: '@', replacement: path.resolve(__dirname, './src') },
+            { find: '@assets', replacement: path.resolve(__dirname, './src/assets') },
+            // { find: 'vue', replacement: 'vue/dist/vue.esm-bundler.js' }
+        ]
+    },
     build: {
+        minify: false, // 配置是否压缩html，默认是true
         rollupOptions: {
+            input: {
+                main: path.resolve(__dirname, './index.html'),
+                product: path.resolve(__dirname, './product.html'),
+            },
             output: {
                 // 配置输出文件名，默认是index.html
                 // entryFileNames: 'js/[name]-[hash].js',
                 // chunkFileNames: 'js/[name]-[hash].js',
                 assetFileNames: '[name]-[hash].[ext]',
+                manualChunks: (id) => {
+                    console.log(id);
+                    if (id.includes('node_modules')) {
+                        return id.toString().split('/').splice(-1)[0].toString();
+                    }
+                }
             },
             // 配置输入文件的入口，默认是src/main.js
-            input: ['main.js'],
+            // input: ['main.js'],
             // 配置是否生成sourceMap，默认是true
             sourcemap: true,
-            // 配置是否生成
+            
         },
         assetsInlineLimit: 409600, // 配置资源大小，默认是4096
         outDir: 'distTest', // 配置输出目录，默认是dist
@@ -108,48 +119,48 @@ export default defineConfig({
     },
     plugins: [
         // viteMockServe(),
-        VitePluginMock(),
-        ViteAliases(),
+        // VitePluginMock(),
+        // ViteAliases(),
         // MyViteAlias(),
         // CreateHtmlPlugin(),
-        createHtmlPlugin({
-            minify: true, // 配置是否压缩html，默认是true
-            inject: {
-                // 配置是否注入，默认是true
-                data: {
-                    title: 'vite-test', // 配置注入的变量名，默认是html
-                },
-                injectOptions: {
-                    // 配置注入的选项，默认是空对象
-                    script: true, // 配置是否注入js文件，默认是true
-                    style: false, // 配置是否注入css文件，默认是false
-                },
-            }
-        }),
+        // createHtmlPlugin({
+        //     minify: true, // 配置是否压缩html，默认是true
+        //     inject: {
+        //         // 配置是否注入，默认是true
+        //         data: {
+        //             title: 'vite-test', // 配置注入的变量名，默认是html
+        //         },
+        //         injectOptions: {
+        //             // 配置注入的选项，默认是空对象
+        //             script: true, // 配置是否注入js文件，默认是true
+        //             style: false, // 配置是否注入css文件，默认是false
+        //         },
+        //     }
+        // }),
         // vite插件调用原理
-        {
-            config(options) {
-                console.log('config执行了', options);
-            },
-            configureServer(server) {},
-            transformIndexHtml() {},
-            configResolved(resolvedConfig) {
-                // 整个配置文件的解析流程完全完毕以后会走的钩子
-                // vite在内部有一个默认的配置文件，这个配置文件会和用户自定义的配置文件进行合并
-                console.log('configResolved执行了', resolvedConfig);
-            },
-            configurePreviewServer(server) {},
-            handleHotUpdate() {},
-            generateBundle() {},
-            // universal hooks -->vite和rollup的钩子函数
-            options(rollupOptions) {
-                console.log('rollupOptions执行了', rollupOptions);
-            },
-            buildStart(fullRollupOptions) {
-                console.log('buildStart执行了', fullRollupOptions); v
-            },
-            transform() {},
-            closeBundle() {},
-        }
+        // {
+        //     config(options) {
+        //         console.log('config执行了', options);
+        //     },
+        //     configureServer(server) {},
+        //     transformIndexHtml() {},
+        //     configResolved(resolvedConfig) {
+        //         // 整个配置文件的解析流程完全完毕以后会走的钩子
+        //         // vite在内部有一个默认的配置文件，这个配置文件会和用户自定义的配置文件进行合并
+        //         console.log('configResolved执行了', resolvedConfig);
+        //     },
+        //     configurePreviewServer(server) {},
+        //     handleHotUpdate() {},
+        //     generateBundle() {},
+        //     // universal hooks -->vite和rollup的钩子函数
+        //     options(rollupOptions) {
+        //         console.log('rollupOptions执行了', rollupOptions);
+        //     },
+        //     buildStart(fullRollupOptions) {
+        //         console.log('buildStart执行了', fullRollupOptions); v
+        //     },
+        //     transform() {},
+        //     closeBundle() {},
+        // }
     ]
 })
