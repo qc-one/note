@@ -8,6 +8,7 @@ import { createHtmlPlugin } from "vite-plugin-html"
 // import CreateHtmlPlugin from "./plugins/CreateHtmlPlugin"
 import { viteMockServe} from 'vite-plugin-mock'
 import VitePluginMock from './plugins/VitePluginMock';
+import viteCompression from 'vite-plugin-compression'
 
 export default defineConfig({
     //     optimizeDeps: {
@@ -118,6 +119,7 @@ export default defineConfig({
         emptyOutDir: true, // 配置是否清空输出目录，默认是true
     },
     plugins: [
+        viteCompression(),
         // viteMockServe(),
         // VitePluginMock(),
         // ViteAliases(),
